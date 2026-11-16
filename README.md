@@ -10,7 +10,7 @@ It has three modes, each with its own address (`#quiz`, `#infinite`, `#study`) s
 
 Plain HTML, CSS and JavaScript modules. There's no framework, no build step and no dependencies to install. Node is only needed for the dev server, the tests and the two generator scripts.
 
-Your marks are kept in the browser's `localStorage` (key `cssp-exam-prep:v1`), the last mark for each question. Nothing is sent anywhere, and progress doesn't follow you to another browser or device. The only outside request the page makes is for the IBM Plex fonts from Google Fonts; without a connection it falls back to system fonts.
+Your marks are kept in the browser's `localStorage` (key `cssp-exam-prep:v1`), the last mark for each question. Nothing is sent anywhere, and progress doesn't follow you to another browser or device. The page uses system fonts and makes no outside requests.
 
 ## Running it locally
 
@@ -85,7 +85,7 @@ The empty `.nojekyll` file tells GitHub Pages to serve the files as they are ins
 npm run bundle   # writes dist/cssp-exam-prep.html (about 450 KB)
 ```
 
-This writes one HTML file with the CSS, data and code inlined. It opens straight from disk and works offline (with system fonts), so you can email it or put it on a USB stick. `dist/` is in `.gitignore`, so it isn't published with the site. Rebuild it whenever the questions or code change.
+This writes one HTML file with the CSS, data and code inlined. It opens straight from disk and works offline, so you can email it or put it on a USB stick. `dist/` is in `.gitignore`, so it isn't published with the site. Rebuild it whenever the questions or code change.
 
 ## How the code is organised
 

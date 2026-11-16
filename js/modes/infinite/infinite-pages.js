@@ -2,67 +2,57 @@
  * Infinite mode pages: the current question and the end-of-session summary.
  */
 
-import { escapeHtml, pad2 } from "../../core/text.js";
-import { renderTags, renderPrompt, renderAnswerArea, renderKeyHints } from "../../ui/question-card.js";
-import { renderFeedback } from "../../ui/feedback.js";
+import { escapeHtml } from "../../core/text.js";
+import { renderQuestion } from "../../ui/question-card.js";
 import { formatDuration } from "../../ui/format.js";
 import { sessionStats, weakConcepts } from "./session-stats.js";
 import { describePick } from "./describe-pick.js";
 
 export function renderInfiniteQuestion(app, session) {
-  const { attempt, number } = session.current;
-  const question = attempt.question;
+  const { attempt, pick, number } = session.current;
   return `
-    <article class="qcard" aria-labelledby="qtext">
-      <header class="qhead">
-        <div class="qnum"><span>Infinite</span> <strong>${number}</strong></div>
-        <div class="tags">${renderTags(question, app.chapterById)}</div>
-      </header>
-      <p class="why-here">${escapeHtml(describePick(session.current.pick, session, app))}</p>
-      ${renderPrompt(question, { withId: true })}
-      ${renderAnswerArea(attempt, { key: `infinite-${number}` })}
-      ${attempt.checked ? renderFeedback(attempt) + conceptChips(app, question) : ""}
-      <footer class="qactions">
-        <button type="button" class="btn ghost" data-act="end">End session</button>
-        <span class="spacer"></span>
-        ${attempt.checked
-          ? `<button type="button" class="btn primary" data-act="next">Next question</button>`
-          : `<button type="button" class="btn primary" data-act="submit">Submit</button>`}
-      </footer>
-    </article>
-    ${renderKeyHints("submit, then next question")}`;
+    <p class="why-here">${escapeHtml(describePick(pick, session, app))}</p>
+    ${renderQuestion(attempt, {
+      number,
+      key: `infinite-${number}`,
+      controls: attempt.checked ? "" : `<div class="checkrow"><button type="button" class="btn" data-act="submit">Check</button></div>`,
+      after: studyLinks(app, attempt.question)
+    })}
+    ${attempt.checked ? `<div class="qactions"><span class="spacer"></span><button type="button" class="btn primary" data-act="next">Next question</button></div>` : ""}`;
 }
 
-function conceptChips(app, question) {
-  const chips = question.concepts.map(c => `<button type="button" class="cchip" data-study="${c}">${escapeHtml(app.conceptById.get(c).name)}</button>`);
-  return `<div class="cchips"><span class="fb-label">Concepts in this question</span>${chips.join("")}</div>`;
+/** Links from a marked question to its concepts in Study mode. */
+function studyLinks(app, question) {
+  const links = question.concepts.map(c => `<button type="button" class="linkbtn" data-study="${c}">${escapeHtml(app.conceptById.get(c).name)}</button>`);
+  return `<p class="seealso">Read up on this: ${links.join(", ")}</p>`;
 }
 
 export function renderInfiniteSummary(app, session) {
   const stats = sessionStats(session.engine.state);
   const weak = weakConcepts(session.engine.state, app.graph);
   return `
-    <article class="qcard results">
+    <div class="page">
       <h2>Session summary</h2>
-      <div class="tablewrap"><table class="reviewtable">
-        <tr><th scope="row">Answered</th><td>${stats.answered}</td></tr>
-        <tr><th scope="row">Fully right</th><td>${stats.fullyRight} (${stats.percentRight}%)</td></tr>
-        <tr><th scope="row">Average mark</th><td>${stats.averageMark.toFixed(2)} out of 1.00</td></tr>
-        <tr><th scope="row">Time</th><td>${formatDuration(session.endedAt - session.startedAt)}</td></tr>
-        <tr><th scope="row">Still to revisit</th><td>${stats.toRevisit}</td></tr>
+      <div class="tablewrap"><table class="generaltable">
+        <tbody>
+          <tr><th scope="row">Answered</th><td>${stats.answered}</td></tr>
+          <tr><th scope="row">Fully right</th><td>${stats.fullyRight} (${stats.percentRight}%)</td></tr>
+          <tr><th scope="row">Average mark</th><td>${stats.averageMark.toFixed(2)} out of 1.00</td></tr>
+          <tr><th scope="row">Time taken</th><td>${formatDuration(session.endedAt - session.startedAt)}</td></tr>
+          <tr><th scope="row">Still to revisit</th><td>${stats.toRevisit}</td></tr>
+        </tbody>
       </table></div>
-      <h3>Concepts you missed</h3>
-      ${weak.length ? `<ul class="weak big">${weak.map(([c, count]) => missedConceptRow(app, c, count)).join("")}</ul>` : `<p class="muted">You didn't miss anything this session.</p>`}
-      <div class="res-actions">
+      <h3>Concepts you got wrong</h3>
+      ${weak.length ? `<ul class="weak big">${weak.map(([c, count]) => missedConceptRow(app, c, count)).join("")}</ul>` : `<p class="muted">None this session.</p>`}
+      <div class="qactions">
         <button type="button" class="btn primary" data-act="new">Start a new session</button>
-        <button type="button" class="btn" data-study="">Open Study mode</button>
+        <button type="button" class="btn" data-study="">Open the concept map</button>
       </div>
-    </article>`;
+    </div>`;
 }
 
 function missedConceptRow(app, conceptId, count) {
   const concept = app.conceptById.get(conceptId);
-  return `<li><span><strong>${escapeHtml(concept.name)}</strong> <span class="muted small">Ch ${pad2(concept.chapter)}</span></span>` +
-    `<span class="muted small">${count} missed</span>` +
-    `<span class="weak-acts"><button type="button" class="btn ghost" data-study="${conceptId}">Study</button><button type="button" class="btn ghost" data-practise="${conceptId}">Practise</button></span></li>`;
+  return `<li><span>${escapeHtml(concept.name)}</span><span>${count} wrong</span>` +
+    `<span class="weak-acts"><button type="button" class="btn" data-study="${conceptId}">Study</button><button type="button" class="btn" data-practise="${conceptId}">Practise</button></span></li>`;
 }

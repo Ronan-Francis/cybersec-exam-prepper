@@ -1,5 +1,5 @@
 /**
- * The single-file build: it runs, keeps the code intact and leaves nothing external but fonts.
+ * The single-file build: it runs, keeps the code intact and leaves nothing external to load.
  */
 
 import { test } from "node:test";

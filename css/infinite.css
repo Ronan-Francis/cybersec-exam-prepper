@@ -1,25 +1,18 @@
-/* Infinite mode: session panel, reason line and concept chips. */
+/* Infinite mode: the session block and the line saying why a question was picked. */
 
-/* Infinite */
-.inf-card { padding: 14px; display: grid; gap: 10px; }
-.inf-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; }
-.inf-stats div { background: var(--surface-2); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; }
-.inf-stats dt { font-size: 12px; color: var(--muted); }
-.inf-stats dd { margin: 0; font: 600 20px/1.2 var(--font-display); font-variant-numeric: tabular-nums; }
-.side-h { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; font-family: var(--font-body); margin-top: 4px; }
-.strip { display: flex; flex-wrap: wrap; gap: 4px; }
-.dot { width: 12px; height: 12px; border-radius: 3px; background: var(--muted); }
+.why-here { font-size: 14px; color: var(--muted); }
+.inf-block { display: grid; gap: 12px; }
+.inf-block h2 { margin: 0; }
+.inf-block h3 { font-size: 15px; margin-bottom: 4px; }
+.inf-stats { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; }
+.inf-stats dt { color: var(--muted); }
+.inf-stats dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.strip { display: flex; flex-wrap: wrap; gap: 3px; }
+.dot { width: 12px; height: 12px; background: var(--muted); }
 .dot.good { background: var(--good); } .dot.part { background: var(--part); } .dot.bad { background: var(--bad); }
 .weak { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.weak li { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 14px; }
-.weak li > span { font-size: 12px; color: var(--muted); white-space: nowrap; }
-.weak.big li { padding: 8px 0; border-bottom: 1px solid var(--line); align-items: center; flex-wrap: wrap; }
+.weak li { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.weak li > span { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.weak.big li { padding: 8px 0; border-top: 1px solid var(--line); align-items: center; flex-wrap: wrap; }
 .weak-acts { display: flex; gap: 6px; }
-.weak-acts .btn { padding: 4px 10px; font-size: 13px; }
-.inf-actions { display: grid; gap: 6px; }
-.focusline { margin: 0; font-size: 14px; display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
-.why-here { margin: -6px 0 0; font-size: 13px; color: var(--accent); background: var(--accent-soft); border-radius: 4px; padding: 6px 10px; }
-.cchips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.cchips .fb-label { width: 100%; margin: 0; }
-.cchip { border: 1px solid var(--accent); color: var(--accent); background: var(--surface); border-radius: 999px; padding: 3px 10px; font-size: 13px; cursor: pointer; }
-.cchip:hover { background: var(--accent-soft); }
+.inf-actions { display: flex; flex-wrap: wrap; gap: 4px 16px; }

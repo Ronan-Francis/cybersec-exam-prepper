@@ -3,7 +3,7 @@
  * "only questions I got wrong before", and the two presets.
  */
 
-import { escapeHtml, pad2, shuffle, plural } from "../../core/text.js";
+import { escapeHtml, shuffle, plural } from "../../core/text.js";
 import { QUESTION_TYPES } from "../../question-types/index.js";
 import { $, $$, isNarrowScreen, scrollBehaviour } from "../../ui/dom.js";
 
@@ -18,17 +18,17 @@ export function createQuizSetup(app, { onStart }) {
   const form = $("#setupForm");
   const typesInBank = QUESTION_TYPES.filter(type => app.questions.some(q => q.type === type.name));
 
-  renderChips();
+  renderLists();
   bindEvents();
   refresh();
   if (isNarrowScreen()) panel.open = false;
 
-  function renderChips() {
+  function renderLists() {
     const count = predicate => app.questions.filter(predicate).length;
-    $("#chapterChips").innerHTML = app.chapters.map(c =>
-      `<label class="chip"><input type="checkbox" name="ch" value="${c.id}" checked><span><b>${pad2(c.id)}</b> ${escapeHtml(c.short)} <em>${count(q => q.chapter === c.id)}</em></span></label>`).join("");
-    $("#typeChips").innerHTML = typesInBank.map(t =>
-      `<label class="chip"><input type="checkbox" name="ty" value="${t.name}" checked><span>${t.label} <em>${count(q => q.type === t.name)}</em></span></label>`).join("");
+    const row = (name, value, label, total) =>
+      `<label class="pick"><input type="checkbox" name="${name}" value="${value}" checked><span>${label} <span class="muted">(${total})</span></span></label>`;
+    $("#chapterList").innerHTML = app.chapters.map(c => row("ch", c.id, `${c.id}. ${escapeHtml(c.short)}`, count(q => q.chapter === c.id))).join("");
+    $("#typeList").innerHTML = typesInBank.map(t => row("ty", t.name, t.label, count(q => q.type === t.name))).join("");
   }
 
   function readSettings() {
@@ -46,16 +46,16 @@ export function createQuizSetup(app, { onStart }) {
     return app.questions.filter(q => settings.chapters.has(q.chapter) && settings.types.has(q.type) && (!missed || missed.has(q.id)));
   }
 
-  /** Updates the "N questions match" line and the missed-question count. */
+  /** Updates the "N questions to draw from" line and the missed-question count. */
   function refresh() {
     const missedCount = app.history.missedIds(app.questions.map(q => q.id)).size;
-    $("#missedCount").textContent = missedCount ? `(${missedCount} so far)` : "(none yet)";
+    $("#missedCount").textContent = missedCount ? `(${missedCount})` : "(none yet)";
     const matches = matchingQuestions(readSettings()).length;
     const info = $("#poolInfo");
     info.classList.toggle("warn", !matches);
     info.textContent = matches
-      ? `${plural(matches, "question")} match these settings.`
-      : "No questions match. Select at least one chapter and one question type.";
+      ? `${plural(matches, "question")} to draw from.`
+      : "Nothing matches. Pick at least one chapter and one question type.";
   }
 
   function start({ scroll = true } = {}) {

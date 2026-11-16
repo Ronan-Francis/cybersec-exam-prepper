@@ -13,7 +13,6 @@ import { escapeHtml } from "./core/text.js";
 
 async function start() {
   const app = createAppContext(await loadAppData());
-  showBankStats(app);
   const router = createRouter({
     modes: [createQuizMode(app), createInfiniteMode(app), createStudyMode(app)],
     tabs: $$(".modetabs button"),
@@ -23,16 +22,10 @@ async function start() {
   router.start();
 }
 
-function showBankStats(app) {
-  $("#statQuestions").textContent = app.questions.length;
-  $("#statChapters").textContent = app.chapters.length;
-  $("#statTypes").textContent = new Set(app.questions.map(q => q.type)).size;
-}
-
 function showStartupError(error) {
-  $("#stage").innerHTML = `<article class="qcard"><h2>The questions couldn't load</h2>
+  $("#stage").innerHTML = `<div class="page"><h2>The questions couldn't load</h2>
     <p>${escapeHtml(error.message)}</p>
-    <p class="muted">If you opened index.html straight from your computer, run <code>npm start</code> and open the address it prints instead. Browsers block loading data from local files.</p></article>`;
+    <p class="muted">If you opened index.html straight from your computer, run <code>npm start</code> and use the address it prints. Browsers won't load the question files from disk.</p></div>`;
 }
 
 start().catch(showStartupError);

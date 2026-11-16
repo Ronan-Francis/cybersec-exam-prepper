@@ -8,6 +8,7 @@
 import { createAttempt, checkAttempt, isFullMarks } from "../../core/attempt.js";
 import { shuffle } from "../../core/text.js";
 import { $, revealIfScrolledPast, scrollIntoViewGently, scrollBehaviour } from "../../ui/dom.js";
+import { updateInfo } from "../../ui/question-card.js";
 import { bindAnswerInputs, bindAnswerKeys } from "../../ui/answer-binding.js";
 import { formatStopwatch } from "../../ui/format.js";
 import { createQuizSetup } from "./quiz-setup.js";
@@ -45,7 +46,7 @@ export function createQuizMode(app) {
     state.index = Math.max(0, Math.min(state.attempts.length - 1, index));
     state.page = "question";
     render();
-    revealIfScrolledPast($(".qcard", stage));
+    revealIfScrolledPast($(".que", stage));
   }
 
   function next() {
@@ -66,7 +67,7 @@ export function createQuizMode(app) {
     if (!attempt || attempt.checked) return;
     app.history.record(attempt.question.id, checkAttempt(attempt));
     render();
-    scrollIntoViewGently($(".feedback", stage));
+    scrollIntoViewGently($(".outcome", stage));
   }
 
   function finish() {
@@ -87,8 +88,8 @@ export function createQuizMode(app) {
 
   function render() {
     renderQuizNav(state);
-    if (state.page === "question") stage.innerHTML = renderQuestionPage(app, state);
-    else if (state.page === "summary") stage.innerHTML = renderSummaryPage(app, state);
+    if (state.page === "question") stage.innerHTML = renderQuestionPage(state);
+    else if (state.page === "summary") stage.innerHTML = renderSummaryPage(state);
     else stage.innerHTML = renderResultsPage(app, state);
     updateTimer();
   }
@@ -138,7 +139,7 @@ export function createQuizMode(app) {
     stage.addEventListener("click", handleStageClick, { signal });
     $("#navgrid").addEventListener("click", handleNavClick, { signal });
     $("#finishBtn").addEventListener("click", showSummary, { signal });
-    bindAnswerInputs({ root: stage, getAttempt: currentAttempt, onAnswerChange: () => renderQuizNav(state), onRerender: render, signal });
+    bindAnswerInputs({ root: stage, getAttempt: currentAttempt, onAnswerChange: attempt => { renderQuizNav(state); updateInfo(stage, attempt, { number: state.index + 1, flag: true }); }, onRerender: render, signal });
     bindAnswerKeys({
       getAttempt: currentAttempt,
       onEnter: attempt => (state.style === "practice" && !attempt.checked ? check() : next()),

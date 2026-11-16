@@ -21,20 +21,20 @@ export function createStudyMode(app) {
   function renderPage() {
     stage.innerHTML = `
       <div class="study">
-        <section class="card study-map" aria-labelledby="maph">
+        <section class="study-map" aria-labelledby="maph">
           <div class="map-bar">
             <h2 id="maph">Concept map</h2>
-            <ul class="legend inline" aria-label="Colour key">
+            <ul class="legend" aria-label="Colour key">
               <li><i class="lg good"></i>80% or more</li><li><i class="lg part"></i>50 to 79%</li><li><i class="lg bad"></i>Below 50%</li><li><i class="lg none"></i>Not answered</li>
             </ul>
             <div class="zoom" role="group" aria-label="Zoom">
-              <button type="button" data-zoom="in" aria-label="Zoom in">+</button><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="fit">Fit</button>
+              <button type="button" class="btn" data-zoom="in" aria-label="Zoom in">+</button><button type="button" class="btn" data-zoom="out" aria-label="Zoom out">−</button><button type="button" class="btn" data-zoom="fit">Fit</button>
             </div>
           </div>
           <svg id="graphSvg" role="group" aria-label="Concept map: ten chapters with their concepts" preserveAspectRatio="xMidYMid meet">${renderConceptMap(app, layout, selected)}</svg>
-          <p class="map-hint">Click a concept to study it. Drag to move around; scroll or use + and − to zoom.</p>
+          <p class="map-hint">Select a concept to study it. Drag to move the map and scroll to zoom.</p>
         </section>
-        <aside class="card study-panel" id="studyPanel" aria-live="polite">${panelHtml()}</aside>
+        <aside class="block study-panel" id="studyPanel" aria-live="polite">${panelHtml()}</aside>
       </div>`;
     const svg = $("#graphSvg");
     applyView(svg, view);
@@ -65,9 +65,9 @@ export function createStudyMode(app) {
     const message = $("#copyMsg");
     try {
       await navigator.clipboard.writeText(json);
-      message.textContent = `Copied ${nodeCount} nodes and ${edgeCount.toLocaleString("en-IE")} edges (${Math.round(json.length / 1024)} KB).`;
+      message.textContent = `Copied ${nodeCount} nodes and ${edgeCount.toLocaleString("en-IE")} links.`;
     } catch {
-      message.textContent = "Your browser blocked copying here.";
+      message.textContent = "Your browser didn't allow the copy.";
     }
   }
 

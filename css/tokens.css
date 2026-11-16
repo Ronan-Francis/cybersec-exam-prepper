@@ -1,38 +1,46 @@
-/* Design tokens: colours, fonts and radius for light and dark themes. */
+/* Design tokens: colours, fonts and radius for light and dark themes. The light theme follows Moodle's default theme. */
 
 :root {
-  --bg: #eceff2;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #f5f7f8;
-  --ink: #15212b;
-  --muted: #5a6875;
-  --line: #d2d9df;
-  --accent: #0c6470;
-  --accent-soft: #dbeef0;
+  --surface-2: #f8f9fa;
+  --ink: #1d2125;
+  --muted: #5f6b76;
+  --line: #dee2e6;
+  --line-strong: #8f959e;
+  --accent: #0f6cbf;
+  --accent-hover: #0c5ba1;
   --accent-ink: #ffffff;
-  --good: #1c7744;
-  --good-soft: #e2f3e8;
-  --part: #946000;
-  --part-soft: #faefd8;
-  --bad: #b0261d;
-  --bad-soft: #fbe4e1;
-  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
-  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --radius: 6px;
+  --button: #ced4da;
+  --button-hover: #b8c1ca;
+  --question: #e7f3f5;
+  --question-ink: #001a1e;
+  --outcome: #fcefdc;
+  --outcome-ink: #6b4d1f;
+  --good: #357a32;
+  --good-soft: #d7e9d6;
+  --part: #a26200;
+  --part-soft: #fbe9c8;
+  --bad: #ca3120;
+  --bad-soft: #f6d9d5;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --radius: 3px;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0e1418; --surface: #161e24; --surface-2: #1b252c; --ink: #e3e9ed; --muted: #94a3ae; --line: #2b3842;
-    --accent: #5bbfcb; --accent-soft: #15343a; --accent-ink: #061417;
-    --good: #5ccb8d; --good-soft: #14301f; --part: #e4ae4d; --part-soft: #33270f; --bad: #f27b70; --bad-soft: #3b1b18;
+    --bg: #14181c; --surface: #14181c; --surface-2: #1d2329; --ink: #e4e8ec; --muted: #9aa5b0; --line: #333c45; --line-strong: #6f7b87;
+    --accent: #6cb2ee; --accent-hover: #8ac3f3; --accent-ink: #0a1620; --button: #39434d; --button-hover: #46525e;
+    --question: #1a2c31; --question-ink: #e0eef1; --outcome: #33290f; --outcome-ink: #f0d9a8;
+    --good: #6cc368; --good-soft: #1b3319; --part: #e2a84a; --part-soft: #382a10; --bad: #f08273; --bad-soft: #3d1c17;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0e1418; --surface: #161e24; --surface-2: #1b252c; --ink: #e3e9ed; --muted: #94a3ae; --line: #2b3842;
-  --accent: #5bbfcb; --accent-soft: #15343a; --accent-ink: #061417;
-  --good: #5ccb8d; --good-soft: #14301f; --part: #e4ae4d; --part-soft: #33270f; --bad: #f27b70; --bad-soft: #3b1b18;
+  --bg: #14181c; --surface: #14181c; --surface-2: #1d2329; --ink: #e4e8ec; --muted: #9aa5b0; --line: #333c45; --line-strong: #6f7b87;
+  --accent: #6cb2ee; --accent-hover: #8ac3f3; --accent-ink: #0a1620; --button: #39434d; --button-hover: #46525e;
+  --question: #1a2c31; --question-ink: #e0eef1; --outcome: #33290f; --outcome-ink: #f0d9a8;
+  --good: #6cc368; --good-soft: #1b3319; --part: #e2a84a; --part-soft: #382a10; --bad: #f08273; --bad-soft: #3d1c17;
   color-scheme: dark;
 }

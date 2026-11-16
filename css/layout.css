@@ -1,45 +1,34 @@
-/* Page layout: masthead, mode tabs, workspace and side panel. */
+/* Page layout: top bar with the mode links, the main column and the blocks beside it. */
 
-/* Masthead */
-.masthead { background: var(--surface); border-bottom: 1px solid var(--line); }
-.mast-inner { max-width: 1240px; margin: 0 auto; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 32px; }
-.kicker { margin: 0 0 2px; font: 500 12px/1.4 var(--font-mono); letter-spacing: 0.04em; color: var(--muted); text-transform: uppercase; }
-h1 { font-size: 28px; letter-spacing: -0.01em; }
-.stats { display: flex; gap: 24px; margin: 0; }
-.stats div { display: grid; }
-.stats dt { font-size: 12px; color: var(--muted); }
-.stats dd { margin: 0; font: 600 20px/1.2 var(--font-display); font-variant-numeric: tabular-nums; }
+/* Top bar */
+.topbar { border-bottom: 1px solid var(--line); background: var(--surface); }
+.topbar-inner { max-width: 1160px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 0 28px; }
+h1 { font-size: 18px; font-weight: 400; padding: 14px 0; }
+.modetabs { display: flex; gap: 4px; align-self: stretch; }
+.modetabs button { border: 0; border-bottom: 3px solid transparent; background: none; padding: 3px 12px 0; cursor: pointer; color: var(--ink); }
+.modetabs button:hover { background: var(--surface-2); }
+.modetabs button[aria-pressed="true"] { border-bottom-color: var(--accent); }
 
-/* Workspace */
-.workspace { max-width: 1240px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 20px; align-items: start; }
-.side { display: grid; gap: 16px; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
-.stage { display: grid; gap: 16px; min-width: 0; scroll-margin-top: 16px; }
+/* Main column and side blocks */
+.workspace { max-width: 1160px; margin: 0 auto; padding: 24px 20px 48px; display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 24px; align-items: start; }
+.stage { grid-column: 1; grid-row: 1; display: grid; gap: 16px; min-width: 0; scroll-margin-top: 16px; }
+.side { grid-column: 2; grid-row: 1; display: grid; gap: 16px; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; }
+.side-group { display: grid; gap: 16px; min-width: 0; }
+.block { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; min-width: 0; }
+.block h2 { font-size: 16px; margin-bottom: 10px; }
 
-/* Mode tabs */
-.modetabs { max-width: 1240px; margin: 0 auto; padding: 0 20px; display: flex; gap: 4px; overflow-x: auto; }
-.modetabs button { display: grid; text-align: left; gap: 1px; border: 1px solid transparent; border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; background: none; padding: 8px 16px 9px; cursor: pointer; color: var(--muted); position: relative; top: 1px; white-space: nowrap; }
-.modetabs button b { font: 600 15px/1.2 var(--font-display); color: var(--ink); }
-.modetabs button small { font-size: 12px; }
-.modetabs button:hover b { color: var(--accent); }
-.modetabs button[aria-pressed="true"] { background: var(--bg); border-color: var(--line); }
-.modetabs button[aria-pressed="true"] b { color: var(--accent); }
 body[data-mode="study"] .workspace { grid-template-columns: minmax(0, 1fr); }
 body[data-mode="study"] .side { display: none; }
 
+/* Narrow screens: one column. The collapsed "New quiz" block sits above the question, the other blocks below it. */
 @media (max-width: 900px) {
-  .workspace { grid-template-columns: minmax(0, 1fr); padding: 14px 16px; }
-  .side { position: static; max-height: none; overflow: visible; grid-template-columns: minmax(0, 1fr); min-width: 0; }
-  .side > * { min-width: 0; }
-  .modetabs { padding: 0 12px; }
-  .modetabs button small { display: none; }
+  .workspace { grid-template-columns: minmax(0, 1fr); padding: 16px 14px 40px; gap: 16px; }
+  .side, .side-group { display: contents; }
+  .stage { grid-column: auto; grid-row: auto; order: 1; }
+  .block { order: 2; }
+  .block.setup { order: 0; }
+  .topbar-inner { padding: 0 14px; }
+  h1 { padding: 10px 0 4px; flex-basis: 100%; }
+  .modetabs { margin-left: -12px; }
+  .modetabs button { padding: 8px 12px 6px; }
 }
-
-@media (max-width: 560px) {
-  h1 { font-size: 24px; }
-  .stats { gap: 16px; }
-}
-
-/* Groups the quiz navigation and setup cards in the side panel. */
-.side-group { display: grid; gap: 16px; min-width: 0; }
-.side-group > * { min-width: 0; }  /* lets the navigation strip scroll instead of widening the page */

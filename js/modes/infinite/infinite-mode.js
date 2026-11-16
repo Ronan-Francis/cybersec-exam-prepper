@@ -9,6 +9,7 @@ import { createInfiniteEngine } from "../../core/infinite-engine.js";
 import { $, revealIfScrolledPast, scrollIntoViewGently } from "../../ui/dom.js";
 import { bindAnswerInputs, bindAnswerKeys } from "../../ui/answer-binding.js";
 import { formatStopwatch } from "../../ui/format.js";
+import { updateInfo } from "../../ui/question-card.js";
 import { renderInfiniteQuestion, renderInfiniteSummary } from "./infinite-pages.js";
 import { renderInfiniteSidePanel } from "./infinite-side-panel.js";
 
@@ -37,7 +38,7 @@ export function createInfiniteMode(app) {
     const number = session.engine.state.history.length + 1;
     session.current = { attempt: createAttempt(app.questionById.get(pick.id)), pick, number };
     render();
-    revealIfScrolledPast($(".qcard", stage));
+    revealIfScrolledPast($(".que", stage));
   }
 
   function submit() {
@@ -48,7 +49,7 @@ export function createInfiniteMode(app) {
     session.questionNumbers.set(attempt.question.id, number);
     session.engine.record(attempt.question.id, score);
     render();
-    scrollIntoViewGently($(".feedback", stage));
+    scrollIntoViewGently($(".outcome", stage));
   }
 
   function endSession() {
@@ -98,7 +99,8 @@ export function createInfiniteMode(app) {
   function bindEvents(signal) {
     stage.addEventListener("click", handleClick, { signal });
     infiniteSide.addEventListener("click", handleClick, { signal });
-    bindAnswerInputs({ root: stage, getAttempt: currentAttempt, onRerender: render, signal });
+    const onAnswerChange = attempt => updateInfo(stage, attempt, { number: session.current.number });
+    bindAnswerInputs({ root: stage, getAttempt: currentAttempt, onAnswerChange, onRerender: render, signal });
     bindAnswerKeys({ getAttempt: currentAttempt, onEnter: attempt => (attempt.checked ? nextQuestion() : submit()), signal });
   }
 

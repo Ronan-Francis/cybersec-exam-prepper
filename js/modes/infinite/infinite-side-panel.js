@@ -1,5 +1,5 @@
 /**
- * The Infinite session panel: stats, focus, recent answers and weak spots.
+ * The Infinite session block: totals, the concept being practised, recent answers and the concepts missed.
  */
 
 import { escapeHtml } from "../../core/text.js";
@@ -16,26 +16,23 @@ export function renderInfiniteSidePanel(app, session) {
   const weak = weakConcepts(engineState, app.graph);
   const focus = engineState.focus;
   return `
-    <div class="nav-head"><h2>Infinite session</h2><span class="timer" id="infiniteTimer">${formatStopwatch((session.endedAt || Date.now()) - session.startedAt)}</span></div>
+    <h2>This session</h2>
     <dl class="inf-stats">
-      <div><dt>Answered</dt><dd>${stats.answered}</dd></div>
-      <div><dt>Fully right</dt><dd>${stats.answered ? `${stats.percentRight}%` : "0"}</dd></div>
-      <div><dt>Streak</dt><dd>${stats.streak}</dd></div>
-      <div><dt>To revisit</dt><dd>${stats.toRevisit}</dd></div>
+      <dt>Answered</dt><dd>${stats.answered}</dd>
+      <dt>Fully right</dt><dd>${stats.answered ? `${stats.percentRight}%` : "0"}</dd>
+      <dt>To revisit</dt><dd>${stats.toRevisit}</dd>
+      <dt>Time taken</dt><dd id="infiniteTimer">${formatStopwatch((session.endedAt || Date.now()) - session.startedAt)}</dd>
     </dl>
-    ${focus ? `<p class="focusline">Focus: <strong>${escapeHtml(app.conceptById.get(focus).name)}</strong> <button type="button" class="tiny" data-act="clear-focus">Clear focus</button></p>` : ""}
-    <h3 class="side-h">Recent answers</h3>
-    <div class="strip">${recentDots(engineState.history)}</div>
-    <h3 class="side-h">Weak spots this session</h3>
-    ${weakSpotList(app, weak)}
+    ${focus ? `<p>Practising <strong>${escapeHtml(app.conceptById.get(focus).name)}</strong>. <button type="button" class="linkbtn" data-act="clear-focus">Go back to everything</button></p>` : ""}
+    ${engineState.history.length ? `<div><h3>Recent answers</h3><div class="strip">${recentDots(engineState.history)}</div></div>` : ""}
+    ${weak.length ? `<div><h3>Concepts you've got wrong</h3>${weakSpotList(app, weak)}</div>` : ""}
     <div class="inf-actions">
-      ${session.endedAt ? "" : `<button type="button" class="btn ghost block" data-act="end">End session</button>`}
-      <button type="button" class="btn ghost block" data-act="new">Start a new session</button>
+      ${session.endedAt ? "" : `<button type="button" class="linkbtn" data-act="end">End session</button>`}
+      <button type="button" class="linkbtn" data-act="new">Start a new session</button>
     </div>`;
 }
 
 function recentDots(history) {
-  if (!history.length) return `<span class="muted small">Nothing yet.</span>`;
   return history.slice(-RECENT_DOTS).map(h => {
     const result = isFullMarks(h.score) ? "right" : h.score > 0 ? "partly right" : "wrong";
     return `<span class="dot ${markBand(h.score)}" title="${escapeHtml(h.id)}: ${result}"></span>`;
@@ -43,8 +40,7 @@ function recentDots(history) {
 }
 
 function weakSpotList(app, weak) {
-  if (!weak.length) return `<p class="muted small">None yet. Concepts you miss will show up here.</p>`;
   const items = weak.slice(0, WEAK_SPOTS_SHOWN).map(([conceptId, count]) =>
-    `<li><button type="button" class="linkbtn" data-study="${conceptId}">${escapeHtml(app.conceptById.get(conceptId).name)}</button><span>${count} missed</span></li>`);
+    `<li><button type="button" class="linkbtn" data-study="${conceptId}">${escapeHtml(app.conceptById.get(conceptId).name)}</button><span>${count} wrong</span></li>`);
   return `<ul class="weak">${items.join("")}</ul>`;
 }
