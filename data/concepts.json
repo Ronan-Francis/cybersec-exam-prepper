@@ -63,13 +63,13 @@
     "id": "models",
     "chapter": 2,
     "name": "Data flows and trust boundaries",
-    "summary": "A system model shows components, data flows and trust boundaries. Mark a boundary wherever data crosses between parts with different trust or control, and note who and what crosses it."
+    "summary": "Defining the scope means recording the system's components, how data moves between them and where trust or privilege changes. Update the model whenever data, trust or privilege changes."
   },
   {
     "id": "responses",
     "chapter": 2,
     "name": "Threats and responses",
-    "summary": "A useful threat statement names the actor, action, target and consequence. Each threat is then eliminated, mitigated, transferred or accepted, with a reason and an owner."
+    "summary": "A useful threat statement names the actor, action, target and consequence. The response either changes the design to remove the cause or adds controls to reduce the risk, and the decision is recorded with an owner and a reason."
   },
   {
     "id": "lifecycle",
@@ -87,7 +87,7 @@
     "id": "lsb",
     "chapter": 3,
     "name": "LSB embedding",
-    "summary": "Least-significant-bit embedding changes the last bit of pixel or sample values, so each change is tiny and hard to see. Editing, resizing or re-saving the carrier can destroy the payload."
+    "summary": "Least-significant-bit embedding changes the last bit of pixel values, so each change is tiny and hard to see. Hard to see does not mean undetectable: the changes can add up or leave statistical clues."
   },
   {
     "id": "steganalysis",
@@ -105,7 +105,7 @@
     "id": "ads",
     "chapter": 3,
     "name": "Alternate data streams",
-    "summary": "NTFS lets a file carry extra named streams alongside its main content. They don't run by themselves, may be lost when copying, and are missed by tools that only read the default stream."
+    "summary": "NTFS lets a file carry extra named streams alongside its main content. They don't run by themselves, and tools that only read the default stream miss them."
   },
   {
     "id": "owasp",
@@ -153,7 +153,7 @@
     "id": "registry",
     "chapter": 5,
     "name": "Registry and persistence",
-    "summary": "The Registry holds user and machine settings. Run keys start programs at sign-in, so they are common for both legitimate software and persistence; compare against a baseline before calling a value new."
+    "summary": "The Registry stores configuration and traces of activity. Run keys start programs at sign-in, so they are common for both legitimate software and persistence; compare against a baseline before calling a value new."
   },
   {
     "id": "timeline",
@@ -315,7 +315,7 @@
     "id": "sessions",
     "chapter": 10,
     "name": "Sessions and session IDs",
-    "summary": "After login, the server issues an opaque session ID in a cookie, and later requests carry it instead of the password. The ID acts like a credential, and an IP address is no substitute for it."
+    "summary": "After login, the server creates a session and gives the browser an opaque session ID in a cookie. Later requests carry the ID instead of the password, and the server checks the session is valid before applying its access policy."
   },
   {
     "id": "cookies",
@@ -327,7 +327,7 @@
     "id": "samesite",
     "chapter": 10,
     "name": "Sites, SameSite and CSRF",
-    "summary": "CSRF makes a signed-in browser send an unwanted request. SameSite helps, but Lax still sends cookies on normal links, so keep state changes off GET and use CSRF tokens. Origin and site are different boundaries."
+    "summary": "SameSite controls whether a cookie is sent on requests that start from another site. Lax still sends it on normal links, so keep state changes off GET and keep CSRF protection. Origin and site are different boundaries."
   },
   {
     "id": "objectauth",
