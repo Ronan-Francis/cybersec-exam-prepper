@@ -176,7 +176,7 @@
         "why": "Records read or altered is the harm if it happens."
       },
       {
-        "item": "Plausible access combined with serious harm makes it a high priority",
+        "item": "It is likely to be found and the harm would be serious, so fixing it is a high priority",
         "match": "Risk",
         "why": "Likelihood combined with impact is risk."
       }
@@ -190,7 +190,7 @@
     "concepts": [
       "risk"
     ],
-    "prompt": "`risk ≈ likelihood × impact` produces a precise score that can be compared across systems without defining the inputs.",
+    "prompt": "The shorthand `risk ≈ likelihood × impact` gives a precise score, even when likelihood and impact are only rough estimates.",
     "answer": false,
     "explanation": "It is a qualitative shorthand for comparing and prioritising. Likelihood and impact are often estimates, so it is only precise when the inputs are defined and measured consistently."
   },
@@ -201,7 +201,7 @@
     "concepts": [
       "risk"
     ],
-    "prompt": "A threat can exist without a reachable vulnerability.",
+    "prompt": "A threat can exist even if there is no vulnerability it can reach.",
     "answer": true,
     "explanation": "Ask each question separately. A threat may exist without a reachable vulnerability, and a vulnerability may have limited impact if it protects no important asset."
   },
@@ -312,15 +312,15 @@
       },
       {
         "item": "File upload",
-        "match": "Malicious content reaches unsafe processing"
+        "match": "A malicious file is uploaded and then processed unsafely"
       },
       {
         "item": "Public API",
-        "match": "Changing an object identifier bypasses an ownership check"
+        "match": "Changing a record ID in the request to reach someone else's data"
       },
       {
         "item": "Dependency update",
-        "match": "A compromised package reaches the build or deployment"
+        "match": "A compromised package gets into the build"
       }
     ],
     "explanation": "The surface is where contact is possible; the vector is how an attacker might use that contact. A single interface can support several vectors."

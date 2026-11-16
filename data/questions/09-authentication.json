@@ -6,19 +6,19 @@
     "concepts": [
       "pwstore"
     ],
-    "prompt": "An attacker copies the account table. Match each stored value to the consequence.",
+    "prompt": "An attacker copies the account table. Match each way of storing passwords to what the attacker can do.",
     "pairs": [
       {
-        "item": "Original password",
-        "match": "Immediately readable"
+        "item": "Stored as plain text",
+        "match": "Read every password straight away"
       },
       {
-        "item": "Encrypted password",
-        "match": "Recoverable with the decryption key"
+        "item": "Stored encrypted",
+        "match": "Recover every password if they also get the key"
       },
       {
-        "item": "Password-hash record",
-        "match": "Candidates can be tested, but the original is not stored"
+        "item": "Stored as password hashes",
+        "match": "Only test guesses against each record; the passwords themselves aren't there"
       }
     ],
     "explanation": "The login system needs to verify a password without keeping a recoverable copy."
@@ -43,7 +43,7 @@
       },
       {
         "item": "Password hashing",
-        "match": "Checking a submitted password"
+        "match": "Checking a submitted password at login"
       }
     ],
     "explanation": "Password hashing is a salted, deliberately costly calculation that produces a verifier."
@@ -58,7 +58,7 @@
     "prompt": "Order the steps of checking a password at login.",
     "steps": [
       "Retrieve the saved hash, salt and settings",
-      "Calculate the candidate result with the submitted password, using that saved salt and those settings",
+      "Hash the submitted password using that saved salt and those settings",
       "Compare the result with the saved hash"
     ],
     "explanation": "This is verification. It does not decrypt or recover the original password."
@@ -312,7 +312,7 @@
     "pairs": [
       {
         "item": "Logging in",
-        "match": "Has the student supplied valid evidence for the claimed account?"
+        "match": "Has the student proved they own this account, for example with the right password?"
       },
       {
         "item": "Each later request",

@@ -10,9 +10,9 @@
     "steps": [
       "The customer submits credentials over HTTPS",
       "The server verifies them and creates a session record",
-      "A Set-Cookie header gives the browser an opaque session ID",
+      "The server's Set-Cookie header gives the browser a random session ID",
       "A later request carries the ID in its Cookie header",
-      "The server resolves and validates the session, then checks permission"
+      "The server looks up the session, checks it is valid, then checks permission"
     ],
     "explanation": "Later requests use the session ID rather than resending the password. The ID does not let the browser choose its own role."
   },
@@ -211,7 +211,7 @@
     "concepts": [
       "samesite"
     ],
-    "prompt": "Compare each URL with https://shop.example.com. Origin = scheme + host + port. Site = scheme + registrable domain (example.com). Match each URL to its relationship.",
+    "prompt": "An origin is the scheme, host and port together. A site is the scheme plus the registrable domain (here example.com). How does each URL relate to https://shop.example.com?",
     "pairs": [
       {
         "item": "https://shop.example.com/orders/101",
@@ -392,7 +392,7 @@
     "concepts": [
       "objectauth"
     ],
-    "prompt": "You want a test that proves the permission check, and not some other rule, is what stops a customer issuing a refund. Which order should the test use?",
+    "prompt": "You are testing that a customer cannot issue a refund. To be sure it is the permission check that refuses them, and not some other rule, which order should the test use?",
     "options": [
       {
         "text": "A paid order that is still eligible for a refund",
@@ -420,23 +420,23 @@
     "concepts": [
       "sessions"
     ],
-    "prompt": "A valid session ID works like a password. Where should it NOT appear? Select all that apply.",
+    "prompt": "A valid session ID works like a password. Which of these places would expose it? Select all that apply.",
     "options": [
       {
-        "text": "In URLs",
+        "text": "A URL",
         "correct": true
       },
       {
-        "text": "In shared screenshots",
+        "text": "A screenshot shared with other people",
         "correct": true
       },
       {
-        "text": "In application logs",
+        "text": "An application log",
         "correct": true
       },
       {
-        "text": "In the browser's Cookie request header",
-        "why": "The Cookie header is the intended way for the session ID to travel."
+        "text": "The Cookie header of a request sent over HTTPS",
+        "why": "The Cookie header is the intended way for the session ID to travel, and HTTPS protects it on the way."
       }
     ],
     "explanation": "The Cookie header is how the session ID is meant to travel. Keep it out of URLs, screenshots and logs, and renew it when authentication or privilege changes."

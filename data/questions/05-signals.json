@@ -6,19 +6,19 @@
     "concepts": [
       "intake"
     ],
-    "prompt": "File intake: match each signature result to the suitable handling.",
+    "prompt": "A file-upload service compares each file's first bytes (its signature) with the type the uploader claims. Match each result to what the service should do.",
     "pairs": [
       {
-        "item": "Signature matches the claimed file family",
-        "match": "Continue with structural parsing and policy checks"
+        "item": "The signature matches the claimed type",
+        "match": "Carry on with the remaining checks, such as parsing its structure"
       },
       {
-        "item": "Signature conflicts with the claimed type",
-        "match": "Hold, reject or quarantine under documented policy and record the reason"
+        "item": "The signature conflicts with the claimed type",
+        "match": "Hold or reject the file and record why"
       },
       {
-        "item": "Signature is unavailable or unrecognised",
-        "match": "Keep the result unknown and route it for further inspection"
+        "item": "The signature is missing or not recognised",
+        "match": "Record it as unknown and send it for closer inspection"
       }
     ],
     "explanation": "A known signature match is not a full safety check; an unknown signature is uncertainty, not proof of malware."
@@ -98,7 +98,7 @@
     "concepts": [
       "eventlogs"
     ],
-    "prompt": "You expected a process-creation event in the Security log, but none is present. Which of these could explain the missing event? Select all that apply.",
+    "prompt": "You expected a process-creation event in the Security log, but none is present. The program may still have run. Which of these could explain why there is no event? Select all that apply.",
     "options": [
       {
         "text": "Process-creation auditing was not enabled",
@@ -113,15 +113,15 @@
         "correct": true
       },
       {
-        "text": "The process definitely never ran",
-        "why": "A missing event describes the log, not reality; the process may have run without being recorded."
+        "text": "Viewing an entry in Event Viewer deletes it",
+        "why": "Viewing an event doesn't remove it; entries are lost through retention settings or clearing."
       },
       {
-        "text": "Event Viewer always records every action",
-        "why": "Event Viewer only shows what auditing captured and retention kept."
+        "text": "Windows only records programs started by an administrator",
+        "why": "With auditing enabled, process creation is recorded whoever starts the program."
       }
     ],
-    "explanation": "\"No event found\" describes this collection. It is not proof an action never happened."
+    "explanation": "\"No event found\" describes this collection. It is not proof that the program never ran."
   },
   {
     "id": "5-10",
@@ -203,7 +203,7 @@
       "timeline",
       "reasoning"
     ],
-    "prompt": "10:14 to 10:16 three failed network logons; 10:18 the same account and source succeeds; 10:21 a new startup entry; 10:24 a new USB device. What is the most defensible conclusion?",
+    "prompt": "A laptop's records show three failed network logons between 10:14 and 10:16, a successful logon from the same account and source at 10:18, a new startup entry at 10:21 and a new USB device at 10:24. What is the most defensible conclusion?",
     "options": [
       {
         "text": "It warrants investigation, but proves neither malware nor data loss",
@@ -405,7 +405,7 @@
     "prompt": "Several failed logons are followed by a successful logon for the same account. What does this show on its own?",
     "options": [
       {
-        "text": "Worth investigating, though it could just be someone mistyping a password",
+        "text": "Something worth investigating, though it may just be someone mistyping a password",
         "correct": true
       },
       {
@@ -413,7 +413,7 @@
         "why": "A success after failures is consistent with an attack, but also with someone mistyping."
       },
       {
-        "text": "That malware is running on the machine and guessing passwords",
+        "text": "Malware on the machine that is guessing passwords",
         "why": "Failed logons don't show malware; people mistype passwords all the time."
       },
       {

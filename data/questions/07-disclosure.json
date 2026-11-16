@@ -62,8 +62,8 @@
     "concepts": [
       "minimise"
     ],
-    "prompt": "Complete the checks for deciding whether a property belongs in an API response.",
-    "text": "[[Need|Speed|Format]]: does this response function require the property? [[Audience|Cost|Version]]: which user or client receives it? [[Permission|Popularity|Encoding]]: may that recipient read this property?",
+    "prompt": "Three checks decide whether a field belongs in an API response. Choose the name of each check.",
+    "text": "[[Need|Speed|Format]]: does the feature using this response actually need the field? [[Audience|Cost|Version]]: which user or client receives the response? [[Permission|Popularity|Encoding]]: is that recipient allowed to read the field?",
     "explanation": "Define what each endpoint returns for each audience, and leave out anything that fails one of these checks."
   },
   {
@@ -73,23 +73,23 @@
     "concepts": [
       "minimise"
     ],
-    "prompt": "Why use an explicit response model rather than returning the whole object and removing a list of known secrets?",
+    "prompt": "An API can either list exactly which fields to return, or return the whole object after removing known secrets. Why is listing the fields safer?",
     "options": [
       {
-        "text": "Newly added internal fields won’t leak out by accident",
+        "text": "A newly added internal field won't leak out by accident",
         "correct": true
       },
       {
-        "text": "Explicit models make API responses noticeably faster",
-        "why": "Explicit models aren't about speed; they control which fields are allowed out."
+        "text": "Listing the fields makes API responses noticeably faster",
+        "why": "Listing fields isn't about speed; it controls which fields are allowed out."
       },
       {
-        "text": "Removing fields from a response isn't allowed by HTTP",
-        "why": "HTTP doesn't forbid removing fields; the issue is new fields slipping through a blocklist."
+        "text": "HTTP doesn't allow fields to be removed from a response",
+        "why": "HTTP doesn't forbid removing fields; the issue is new fields slipping past a list of things to remove."
       },
       {
-        "text": "Explicit models encrypt the response automatically",
-        "why": "Response models select fields; they don't encrypt anything."
+        "text": "Listing the fields encrypts the response automatically",
+        "why": "Choosing fields doesn't encrypt anything."
       }
     ],
     "explanation": "Selecting the intended properties makes the public representation easier to understand and review."
@@ -101,9 +101,9 @@
     "concepts": [
       "minimise"
     ],
-    "prompt": "A front-end display condition enforces which fields a recipient may see.",
+    "prompt": "Hiding a field in the front end controls who is able to see it.",
     "answer": false,
-    "explanation": "Link response shaping to the server's access policy. The client still receives whatever the server sends."
+    "explanation": "The client still receives whatever the server sends, so decide which fields to return on the server, using its access policy."
   },
   {
     "id": "7-06",
@@ -414,7 +414,7 @@
     "concepts": [
       "minimise"
     ],
-    "prompt": "An endpoint checks ownership correctly but its serializer still returns an internal role flag. Which kind of authorisation failed?",
+    "prompt": "An endpoint checks ownership correctly, but its response still includes an internal role flag the user should not see. Which kind of authorisation failed?",
     "options": [
       {
         "text": "Property-level",
@@ -483,10 +483,10 @@
     ],
     "prompt": "Order the layers a piece of data passes through on its way from storage to the recipient.",
     "steps": [
-      "Data store: records and properties",
-      "Application: selection and policy",
-      "Representation: JSON, HTML or file",
-      "Delivery: headers, cache and client"
+      "The data store holds the records and their fields",
+      "The application selects fields and applies its access policy",
+      "The response is built as JSON, HTML or a file",
+      "The response is delivered through headers, caches and the client"
     ],
     "explanation": "Disclosure can happen at any layer, including headers, downloads and caches."
   },

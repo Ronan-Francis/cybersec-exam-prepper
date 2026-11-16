@@ -231,7 +231,7 @@
     "prompt": "What distinguishes Software Supply Chain Failures from Software or Data Integrity Failures?",
     "options": [
       {
-        "text": "Supply chain covers suppliers and builds; integrity covers verifying one artifact",
+        "text": "Supply chain covers suppliers, dependencies and builds; integrity covers checking one artifact before use",
         "correct": true
       },
       {
@@ -400,11 +400,11 @@
         "why": "MFA protects login; injection happens in how input is handled after login."
       },
       {
-        "text": "Rely on parameterised SQL to also stop XSS",
-        "why": "Parameterised SQL protects the database only; browser output still needs encoding to stop XSS."
+        "text": "Keep tested backups",
+        "why": "Backups help recovery afterwards; they don't stop input changing a query or page."
       }
     ],
-    "explanation": "The two controls address different interpreters. One does not replace the other."
+    "explanation": "Parameters protect the database query and output encoding protects the page. They address different interpreters, so one does not replace the other: parameterised SQL does nothing to stop XSS."
   },
   {
     "id": "4-14",

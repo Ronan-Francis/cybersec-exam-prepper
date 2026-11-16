@@ -27,15 +27,15 @@
     "pairs": [
       {
         "item": "Master File Table (MFT)",
-        "match": "What file records, names and allocation state are present or retained?"
+        "match": "Which files have records on the volume, with their names and whether each record is still in use?"
       },
       {
         "item": "USN change journal",
-        "match": "What changes were recorded for files and directories?"
+        "match": "What changes to files and folders were recorded?"
       },
       {
         "item": "Application logs",
-        "match": "Which operation or process may explain a change?"
+        "match": "Which program or operation might explain a change?"
       }
     ],
     "explanation": "The USN journal has limited retention and does not identify who made a change, so application and process logs add context."
@@ -122,23 +122,23 @@
     "prompt": "Which factors can reduce the chance of recovering a deleted NTFS file? Select all that apply.",
     "options": [
       {
-        "text": "MFT record reuse",
+        "text": "Its MFT record has been reused for another file",
         "correct": true
       },
       {
-        "text": "TRIM or discard on the storage",
+        "text": "The drive uses TRIM or discard, which clears deleted blocks",
         "correct": true
       },
       {
-        "text": "Encryption",
+        "text": "The file's contents were encrypted",
         "correct": true
       },
       {
-        "text": "Fragmentation removing the order needed to reassemble pieces",
+        "text": "The file was stored in scattered pieces and their order is lost",
         "correct": true
       },
       {
-        "text": "Renaming the file before deletion",
+        "text": "The file was renamed before it was deleted",
         "why": "Renaming changes only the name; the content clusters are unaffected."
       }
     ],
@@ -152,22 +152,22 @@
       "journal",
       "attribution"
     ],
-    "prompt": "The change journal shows budget.xlsx renamed to temp01.tmp, with the same file reference on both records. What do these records support?",
+    "prompt": "The change journal shows budget.xlsx renamed to temp01.tmp, with the same file reference on both records. What do these records show?",
     "options": [
       {
-        "text": "It shows the same file was renamed, but not who or what renamed it",
+        "text": "That the same file was renamed, but not who or what renamed it",
         "correct": true
       },
       {
-        "text": "The content of budget.xlsx was changed as well as its name",
+        "text": "That the content of budget.xlsx was changed as well as its name",
         "why": "A rename record says nothing about the file's content changing."
       },
       {
-        "text": "A person deliberately renamed the file to hide the budget",
+        "text": "That a person deliberately renamed the file to hide the budget",
         "why": "The journal doesn't record who renamed the file or why."
       },
       {
-        "text": "Two different files were involved, one replacing the other",
+        "text": "That two different files were involved, one replacing the other",
         "why": "The same file reference on both records shows it's one file."
       }
     ],

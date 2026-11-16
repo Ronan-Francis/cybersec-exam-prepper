@@ -6,22 +6,22 @@
     "concepts": [
       "stego"
     ],
-    "prompt": "What does steganography mainly aim to protect?",
+    "prompt": "What does steganography mainly aim to hide?",
     "options": [
       {
-        "text": "The presence of the communication",
+        "text": "The fact that a message exists at all",
         "correct": true
       },
       {
-        "text": "The contents of the message, using a key",
-        "why": "Protecting contents with a key is what cryptography does."
+        "text": "What the message says, by using a key",
+        "why": "Protecting what a message says with a key is what cryptography does."
       },
       {
-        "text": "The integrity of the carrier file",
-        "why": "Steganography changes the carrier, so protecting the carrier's integrity is not its aim."
+        "text": "The size of the carrier file",
+        "why": "Steganography doesn't aim to hide the carrier's size; an unexpected size can even give it away."
       },
       {
-        "text": "The identity of the sender",
+        "text": "Who sent the message",
         "why": "Hiding the sender's identity is anonymity, not steganography."
       }
     ],
@@ -201,7 +201,7 @@
     "steps": [
       "The sender chooses a message and a carrier file",
       "The sender embeds the message into the carrier",
-      "The resulting stego object is sent or stored",
+      "The carrier, now holding the message, is sent or stored",
       "The recipient extracts the hidden message"
     ],
     "explanation": "A payload may be compressed or encrypted before embedding, and some methods use a key. These are choices, not requirements of every method."
@@ -224,27 +224,27 @@
     "concepts": [
       "steganalysis"
     ],
-    "prompt": "Which of these are useful steganalysis checks? Select all that apply.",
+    "prompt": "Which of these are useful things to check when looking for hidden data in a file? Select all that apply.",
     "options": [
       {
-        "text": "Unexpected size, format or metadata changes",
+        "text": "Unexpected changes to its size, format or metadata",
         "correct": true
       },
       {
-        "text": "Statistical patterns in pixel or signal distributions",
+        "text": "Statistical patterns in its pixel or audio data that differ from normal files",
         "correct": true
       },
       {
-        "text": "Visual or audio artefacts",
+        "text": "Visible or audible distortion",
         "correct": true
       },
       {
-        "text": "Unexpected upload, transfer or process access context",
+        "text": "Odd context, such as an unexpected upload, transfer or program opening it",
         "correct": true
       },
       {
-        "text": "A matching file extension proves the file is clean",
-        "why": "An extension is a user-supplied label; it can't prove a file is free of hidden data."
+        "text": "Its file extension, since a normal extension means nothing is hidden",
+        "why": "An extension is a user-supplied label; it can't show a file is free of hidden data."
       }
     ],
     "explanation": "Simple checks can miss sophisticated embedding. Comparing with a known original helps, but an original is often unavailable."
@@ -337,7 +337,7 @@
     "prompt": "Which statements about NTFS alternate data streams are correct? Select all that apply.",
     "options": [
       {
-        "text": "A normal hash of a file covers only its default-stream bytes",
+        "text": "An ordinary hash of the file covers only its main (default) stream",
         "correct": true
       },
       {
@@ -370,12 +370,12 @@
     "prompt": "Steganography or alternate data stream? Match each statement.",
     "pairs": [
       {
-        "item": "Embeds data within a carrier's content or representation",
+        "item": "Hides data inside the content of a carrier, such as an image's pixels",
         "match": "Steganography",
         "why": "Steganography hides data inside the carrier itself."
       },
       {
-        "item": "Attaches another named stream to an NTFS file object",
+        "item": "Attaches an extra named stream to a file on NTFS",
         "match": "Alternate data stream",
         "why": "Named streams are an NTFS feature attached to a file."
       },
@@ -385,7 +385,7 @@
         "why": "Streams show up when you list them; steganography doesn't."
       },
       {
-        "item": "Looked for through statistical patterns and visual or audio artefacts",
+        "item": "Looked for through statistical patterns and visible or audible distortion",
         "match": "Steganography",
         "why": "Steganalysis looks for statistical and visual traces."
       },

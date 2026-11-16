@@ -368,27 +368,27 @@
     "prompt": "Which of these describe good threat modelling? Select all that apply.",
     "options": [
       {
-        "text": "Structured and repeatable",
+        "text": "It follows a structured method that can be repeated",
         "correct": true
       },
       {
-        "text": "Multidisciplinary",
+        "text": "It brings in people with different technical perspectives",
         "correct": true
       },
       {
-        "text": "Decision focused",
+        "text": "Its findings lead to decisions about what to do",
         "correct": true
       },
       {
-        "text": "Maintained when the system changes",
+        "text": "It is updated when the system changes",
         "correct": true
       },
       {
-        "text": "A one-off activity done after deployment",
+        "text": "It is done once, after deployment",
         "why": "Threat modelling is most useful during design and is revisited as the system changes."
       },
       {
-        "text": "A guarantee that every threat has been found",
+        "text": "It guarantees that every threat has been found",
         "why": "A model is a structured way to ask questions; it can't guarantee every threat was found."
       }
     ],
@@ -405,19 +405,19 @@
     "pairs": [
       {
         "item": "What are we working on?",
-        "match": "Defined scope: components, boundaries and assumptions"
+        "match": "A defined scope: components, boundaries and assumptions"
       },
       {
         "item": "What can go wrong?",
-        "match": "Specific threats, structured with prompts such as STRIDE"
+        "match": "A list of specific threats, found with prompts such as STRIDE"
       },
       {
         "item": "What are we going to do about it?",
-        "match": "A chosen response with owner and rationale"
+        "match": "A chosen response for each threat, with an owner and a reason"
       },
       {
         "item": "Did we do a good enough job?",
-        "match": "Review of coverage, evidence that controls exist, and changes"
+        "match": "A review: was everything covered, do the controls exist, has anything changed?"
       }
     ],
     "explanation": "Scope, threats, responses, review."
