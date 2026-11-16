@@ -1,0 +1,552 @@
+[
+  {
+    "id": "1-01",
+    "chapter": 1,
+    "type": "multiple-choice",
+    "concepts": [
+      "defence",
+      "incident"
+    ],
+    "prompt": "An antivirus product detects suspicious activity, but it is set to monitor only and nobody reviews its alerts overnight. What principle does this illustrate?",
+    "options": [
+      {
+        "text": "Detection only helps if someone reviews the alert and responds to it in time",
+        "correct": true
+      },
+      {
+        "text": "Monitoring mode is safer than blocking because it avoids disrupting users",
+        "why": "Monitoring without anyone acting on alerts lets the attack carry on unchecked."
+      },
+      {
+        "text": "Antivirus alerts matter less when the organisation keeps good backups",
+        "why": "Backups help recovery, but an unreviewed alert still lets the attacker keep going and take data."
+      },
+      {
+        "text": "Overnight alerts can wait, since attacks are rarely active outside working hours",
+        "why": "Attackers often work outside office hours precisely because fewer people are watching."
+      }
+    ],
+    "explanation": "Prevention, detection, response and recovery need to work as connected controls. Ask who receives an alert, how quickly it is reviewed, what authority they have to contain activity, and what happens outside staffed hours."
+  },
+  {
+    "id": "1-04",
+    "chapter": 1,
+    "type": "ordering",
+    "concepts": [
+      "incident"
+    ],
+    "prompt": "Order the typical stages of a ransomware attack on an organisation.",
+    "steps": [
+      "Initial access: a malicious attachment gives the attacker a foothold",
+      "Expansion: the attacker moves through systems and gains privileged accounts",
+      "Impact: data is taken and services lose access to systems"
+    ],
+    "explanation": "Examine an incident as a sequence. Each stage can happen at a different time and affect different security objectives."
+  },
+  {
+    "id": "1-05",
+    "chapter": 1,
+    "type": "matching",
+    "concepts": [
+      "cia"
+    ],
+    "prompt": "Match each control to the CIA objective it mainly supports.",
+    "pairs": [
+      {
+        "item": "Encrypting stored files",
+        "match": "Confidentiality",
+        "why": "Encryption stops unauthorised people reading the data."
+      },
+      {
+        "item": "Restricting who can open a file",
+        "match": "Confidentiality",
+        "why": "Restricting access decides who can see the file."
+      },
+      {
+        "item": "Checking a file's hash against a known value",
+        "match": "Integrity",
+        "why": "A hash check shows whether the content has changed."
+      },
+      {
+        "item": "Digitally signing a document",
+        "match": "Integrity",
+        "why": "A signature shows a document is genuine and unaltered."
+      },
+      {
+        "item": "Keeping a redundant server ready to take over",
+        "match": "Availability",
+        "why": "A standby server keeps the service available if one fails."
+      },
+      {
+        "item": "Planning capacity for peak demand",
+        "match": "Availability",
+        "why": "Capacity planning keeps the service working under load."
+      }
+    ],
+    "explanation": "Confidentiality asks who can see it. Integrity asks whether it can be trusted (hashes, signatures, audit trails). Availability asks whether it is there when needed (backups, redundancy, capacity planning)."
+  },
+  {
+    "id": "1-06",
+    "chapter": 1,
+    "type": "matching",
+    "concepts": [
+      "cia"
+    ],
+    "prompt": "A ransomware attack hits a health service. Match each consequence to the objective it affects.",
+    "pairs": [
+      {
+        "item": "Patient records are copied and leaked online",
+        "match": "Confidentiality",
+        "why": "Leaked records are seen by people who shouldn't see them."
+      },
+      {
+        "item": "Attackers with administrator access alter records and system settings",
+        "match": "Integrity",
+        "why": "Altered records and settings can no longer be trusted."
+      },
+      {
+        "item": "Systems are encrypted, so staff cannot open patient records",
+        "match": "Availability",
+        "why": "Staff can't reach the records they need."
+      }
+    ],
+    "explanation": "One incident can affect all three objectives, each in a different way."
+  },
+  {
+    "id": "1-07",
+    "chapter": 1,
+    "type": "multiple-choice",
+    "concepts": [
+      "cia"
+    ],
+    "prompt": "For emergency-care records, any delay in reaching the record can harm the patient. Which CIA objective does that make the priority?",
+    "options": [
+      {
+        "text": "Availability",
+        "correct": true
+      },
+      {
+        "text": "Confidentiality",
+        "why": "Confidentiality matters, but the harm described comes from delay, which is an availability problem."
+      },
+      {
+        "text": "Integrity",
+        "why": "Integrity matters for accuracy, but the stated risk is not being able to reach the record in time."
+      },
+      {
+        "text": "Non-repudiation",
+        "why": "Non-repudiation is about proving who did something, not about reaching a record quickly."
+      }
+    ],
+    "explanation": "Emergency records must be available immediately, though access still needs accountability. Psychotherapy notes are the contrasting case, where confidentiality weighs more."
+  },
+  {
+    "id": "1-08",
+    "chapter": 1,
+    "type": "true-false",
+    "concepts": [
+      "cia"
+    ],
+    "prompt": "A stricter password policy can reduce confidentiality in practice if it leads users to write passwords down.",
+    "answer": true,
+    "explanation": "A password policy can improve confidentiality in theory while reducing it in practice if users write passwords down or reuse them. Controls can pull objectives in different directions."
+  },
+  {
+    "id": "1-09",
+    "chapter": 1,
+    "type": "matching",
+    "concepts": [
+      "risk"
+    ],
+    "prompt": "An administration API is reachable from the internet and has no authentication. Match each element to the term it illustrates.",
+    "pairs": [
+      {
+        "item": "Automated internet scanning finds the endpoint",
+        "match": "Threat",
+        "why": "Scanning is something capable of causing harm: a threat."
+      },
+      {
+        "item": "The API has no authentication",
+        "match": "Vulnerability",
+        "why": "Missing authentication is the weakness that can be exploited."
+      },
+      {
+        "item": "Private records can be read or altered",
+        "match": "Impact",
+        "why": "Records read or altered is the harm if it happens."
+      },
+      {
+        "item": "Plausible access combined with serious harm makes it a high priority",
+        "match": "Risk",
+        "why": "Likelihood combined with impact is risk."
+      }
+    ],
+    "explanation": "Threat: an actor or circumstance capable of harm. Vulnerability: a weakness a threat could exploit. Impact: the harm if it happens. Risk: likelihood and impact considered together."
+  },
+  {
+    "id": "1-10",
+    "chapter": 1,
+    "type": "true-false",
+    "concepts": [
+      "risk"
+    ],
+    "prompt": "`risk ≈ likelihood × impact` produces a precise score that can be compared across systems without defining the inputs.",
+    "answer": false,
+    "explanation": "It is a qualitative shorthand for comparing and prioritising. Likelihood and impact are often estimates, so it is only precise when the inputs are defined and measured consistently."
+  },
+  {
+    "id": "1-11",
+    "chapter": 1,
+    "type": "true-false",
+    "concepts": [
+      "risk"
+    ],
+    "prompt": "A threat can exist without a reachable vulnerability.",
+    "answer": true,
+    "explanation": "Ask each question separately. A threat may exist without a reachable vulnerability, and a vulnerability may have limited impact if it protects no important asset."
+  },
+  {
+    "id": "1-12",
+    "chapter": 1,
+    "type": "multiple-choice",
+    "concepts": [
+      "actors"
+    ],
+    "prompt": "Which threat-actor category already has some trusted access and may act maliciously, under coercion, or by mistake?",
+    "options": [
+      {
+        "text": "Insider",
+        "correct": true
+      },
+      {
+        "text": "Opportunist",
+        "why": "Opportunists scan broadly from outside; they don't start with trusted access."
+      },
+      {
+        "text": "State-linked group",
+        "why": "State-linked groups pursue intelligence or disruption from outside; trusted access isn't their defining trait."
+      },
+      {
+        "text": "Cybercriminal",
+        "why": "Cybercriminals are defined by a financial motive, not by already having trusted access."
+      }
+    ],
+    "explanation": "Insiders misuse legitimate access or make ordinary mistakes. Opportunists scan broadly; cybercriminals seek money; state-linked groups pursue intelligence, influence or disruption."
+  },
+  {
+    "id": "1-13",
+    "chapter": 1,
+    "type": "multiple-choice",
+    "concepts": [
+      "actors"
+    ],
+    "prompt": "An attacker's goal is long-term intelligence gathering. Which behaviour is most likely?",
+    "options": [
+      {
+        "text": "Staying hidden on a few chosen targets for a long time",
+        "correct": true
+      },
+      {
+        "text": "Broad scanning with reused tools and visible extortion",
+        "why": "Broad scanning and visible extortion fit a quick financial motive, not quiet intelligence gathering."
+      },
+      {
+        "text": "Immediate destructive impact to attract public attention",
+        "why": "Destructive, attention-seeking impact would expose the attacker and end the intelligence gathering."
+      },
+      {
+        "text": "Exploiting whatever is exposed and moving on quickly",
+        "why": "Grabbing whatever is exposed and leaving is opportunistic, not a long-term intelligence goal."
+      }
+    ],
+    "explanation": "Motive changes the target, the tempo and what detection looks like. A fast financial return favours broad scanning and visible extortion. Treat motive as a hypothesis, not proof of who acted."
+  },
+  {
+    "id": "1-14",
+    "chapter": 1,
+    "type": "multiple-response",
+    "concepts": [
+      "surface"
+    ],
+    "prompt": "The attack surface is the set of reachable parts of a system. Which of these are parts of the system's attack surface, rather than attack methods or facts about the attacker? Select all that apply.",
+    "options": [
+      {
+        "text": "A login screen",
+        "correct": true
+      },
+      {
+        "text": "A service account and its credentials",
+        "correct": true
+      },
+      {
+        "text": "A third-party library the application depends on",
+        "correct": true
+      },
+      {
+        "text": "A coursework file-upload feature",
+        "correct": true
+      },
+      {
+        "text": "Credential stuffing",
+        "why": "Credential stuffing is an attack method, a vector used against the login screen, not part of the system."
+      },
+      {
+        "text": "The attacker's financial motive",
+        "why": "Motive describes the attacker, not any reachable part of the system."
+      }
+    ],
+    "explanation": "The attack surface covers interfaces, data entry points, identities and credentials, and dependencies. Credential stuffing is a vector (a route through the surface). Motive describes the actor, not the system."
+  },
+  {
+    "id": "1-15",
+    "chapter": 1,
+    "type": "matching",
+    "concepts": [
+      "surface"
+    ],
+    "prompt": "Match each attack-surface point to a typical attack vector against it.",
+    "pairs": [
+      {
+        "item": "Login form",
+        "match": "Credential stuffing with reused passwords"
+      },
+      {
+        "item": "File upload",
+        "match": "Malicious content reaches unsafe processing"
+      },
+      {
+        "item": "Public API",
+        "match": "Changing an object identifier bypasses an ownership check"
+      },
+      {
+        "item": "Dependency update",
+        "match": "A compromised package reaches the build or deployment"
+      }
+    ],
+    "explanation": "The surface is where contact is possible; the vector is how an attacker might use that contact. A single interface can support several vectors."
+  },
+  {
+    "id": "1-16",
+    "chapter": 1,
+    "type": "multiple-choice",
+    "concepts": [
+      "cia",
+      "surface"
+    ],
+    "prompt": "A compromised package reaches the build through a dependency update. Which objectives are potentially at risk?",
+    "options": [
+      {
+        "text": "All three CIA objectives",
+        "correct": true
+      },
+      {
+        "text": "Confidentiality only",
+        "why": "Malicious build code can also change behaviour and break the service, not only steal data."
+      },
+      {
+        "text": "Availability only",
+        "why": "Malicious build code can also steal data and alter behaviour, not only cause outages."
+      },
+      {
+        "text": "Integrity and availability, but not confidentiality",
+        "why": "Malicious code inside the build can read and send out data, so confidentiality is at risk too."
+      }
+    ],
+    "explanation": "Malicious code in the build can steal data, change how the software behaves, or break the service, so all three objectives are at risk."
+  },
+  {
+    "id": "1-17",
+    "chapter": 1,
+    "type": "missing-words",
+    "concepts": [
+      "defence"
+    ],
+    "prompt": "Complete the defence-in-depth stages.",
+    "text": "Patching, strong authentication and least privilege belong to [[Prevent|Detect and respond|Recover]]. Monitoring, alert review and incident response belong to [[Detect and respond|Prevent|Recover]]. Tested backups and post-incident changes belong to [[Recover|Prevent|Detect and respond]].",
+    "explanation": "Defence in depth assumes an individual control can fail, so controls are combined so that one failure does not immediately become a major incident."
+  },
+  {
+    "id": "1-18",
+    "chapter": 1,
+    "type": "true-false",
+    "concepts": [
+      "zerotrust"
+    ],
+    "prompt": "Under zero trust, being inside the organisation's network does not by itself make a request trusted.",
+    "answer": true,
+    "explanation": "Zero trust removes location-based trust. Access decisions use identity, device and context, grant only the access needed, and are re-evaluated rather than relying on one boundary check."
+  },
+  {
+    "id": "1-19",
+    "chapter": 1,
+    "type": "multiple-choice",
+    "concepts": [
+      "zerotrust"
+    ],
+    "prompt": "Which description fits zero trust?",
+    "options": [
+      {
+        "text": "Every request is checked using identity, device and current context, wherever it comes from",
+        "correct": true
+      },
+      {
+        "text": "A firewall that blocks all inbound traffic from outside the network",
+        "why": "Zero trust isn't a single firewall product; it checks every request, including internal ones."
+      },
+      {
+        "text": "Users inside the office network are trusted once they log in",
+        "why": "Trusting users because they're on the office network is exactly what zero trust removes."
+      },
+      {
+        "text": "A single strong login check when users first connect each day",
+        "why": "A single daily check is boundary thinking; zero trust re-evaluates access per request or session."
+      }
+    ],
+    "explanation": "Zero trust is not a single product. Protect the resource itself, authenticate and authorise explicitly, decide per session using identity, device and context, and monitor posture so trust can change."
+  },
+  {
+    "id": "1-20",
+    "chapter": 1,
+    "type": "multiple-response",
+    "concepts": [
+      "secbasics"
+    ],
+    "prompt": "Which of these are sound secure-programming practices? Select all that apply.",
+    "options": [
+      {
+        "text": "Treat input as untrusted and validate it against the intended format",
+        "correct": true
+      },
+      {
+        "text": "Enforce authorisation on the server",
+        "correct": true
+      },
+      {
+        "text": "Encode output for its destination",
+        "correct": true
+      },
+      {
+        "text": "Record useful security events",
+        "correct": true
+      },
+      {
+        "text": "Rely on hidden front-end controls to restrict actions",
+        "why": "Hidden front-end controls can be bypassed by sending the request directly; enforce rules on the server."
+      },
+      {
+        "text": "Show full error details in public responses so users can report them",
+        "why": "Full error details in public responses disclose internals; keep details in restricted logs."
+      }
+    ],
+    "explanation": "Using safe defaults and managing third-party components also belong on the list. Each choice should protect a named property and have a way to check that it works."
+  },
+  {
+    "id": "1-21",
+    "chapter": 1,
+    "type": "matching",
+    "concepts": [
+      "cia"
+    ],
+    "prompt": "Match each scenario to the CIA objective it mainly affects.",
+    "pairs": [
+      {
+        "item": "An attacker changes students' marks in the results database",
+        "match": "Integrity",
+        "why": "Changed marks can no longer be trusted."
+      },
+      {
+        "item": "A denial-of-service attack takes the enrolment portal offline during registration",
+        "match": "Availability",
+        "why": "The portal can't be reached when it's needed."
+      },
+      {
+        "item": "A class list with medical notes is emailed to every student by mistake",
+        "match": "Confidentiality",
+        "why": "Medical notes were seen by people who shouldn't see them."
+      },
+      {
+        "item": "Ransomware encrypts the shared file server",
+        "match": "Availability",
+        "why": "Encrypted files can't be opened."
+      },
+      {
+        "item": "A forged invoice is accepted as genuine and paid",
+        "match": "Integrity",
+        "why": "A forged document was trusted as genuine."
+      }
+    ],
+    "explanation": "Ask: who can see it (confidentiality)? Can it be trusted (integrity)? Is it there when needed (availability)?"
+  },
+  {
+    "id": "1-22",
+    "chapter": 1,
+    "type": "multiple-choice",
+    "concepts": [
+      "secbasics"
+    ],
+    "prompt": "Why can't security simply be bought as a product?",
+    "options": [
+      {
+        "text": "The protection needed depends on what the system holds and what failure would cost",
+        "correct": true
+      },
+      {
+        "text": "Security products only work when they come from a single vendor's complete suite",
+        "why": "Vendor suites don't change the fact that protection must fit what the system holds and the cost of failure."
+      },
+      {
+        "text": "Most security products are designed for large companies, not ordinary systems",
+        "why": "Product size isn't the issue; the right protection depends on the system's data and the consequences of failure."
+      },
+      {
+        "text": "Buying a product is fine, but it must be replaced every year to stay effective",
+        "why": "Replacing products regularly doesn't decide what protection a particular system needs."
+      }
+    ],
+    "explanation": "Similar technology can carry very different responsibilities: a library catalogue and a database of identifiable survey responses need different protection."
+  },
+  {
+    "id": "1-23",
+    "chapter": 1,
+    "type": "short-answer",
+    "concepts": [
+      "surface"
+    ],
+    "prompt": "What term describes a particular route an attacker takes through the attack surface, such as credential stuffing against a login form?",
+    "accept": [
+      "attack vector",
+      "vector",
+      "an attack vector",
+      "attack vectors"
+    ],
+    "explanation": "The attack surface is where contact is possible; a vector is how an attacker might use that contact."
+  },
+  {
+    "id": "1-24",
+    "chapter": 1,
+    "type": "multiple-choice",
+    "concepts": [
+      "defence"
+    ],
+    "prompt": "Why does defence in depth combine several controls?",
+    "options": [
+      {
+        "text": "Any single control can fail, so others should limit the damage",
+        "correct": true
+      },
+      {
+        "text": "Regulators require at least three separate security products",
+        "why": "Defence in depth is a design principle about failure, not a regulatory product count."
+      },
+      {
+        "text": "Several weaker controls are cheaper than one strong control",
+        "why": "The point isn't cost; it's that any one control can fail, so others limit the damage."
+      },
+      {
+        "text": "Each control can then be configured with less care and testing",
+        "why": "Each layer still needs careful configuration; layering is a safety net, not an excuse."
+      }
+    ],
+    "explanation": "Prevent, detect and respond, and recover should work together."
+  }
+]

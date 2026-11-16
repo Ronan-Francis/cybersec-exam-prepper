@@ -1,0 +1,530 @@
+[
+  {
+    "id": "7-01",
+    "chapter": 7,
+    "type": "matching",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "Match each term to its meaning.",
+    "pairs": [
+      {
+        "item": "Information disclosure",
+        "match": "Sensitive information reaches a recipient who should not receive it"
+      },
+      {
+        "item": "Broken Object Property Level Authorization (BOPLA)",
+        "match": "An API lets a user read or change individual object fields they should not"
+      },
+      {
+        "item": "Information exposure through an error message",
+        "match": "An error response reveals details about users, data or the environment"
+      },
+      {
+        "item": "Failing closed",
+        "match": "Refusing a protected action when the permission check cannot be completed"
+      }
+    ],
+    "explanation": "Use the term that identifies the failure being discussed."
+  },
+  {
+    "id": "7-02",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "A profile page shows only the user's name and course, but the API response behind it also contains the user's password-reset token. What is the right assessment?",
+    "options": [
+      {
+        "text": "It's exposed; remove it from the response on the server",
+        "correct": true
+      },
+      {
+        "text": "No problem, because the page never displays the token to users",
+        "why": "Anyone can read the full response in developer tools, even if the page hides it."
+      },
+      {
+        "text": "Hide the token with CSS so it cannot be seen on the page",
+        "why": "CSS only hides it on screen; the token is still in the response."
+      },
+      {
+        "text": "Encode the token with Base64 before it is returned to the page",
+        "why": "Base64 is reversible encoding; the token is still exposed."
+      }
+    ],
+    "explanation": "Browser developer tools, another client or a saved download can expose what the page never shows. Assess what the server sends, not what the page displays."
+  },
+  {
+    "id": "7-03",
+    "chapter": 7,
+    "type": "missing-words",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "Complete the checks for deciding whether a property belongs in an API response.",
+    "text": "[[Need|Speed|Format]]: does this response function require the property? [[Audience|Cost|Version]]: which user or client receives it? [[Permission|Popularity|Encoding]]: may that recipient read this property?",
+    "explanation": "Define what each endpoint returns for each audience, and leave out anything that fails one of these checks."
+  },
+  {
+    "id": "7-04",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "Why use an explicit response model rather than returning the whole object and removing a list of known secrets?",
+    "options": [
+      {
+        "text": "Newly added internal fields won’t leak out by accident",
+        "correct": true
+      },
+      {
+        "text": "Explicit models make API responses noticeably faster",
+        "why": "Explicit models aren't about speed; they control which fields are allowed out."
+      },
+      {
+        "text": "Removing fields from a response isn't allowed by HTTP",
+        "why": "HTTP doesn't forbid removing fields; the issue is new fields slipping through a blocklist."
+      },
+      {
+        "text": "Explicit models encrypt the response automatically",
+        "why": "Response models select fields; they don't encrypt anything."
+      }
+    ],
+    "explanation": "Selecting the intended properties makes the public representation easier to understand and review."
+  },
+  {
+    "id": "7-05",
+    "chapter": 7,
+    "type": "true-false",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "A front-end display condition enforces which fields a recipient may see.",
+    "answer": false,
+    "explanation": "Link response shaping to the server's access policy. The client still receives whatever the server sends."
+  },
+  {
+    "id": "7-06",
+    "chapter": 7,
+    "type": "matching",
+    "concepts": [
+      "errors"
+    ],
+    "prompt": "Match each error-response detail to what it may disclose.",
+    "pairs": [
+      {
+        "item": "Stack trace",
+        "match": "File paths, framework structure and implementation details"
+      },
+      {
+        "item": "Database exception",
+        "match": "Table names, query structure or fragments of stored data"
+      },
+      {
+        "item": "Account-specific error",
+        "match": "Whether a particular account or identifier exists"
+      },
+      {
+        "item": "Debug page",
+        "match": "Configuration, local variables or environment details"
+      }
+    ],
+    "explanation": "A useful public error can be concise while internal diagnostics stay restricted."
+  },
+  {
+    "id": "7-07",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "errors"
+    ],
+    "prompt": "A booking fails because the database is unavailable. Which public error response is most appropriate?",
+    "options": [
+      {
+        "text": "\"We could not complete that request. Reference: 4F7K.\"",
+        "correct": true
+      },
+      {
+        "text": "\"SQLException: connection refused at db01:5432 in BookingRepo.java:118\"",
+        "why": "This exposes the database host, port and source file, which helps an attacker."
+      },
+      {
+        "text": "\"Booking failed for jo@example.com: table bookings locked\"",
+        "why": "This reveals a user's email address and internal table details."
+      },
+      {
+        "text": "A blank page with HTTP 200",
+        "why": "A blank page with a success code hides the failure and gives the user nothing to report."
+      }
+    ],
+    "explanation": "A short message with an opaque reference lets staff find the detailed diagnostic record, which stays restricted. Also check whether the failed operation left an unintended change behind."
+  },
+  {
+    "id": "7-08",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "enum"
+    ],
+    "prompt": "Sign-in returns \"Password is incorrect\" for a real account and \"No account with that address\" for an unknown one, both with the same HTTP status. What is the issue?",
+    "options": [
+      {
+        "text": "The two different messages reveal which accounts exist",
+        "correct": true
+      },
+      {
+        "text": "No issue, because both responses use the same HTTP status",
+        "why": "Attackers read the message body, not only the status code, so different wording still leaks."
+      },
+      {
+        "text": "It shows credential stuffing has already succeeded",
+        "why": "The messages reveal which accounts exist, not that any password has been guessed."
+      },
+      {
+        "text": "It is a cross-site scripting flaw in the sign-in form",
+        "why": "No script is being injected; the problem is the information the messages give away."
+      }
+    ],
+    "explanation": "An account list supports phishing and password attacks, but it does not prove the attacker knows any passwords."
+  },
+  {
+    "id": "7-09",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "enum"
+    ],
+    "prompt": "Both failed sign-ins now show \"Unable to sign in with those details\", but unknown usernames are rejected immediately while real ones go through costly password verification. What fixes this?",
+    "options": [
+      {
+        "text": "Make both failures do similar password-checking work, so timing matches",
+        "correct": true
+      },
+      {
+        "text": "Reword the message again so it gives even less information",
+        "why": "The words are already identical; the leak is the time each failure takes."
+      },
+      {
+        "text": "Return HTTP 404 for unknown users and HTTP 401 for real ones",
+        "why": "Different status codes would leak account existence even more directly."
+      },
+      {
+        "text": "Show a CAPTCHA only when the sign-in is for a real account",
+        "why": "A CAPTCHA only for real accounts would itself reveal which accounts exist."
+      }
+    ],
+    "explanation": "A repeatable timing difference is an account-existence clue. One slow response proves nothing, because network delay and load also affect timing."
+  },
+  {
+    "id": "7-10",
+    "chapter": 7,
+    "type": "true-false",
+    "concepts": [
+      "secrets"
+    ],
+    "prompt": "Adding a file to .gitignore removes it from the repository's committed history.",
+    "answer": false,
+    "explanation": "Ignore rules concern files that are not already tracked. Earlier snapshots still contain the committed content."
+  },
+  {
+    "id": "7-11",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "secrets"
+    ],
+    "prompt": "An API key was committed to a repository and pushed. Which action stops the key itself from working?",
+    "options": [
+      {
+        "text": "Revoke or rotate the key",
+        "correct": true
+      },
+      {
+        "text": "Delete the file containing the key in a new commit",
+        "why": "The key stays in earlier commits and in any copies people already have."
+      },
+      {
+        "text": "Add the file containing the key to .gitignore",
+        "why": ".gitignore only affects untracked files; the committed key is still there."
+      },
+      {
+        "text": "Rewrite the repository history to remove the file",
+        "why": "Rewriting history doesn't invalidate the key, and copies may already exist."
+      }
+    ],
+    "explanation": "Deleting a secret does not invalidate it, and cleaning history cannot retrieve copies already downloaded. Revoke or rotate, investigate for use of the key, and clean history as separate steps."
+  },
+  {
+    "id": "7-12",
+    "chapter": 7,
+    "type": "matching",
+    "concepts": [
+      "secrets"
+    ],
+    "prompt": "Match each action to what it achieves.",
+    "pairs": [
+      {
+        "item": "Revocation",
+        "match": "Disables a credential value"
+      },
+      {
+        "item": "Rotation",
+        "match": "Replaces the credential and retires the previous value"
+      },
+      {
+        "item": "History cleanup",
+        "match": "Reduces future exposure but cannot retrieve copies already downloaded"
+      }
+    ],
+    "explanation": "Applications that need the replacement credential must be updated after rotation."
+  },
+  {
+    "id": "7-13",
+    "chapter": 7,
+    "type": "true-false",
+    "concepts": [
+      "secrets"
+    ],
+    "prompt": "With directory listings turned off, visitors can still fetch files from an exposed .git folder if they know the file names.",
+    "answer": true,
+    "explanation": "Directory listings being off does not prevent requests for known filenames. Deploy only intended files and deny Git paths."
+  },
+  {
+    "id": "7-14",
+    "chapter": 7,
+    "type": "matching",
+    "concepts": [
+      "failclosed"
+    ],
+    "prompt": "Before exporting private records, the application checks permission. Match each result to the correct behaviour.",
+    "pairs": [
+      {
+        "item": "Permission confirmed",
+        "match": "Continue with the permitted export",
+        "why": "Permission was granted, so the export can proceed."
+      },
+      {
+        "item": "Permission denied",
+        "match": "Refuse the export",
+        "why": "Permission was refused, so the export must not happen."
+      },
+      {
+        "item": "Checking service unavailable",
+        "match": "Refuse for now and report the problem",
+        "why": "An unavailable checker hasn't granted permission, so fail closed."
+      }
+    ],
+    "explanation": "This is failing closed: an unavailable checker has not granted permission. Make the decision before releasing the records."
+  },
+  {
+    "id": "7-15",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "A response contains sensitive account data. What should its caching policy do?",
+    "options": [
+      {
+        "text": "Stop it being stored anywhere, for example with `Cache-Control: no-store`",
+        "correct": true
+      },
+      {
+        "text": "Cache it for as long as possible to reduce load on the server",
+        "why": "Caching sensitive data means copies can be served to the wrong person later."
+      },
+      {
+        "text": "Nothing, because caching a response can't cause a disclosure",
+        "why": "Shared or browser caches can hand a stored copy to someone else."
+      },
+      {
+        "text": "Nothing, because HTTPS already stops caches keeping a copy",
+        "why": "HTTPS encrypts transit; it doesn't stop browsers or proxies keeping a copy."
+      }
+    ],
+    "explanation": "Cached representations can stay available beyond their intended use. Cache policy complements, but does not replace, access control."
+  },
+  {
+    "id": "7-16",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "injection",
+      "minimise"
+    ],
+    "prompt": "A profile response contains a recovery token the recipient should not receive. A developer adds context-aware HTML encoding. Is the issue fixed?",
+    "options": [
+      {
+        "text": "No: encoding doesn't stop the wrong person receiving it",
+        "correct": true
+      },
+      {
+        "text": "Yes: encoding hides the token from anyone reading the page",
+        "why": "Encoding changes how text is shown, but the token is still delivered to the wrong person."
+      },
+      {
+        "text": "Yes: encoding prevents both disclosure and XSS at the same time",
+        "why": "Encoding helps with XSS, but it doesn't stop a field being disclosed."
+      },
+      {
+        "text": "Only if the token is also moved into a cookie afterwards",
+        "why": "Moving the token to a cookie still sends it to someone who shouldn't have it."
+      }
+    ],
+    "explanation": "Disclosure is about which information is sent. Output encoding is about how untrusted text is represented. Review both."
+  },
+  {
+    "id": "7-17",
+    "chapter": 7,
+    "type": "multiple-response",
+    "concepts": [
+      "logging"
+    ],
+    "prompt": "Which of these are good practice for a security log? Select all that apply.",
+    "options": [
+      {
+        "text": "Record failed sign-ins, refused access and permission changes",
+        "correct": true
+      },
+      {
+        "text": "Leave out passwords, access tokens and complete submitted forms",
+        "correct": true
+      },
+      {
+        "text": "Restrict who can read the logs",
+        "correct": true
+      },
+      {
+        "text": "Store the full request body for every sign-in",
+        "why": "Full request bodies capture passwords and other secrets in the log."
+      },
+      {
+        "text": "Include the user's password to help debug lockouts",
+        "why": "Logging passwords exposes them to anyone who can read the logs."
+      }
+    ],
+    "explanation": "Select fields rather than recording whole forms. If secrets were already logged, deal with the retained copies and the exposed credentials too."
+  },
+  {
+    "id": "7-18",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "An endpoint checks ownership correctly but its serializer still returns an internal role flag. Which kind of authorisation failed?",
+    "options": [
+      {
+        "text": "Property-level",
+        "correct": true
+      },
+      {
+        "text": "Object-level",
+        "why": "Object-level access worked: the user may access this record. The problem is one field."
+      },
+      {
+        "text": "Function-level",
+        "why": "Function-level is about which actions a user may perform, not which fields they see."
+      },
+      {
+        "text": "Authentication",
+        "why": "The user is correctly identified; the failure is in which fields are returned."
+      }
+    ],
+    "explanation": "Object-level asks whether you may access the record. Property-level asks which fields you may read or change."
+  },
+  {
+    "id": "7-19",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "failclosed"
+    ],
+    "prompt": "A required API key is missing from configuration at startup. What should the application do?",
+    "options": [
+      {
+        "text": "Stop safely and report that the key is missing",
+        "correct": true
+      },
+      {
+        "text": "Fall back to a known shared credential",
+        "why": "A shared fallback credential is a known secret and weakens security."
+      },
+      {
+        "text": "Use a default key from the source code",
+        "why": "Keys in source code end up in repositories and copies."
+      },
+      {
+        "text": "Continue and log the missing key's expected value",
+        "why": "Logging the expected key would put a secret into the logs."
+      }
+    ],
+    "explanation": "Keep real keys in protected server configuration or a secret store, give each only the permissions it needs, and support replacing them."
+  },
+  {
+    "id": "7-21",
+    "chapter": 7,
+    "type": "true-false",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "A sensitive value in an API response is exposed even if the page never displays it.",
+    "answer": true,
+    "explanation": "A sensitive value does not become safe because the interface ignores it. Equally, an unnecessary public field is not automatically a vulnerability: check sensitivity, permission and purpose."
+  },
+  {
+    "id": "7-22",
+    "chapter": 7,
+    "type": "ordering",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "Order the layers a piece of data passes through on its way from storage to the recipient.",
+    "steps": [
+      "Data store: records and properties",
+      "Application: selection and policy",
+      "Representation: JSON, HTML or file",
+      "Delivery: headers, cache and client"
+    ],
+    "explanation": "Disclosure can happen at any layer, including headers, downloads and caches."
+  },
+  {
+    "id": "7-23",
+    "chapter": 7,
+    "type": "short-answer",
+    "concepts": [
+      "failclosed"
+    ],
+    "prompt": "What is the term for refusing a protected action when the permission check cannot be completed?",
+    "accept": [
+      "fail closed",
+      "failing closed",
+      "fail-closed",
+      "fail secure",
+      "fail-secure",
+      "fail safe",
+      "fail-safe"
+    ],
+    "explanation": "An unavailable checking service has not granted permission. Failing open would turn a technical failure into unauthorised disclosure."
+  },
+  {
+    "id": "7-24",
+    "chapter": 7,
+    "type": "short-answer",
+    "concepts": [
+      "enum"
+    ],
+    "prompt": "Different sign-in error messages let someone work out which email addresses have accounts. What is this called?",
+    "accept": [
+      "username enumeration",
+      "user enumeration",
+      "account enumeration",
+      "user name enumeration",
+      "user account enumeration",
+      "email enumeration"
+    ],
+    "explanation": "Return comparable responses, and do comparable work, for comparable failures."
+  }
+]

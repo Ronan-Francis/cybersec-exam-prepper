@@ -1,0 +1,338 @@
+[
+  {
+    "id": "cia",
+    "chapter": 1,
+    "name": "CIA triad",
+    "summary": "Confidentiality asks who can see information, integrity asks whether it can be trusted, and availability asks whether it is there when needed. One incident can hit all three, and a control can help one while hurting another."
+  },
+  {
+    "id": "risk",
+    "chapter": 1,
+    "name": "Threat, vulnerability, risk",
+    "summary": "A threat is something capable of causing harm, a vulnerability is a weakness it could use, and impact is the harm if it happens. Risk combines likelihood and impact to help you decide what to deal with first."
+  },
+  {
+    "id": "actors",
+    "chapter": 1,
+    "name": "Threat actors and motives",
+    "summary": "Opportunists, cybercriminals, state-linked groups and insiders behave differently. Motive shapes which targets are chosen, how fast the attacker moves and what detection looks like."
+  },
+  {
+    "id": "surface",
+    "chapter": 1,
+    "name": "Attack surface and vectors",
+    "summary": "The attack surface is every reachable part of a system: interfaces, data entry points, identities and dependencies. A vector is a particular route an attacker takes through that surface."
+  },
+  {
+    "id": "defence",
+    "chapter": 1,
+    "name": "Defence in depth",
+    "summary": "Any single control can fail, so controls are layered across prevention, detection and response, and recovery. One failure should not turn straight into a major incident."
+  },
+  {
+    "id": "zerotrust",
+    "chapter": 1,
+    "name": "Zero trust",
+    "summary": "Zero trust removes trust based on network location. Each request is authenticated and authorised using identity, device and context, and only the access needed is granted."
+  },
+  {
+    "id": "incident",
+    "chapter": 1,
+    "name": "How incidents unfold",
+    "summary": "Incidents usually move from initial access to expansion to impact, often over weeks. Detection only helps if someone responds, and removing one component rarely ends an intrusion."
+  },
+  {
+    "id": "secbasics",
+    "chapter": 1,
+    "name": "Secure programming basics",
+    "summary": "Protection depends on what a system holds and what failure would cost. Core habits: treat input as untrusted, authorise on the server, encode output, and record useful security events."
+  },
+  {
+    "id": "fourq",
+    "chapter": 2,
+    "name": "The Four Questions",
+    "summary": "Threat modelling asks: what are we working on, what can go wrong, what will we do about it, and did we do a good enough job? The cycle repeats whenever the design changes."
+  },
+  {
+    "id": "stride",
+    "chapter": 2,
+    "name": "STRIDE",
+    "summary": "STRIDE prompts you to look for spoofing, tampering, repudiation, information disclosure, denial of service and elevation of privilege. Each maps to a security property; STRIDE identifies threats but does not prioritise them."
+  },
+  {
+    "id": "models",
+    "chapter": 2,
+    "name": "Data flows and trust boundaries",
+    "summary": "A system model shows components, data flows and trust boundaries. Mark a boundary wherever data crosses between parts with different trust or control, and note who and what crosses it."
+  },
+  {
+    "id": "responses",
+    "chapter": 2,
+    "name": "Threats and responses",
+    "summary": "A useful threat statement names the actor, action, target and consequence. Each threat is then eliminated, mitigated, transferred or accepted, with a reason and an owner."
+  },
+  {
+    "id": "lifecycle",
+    "chapter": 2,
+    "name": "Security across the lifecycle",
+    "summary": "Security objectives are set in requirements, threats are analysed in design, controls are built and tested in implementation, and risk is monitored in operation."
+  },
+  {
+    "id": "stego",
+    "chapter": 3,
+    "name": "Steganography vs cryptography",
+    "summary": "Cryptography hides what a message says; steganography hides that a message exists. They can be combined, but neither guarantees the carrier will escape detection."
+  },
+  {
+    "id": "lsb",
+    "chapter": 3,
+    "name": "LSB embedding",
+    "summary": "Least-significant-bit embedding changes the last bit of pixel or sample values, so each change is tiny and hard to see. Editing, resizing or re-saving the carrier can destroy the payload."
+  },
+  {
+    "id": "steganalysis",
+    "chapter": 3,
+    "name": "Steganalysis",
+    "summary": "Steganalysis looks for signs of hidden data: odd sizes or metadata, statistical patterns, artefacts and unusual context. A suspicious carrier is a lead, not proof of intent."
+  },
+  {
+    "id": "entropy",
+    "chapter": 3,
+    "name": "Entropy and randomness",
+    "summary": "Shannon entropy measures uncertainty. High entropy suggests compressed, encrypted or packed data but proves nothing on its own, and a good entropy score does not make a generator safe for secrets."
+  },
+  {
+    "id": "ads",
+    "chapter": 3,
+    "name": "Alternate data streams",
+    "summary": "NTFS lets a file carry extra named streams alongside its main content. They don't run by themselves, may be lost when copying, and are missed by tools that only read the default stream."
+  },
+  {
+    "id": "owasp",
+    "chapter": 4,
+    "name": "OWASP Top 10 categories",
+    "summary": "The OWASP Top 10 groups common web risks such as broken access control, misconfiguration, supply chain and integrity failures, injection and authentication failures. It prompts questions but doesn't replace reviewing your own application."
+  },
+  {
+    "id": "misconfig",
+    "chapter": 4,
+    "name": "Security misconfiguration",
+    "summary": "Misconfiguration covers settings that expose more than intended: unnecessary services, default accounts, verbose errors and over-wide cloud permissions."
+  },
+  {
+    "id": "supply",
+    "chapter": 4,
+    "name": "Supply chain and integrity",
+    "summary": "Supply chain risk covers suppliers, dependencies, builds and updates. Integrity asks whether a particular artifact is authentic and unchanged before you use it, for example by checking a hash or signature."
+  },
+  {
+    "id": "injection",
+    "chapter": 4,
+    "name": "Injection and output encoding",
+    "summary": "Injection happens when untrusted input changes the meaning of a query, command or page. Parameterised queries protect SQL; context-aware encoding protects HTML. One does not replace the other."
+  },
+  {
+    "id": "intake",
+    "chapter": 5,
+    "name": "Secure file intake",
+    "summary": "An extension is only a claim. Signatures, parsers and hashes add evidence about what a file really is. Conflicts mean hold and record; unknowns mean inspect further, not assume malware."
+  },
+  {
+    "id": "hashes",
+    "chapter": 5,
+    "name": "Hashes and baselines",
+    "summary": "A hash shows whether bytes match a trusted baseline. It doesn't say who changed a file, when, or why, and one changed byte gives a completely different hash."
+  },
+  {
+    "id": "eventlogs",
+    "chapter": 5,
+    "name": "Event logs and missing evidence",
+    "summary": "Windows logs record logons and other events, but only what auditing captures and retention keeps. A missing event describes the collection, not proof that nothing happened."
+  },
+  {
+    "id": "registry",
+    "chapter": 5,
+    "name": "Registry and persistence",
+    "summary": "The Registry holds user and machine settings. Run keys start programs at sign-in, so they are common for both legitimate software and persistence; compare against a baseline before calling a value new."
+  },
+  {
+    "id": "timeline",
+    "chapter": 5,
+    "name": "Timelines and time zones",
+    "summary": "Records from different systems must be converted to UTC before sorting. Keep the original value and offset too, so the conversion can be checked."
+  },
+  {
+    "id": "reasoning",
+    "chapter": 5,
+    "name": "Observe, interpret, test",
+    "summary": "Analysis moves from exact observations, to a stated hypothesis, to a test against an independent source. A suspicious sequence warrants investigation; it is not yet a conclusion."
+  },
+  {
+    "id": "logging",
+    "chapter": 5,
+    "name": "Security logging",
+    "summary": "Useful logs record time, action, outcome, resource and a request ID, while leaving out passwords and tokens. Logging only helps if someone is alerted and acts."
+  },
+  {
+    "id": "ntfs",
+    "chapter": 6,
+    "name": "NTFS structure",
+    "summary": "A disk holds partitions, which hold file-system volumes. NTFS describes files in Master File Table records, and other sources like the change journal and application logs fill in what happened."
+  },
+  {
+    "id": "clusters",
+    "chapter": 6,
+    "name": "Clusters, slack and run lists",
+    "summary": "Files are stored in whole clusters, so the last one usually has unused slack. A run list records which clusters hold each part of the file, which may be scattered across the volume."
+  },
+  {
+    "id": "timestamps",
+    "chapter": 6,
+    "name": "File timestamps",
+    "summary": "NTFS keeps more than one set of timestamps, and some update differently or not at all. Treat timestamps as fields to corroborate, not conclusions."
+  },
+  {
+    "id": "journal",
+    "chapter": 6,
+    "name": "Change journal and file identity",
+    "summary": "The change journal records creations, renames and deletions for a file reference. Track files by that reference, because names change and records get reused."
+  },
+  {
+    "id": "recovery",
+    "chapter": 6,
+    "name": "Deletion and recovery",
+    "summary": "Deleting a file guarantees neither recovery nor erasure. Record reuse, TRIM, encryption and fragmentation all reduce what can be recovered."
+  },
+  {
+    "id": "attribution",
+    "chapter": 6,
+    "name": "Limits of evidence",
+    "summary": "Records show what happened to data, not usually who did it or why. Service accounts, device records and file changes need corroboration before you name a person or group."
+  },
+  {
+    "id": "minimise",
+    "chapter": 7,
+    "name": "Minimising responses",
+    "summary": "Send only the fields a function needs and the recipient may see, chosen on the server. Hidden page elements, encoding and caching don't stop a field from being disclosed once sent."
+  },
+  {
+    "id": "errors",
+    "chapter": 7,
+    "name": "Safe error messages",
+    "summary": "Public errors should be short with a reference ID; stack traces, queries and account details stay in restricted logs."
+  },
+  {
+    "id": "enum",
+    "chapter": 7,
+    "name": "Username enumeration",
+    "summary": "Different messages or timings for unknown and real accounts let attackers list which accounts exist. Comparable failures should look and take the same."
+  },
+  {
+    "id": "secrets",
+    "chapter": 7,
+    "name": "Leaked secrets",
+    "summary": "A committed secret stays in history and copies. Revoke or rotate it first; deleting files, ignore rules and directory settings don't make it stop working."
+  },
+  {
+    "id": "failclosed",
+    "chapter": 7,
+    "name": "Failing closed",
+    "summary": "When a check can't be completed, refuse the protected action and report the problem. Letting it through on an error turns a technical fault into a security failure."
+  },
+  {
+    "id": "maltypes",
+    "chapter": 8,
+    "name": "Malware types",
+    "summary": "Virus and worm describe how code spreads, Trojan describes how it presents itself, and ransomware describes its purpose. Labels overlap, and widespread damage doesn't prove self-spreading."
+  },
+  {
+    "id": "detect",
+    "chapter": 8,
+    "name": "Detecting and analysing malware",
+    "summary": "Changing malware defeats exact hashes, so detection also uses patterns and behaviour. Static and dynamic analysis each see only part of the picture."
+  },
+  {
+    "id": "delivery",
+    "chapter": 8,
+    "name": "Documents, signatures and lures",
+    "summary": "Documents can carry macros, reader exploits or links, each needing a different control. A valid signature shows who signed software, not that it's safe, and convincing messages need independent verification."
+  },
+  {
+    "id": "ransom",
+    "chapter": 8,
+    "name": "Ransomware and extortion",
+    "summary": "Ransomware hits availability by encrypting data and often confidentiality by copying it. Impact follows the permissions of the account it runs as, and paying or decrypting fixes only part of the problem."
+  },
+  {
+    "id": "backups",
+    "chapter": 8,
+    "name": "Backups and recovery",
+    "summary": "A useful backup is accessible, recent and protected from change. Live sync can copy the damage, and restoring data doesn't undo theft."
+  },
+  {
+    "id": "crimeware",
+    "chapter": 8,
+    "name": "Crimeware and attribution",
+    "summary": "Criminal work is split between developers, access sellers, operators and infrastructure providers. Shared tools mean a malware family doesn't identify the group, and a compromised machine can be a target, a tool, or both."
+  },
+  {
+    "id": "malcontrols",
+    "chapter": 8,
+    "name": "Controls against malware",
+    "summary": "Patching, least privilege, segmentation, monitoring and tested backups each limit a different part of an attack. Removing one file rarely removes the whole compromise."
+  },
+  {
+    "id": "authnz",
+    "chapter": 9,
+    "name": "Authentication vs authorisation",
+    "summary": "Authentication checks evidence for who someone claims to be. Authorisation decides whether that identity may perform this action on this resource. Passing one says nothing about the other."
+  },
+  {
+    "id": "pwstore",
+    "chapter": 9,
+    "name": "Storing passwords",
+    "summary": "Store a password-hash record, never the password or a recoverable encrypted copy. HTTPS protects passwords in transit; hashing protects them at rest. Readable hints undo much of the protection."
+  },
+  {
+    "id": "salt",
+    "chapter": 9,
+    "name": "Salts",
+    "summary": "A unique random salt per record makes equal passwords store differently and blocks precomputed tables. Attackers still get the salts, so salts don't stop guessing."
+  },
+  {
+    "id": "costhash",
+    "chapter": 9,
+    "name": "Costly password hashing",
+    "summary": "Password hashes like Argon2id are deliberately slow and memory-hungry, so each guess is expensive. Fast hashes like SHA-256 make guessing cheap. Weak passwords can still be found."
+  },
+  {
+    "id": "verify",
+    "chapter": 9,
+    "name": "Verifying a password",
+    "summary": "To check a password, reuse the stored salt and settings, repeat the calculation and compare. Nothing is decrypted, and the stored record holds everything needed except the password."
+  },
+  {
+    "id": "sessions",
+    "chapter": 10,
+    "name": "Sessions and session IDs",
+    "summary": "After login, the server issues an opaque session ID in a cookie, and later requests carry it instead of the password. The ID acts like a credential, and an IP address is no substitute for it."
+  },
+  {
+    "id": "cookies",
+    "chapter": 10,
+    "name": "Cookie security settings",
+    "summary": "Secure keeps a cookie on HTTPS, HttpOnly hides it from page scripts, and SameSite limits cross-site sending. None of them replaces server-side access checks or prevents XSS."
+  },
+  {
+    "id": "samesite",
+    "chapter": 10,
+    "name": "Sites, SameSite and CSRF",
+    "summary": "CSRF makes a signed-in browser send an unwanted request. SameSite helps, but Lax still sends cookies on normal links, so keep state changes off GET and use CSRF tokens. Origin and site are different boundaries."
+  },
+  {
+    "id": "objectauth",
+    "chapter": 10,
+    "name": "Object and function access checks",
+    "summary": "For every request, the server checks whether this user may access this record and perform this action. Hidden buttons, random IDs and valid ID formats are not permission checks."
+  }
+]

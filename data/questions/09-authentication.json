@@ -1,0 +1,495 @@
+[
+  {
+    "id": "9-01",
+    "chapter": 9,
+    "type": "matching",
+    "concepts": [
+      "pwstore"
+    ],
+    "prompt": "An attacker copies the account table. Match each stored value to the consequence.",
+    "pairs": [
+      {
+        "item": "Original password",
+        "match": "Immediately readable"
+      },
+      {
+        "item": "Encrypted password",
+        "match": "Recoverable with the decryption key"
+      },
+      {
+        "item": "Password-hash record",
+        "match": "Candidates can be tested, but the original is not stored"
+      }
+    ],
+    "explanation": "The login system needs to verify a password without keeping a recoverable copy."
+  },
+  {
+    "id": "9-02",
+    "chapter": 9,
+    "type": "matching",
+    "concepts": [
+      "hashes",
+      "pwstore"
+    ],
+    "prompt": "Match each operation to its example use.",
+    "pairs": [
+      {
+        "item": "Encryption",
+        "match": "Protecting a stored document that must be recovered later"
+      },
+      {
+        "item": "Hashing",
+        "match": "Checking whether file contents changed"
+      },
+      {
+        "item": "Password hashing",
+        "match": "Checking a submitted password"
+      }
+    ],
+    "explanation": "Password hashing is a salted, deliberately costly calculation that produces a verifier."
+  },
+  {
+    "id": "9-09",
+    "chapter": 9,
+    "type": "ordering",
+    "concepts": [
+      "verify"
+    ],
+    "prompt": "Order the steps of checking a password at login.",
+    "steps": [
+      "Retrieve the saved hash, salt and settings",
+      "Calculate the candidate result with the submitted password, using that saved salt and those settings",
+      "Compare the result with the saved hash"
+    ],
+    "explanation": "This is verification. It does not decrypt or recover the original password."
+  },
+  {
+    "id": "9-10",
+    "chapter": 9,
+    "type": "ordering",
+    "concepts": [
+      "verify"
+    ],
+    "prompt": "Order the steps of saving a new password.",
+    "steps": [
+      "The student submits a chosen password over HTTPS",
+      "The password-hashing library generates a random salt",
+      "The library computes the hash with its configured cost",
+      "The application stores the hash, salt and settings"
+    ],
+    "explanation": "The original password is not saved in the account table or logs."
+  },
+  {
+    "id": "9-11",
+    "chapter": 9,
+    "type": "true-false",
+    "concepts": [
+      "salt",
+      "costhash"
+    ],
+    "prompt": "Adding a salt to SHA-256 gives the same protection as Argon2id.",
+    "answer": false,
+    "explanation": "A salt stops equality and shared-precomputation shortcuts but does not add Argon2id's memory and time cost. Do not build a homemade loop around a general-purpose hash."
+  },
+  {
+    "id": "9-12",
+    "chapter": 9,
+    "type": "true-false",
+    "concepts": [
+      "salt"
+    ],
+    "prompt": "Even with a unique salt on every record, an attacker who copies the password database can still test guesses such as \"blue\" against each record.",
+    "answer": true,
+    "explanation": "The attacker normally gets the salts too. Salts prevent matching equal values and precomputation shortcuts; cost settings make each guess expensive; strong unique passwords still matter."
+  },
+  {
+    "id": "9-15",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "salt"
+    ],
+    "prompt": "In an old breach, thousands of accounts had exactly the same stored encrypted password value. What does that reveal, and what would have prevented it?",
+    "options": [
+      {
+        "text": "They share a password; a unique salt per record would have hidden that",
+        "correct": true
+      },
+      {
+        "text": "The encryption key leaked; a longer key would have prevented it",
+        "why": "Identical values point to identical passwords, not a leaked key."
+      },
+      {
+        "text": "Nothing; identical values are a random coincidence at that scale",
+        "why": "Thousands of identical values aren't coincidence; they're the same password."
+      },
+      {
+        "text": "The passwords must be strong, since they all encrypt to one value",
+        "why": "Identical values mean many users chose the same, probably weak, password."
+      }
+    ],
+    "explanation": "Cracking one would crack them all. Salts prevent equality and precomputation shortcuts, but do not make a weak password strong."
+  },
+  {
+    "id": "9-16",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "pwstore"
+    ],
+    "prompt": "Why are stored password hints a problem, even if the passwords themselves are protected?",
+    "options": [
+      {
+        "text": "Readable hints narrow down what the password might be",
+        "correct": true
+      },
+      {
+        "text": "Hints make the password-hashing step noticeably slower",
+        "why": "Hints don't affect hashing speed; they reveal clues to the password."
+      },
+      {
+        "text": "Hints are encrypted with the same key, so they leak it",
+        "why": "Hints are usually stored readable; the problem is what they say."
+      },
+      {
+        "text": "Hints are only a problem when longer than the password",
+        "why": "Even short hints like a pet's name give attackers a head start."
+      }
+    ],
+    "explanation": "Changing the encryption algorithm does not fix what readable hints disclose. Provide a proper reset flow instead of keeping a clue to the existing password."
+  },
+  {
+    "id": "9-17",
+    "chapter": 9,
+    "type": "true-false",
+    "concepts": [
+      "pwstore"
+    ],
+    "prompt": "The Base64 encoding of the salt and hash in an Argon2id record is a form of encryption.",
+    "answer": false,
+    "explanation": "Base64 represents binary data as text. It is encoding, not encryption."
+  },
+  {
+    "id": "9-18",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "sessions"
+    ],
+    "prompt": "Why is an IP address not reliable evidence of who is making a request?",
+    "options": [
+      {
+        "text": "Addresses are shared and can change over time",
+        "correct": true
+      },
+      {
+        "text": "HTTPS encrypts IP addresses so servers can't read them",
+        "why": "Servers do see IP addresses; HTTPS doesn't hide them."
+      },
+      {
+        "text": "Browsers hide the user's IP address from every server",
+        "why": "Browsers don't hide the client's IP address from servers."
+      },
+      {
+        "text": "IP addresses are only used for email, not web requests",
+        "why": "IP addresses are used for all internet traffic, including web requests."
+      }
+    ],
+    "explanation": "Cookies and sessions provide the context for later requests."
+  },
+  {
+    "id": "9-19",
+    "chapter": 9,
+    "type": "missing-words",
+    "concepts": [
+      "authnz"
+    ],
+    "prompt": "Complete the definitions.",
+    "text": "Authentication checks [[evidence for a claimed identity|whether an action is permitted|that input is well formed]]. Authorisation checks [[whether a particular action is permitted|evidence for a claimed identity|that the session cookie is Secure]].",
+    "explanation": "A student may read their own results; a lecturer may enter marks for an assigned module. Login alone does not grant either."
+  },
+  {
+    "id": "9-20",
+    "chapter": 9,
+    "type": "multiple-response",
+    "concepts": [
+      "verify"
+    ],
+    "prompt": "Which parts are stored in a password-hash record such as an Argon2id string? Select all that apply.",
+    "options": [
+      {
+        "text": "The algorithm name",
+        "correct": true
+      },
+      {
+        "text": "The salt",
+        "correct": true
+      },
+      {
+        "text": "The hash",
+        "correct": true
+      },
+      {
+        "text": "The cost settings",
+        "correct": true
+      },
+      {
+        "text": "The original password",
+        "why": "The original password is never stored; that's the point of hashing."
+      },
+      {
+        "text": "An encryption key for the password",
+        "why": "There's no key to recover the password; the record is verified, not decrypted."
+      }
+    ],
+    "explanation": "Everything needed to repeat the calculation is stored. Nothing in the record is the original password or a key to recover it."
+  },
+  {
+    "id": "9-21",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "verify"
+    ],
+    "prompt": "At login, a developer generates a fresh salt, hashes the submitted password with it, and compares the result with the stored hash. What is wrong?",
+    "options": [
+      {
+        "text": "It must reuse the stored salt, so it will never match",
+        "correct": true
+      },
+      {
+        "text": "Nothing: using a fresh salt at every login is more secure",
+        "why": "A fresh salt gives a different result, so the right password would never match."
+      },
+      {
+        "text": "It should decrypt the stored hash and compare plain text",
+        "why": "Password hashes can't be decrypted; you repeat the calculation instead."
+      },
+      {
+        "text": "It should compare the two salts instead of the two hashes",
+        "why": "Salts are stored values; comparing them doesn't check the password."
+      }
+    ],
+    "explanation": "Use the password library's verify function. It reads the salt and settings from the stored record, repeats the calculation and compares the results."
+  },
+  {
+    "id": "9-22",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "authnz",
+      "verify"
+    ],
+    "prompt": "What is the difference between a password library's verify function and Argon2id?",
+    "options": [
+      {
+        "text": "Verify is the library call that checks a password; Argon2id is the algorithm it uses",
+        "correct": true
+      },
+      {
+        "text": "They are just two different names for the same hashing algorithm",
+        "why": "One is a library function and the other is the algorithm it calls."
+      },
+      {
+        "text": "Argon2id is the library call; verify is the algorithm it runs",
+        "why": "This swaps them: the library function calls the Argon2id algorithm."
+      },
+      {
+        "text": "Verify decrypts the stored Argon2id record to read the password",
+        "why": "Nothing is decrypted; the function repeats the hash and compares."
+      }
+    ],
+    "explanation": "A match lets authentication proceed, subject to account status and any extra factor. It does not authorise access to every record."
+  },
+  {
+    "id": "9-23",
+    "chapter": 9,
+    "type": "matching",
+    "concepts": [
+      "authnz"
+    ],
+    "prompt": "A student logs in to a results website, then opens their results page. Match each step to the question the server must answer.",
+    "pairs": [
+      {
+        "item": "Logging in",
+        "match": "Has the student supplied valid evidence for the claimed account?"
+      },
+      {
+        "item": "Each later request",
+        "match": "Does this request carry a valid session?"
+      },
+      {
+        "item": "Opening the results page",
+        "match": "May this account read these results?"
+      }
+    ],
+    "explanation": "Verify the password, keep a session, check permission."
+  },
+  {
+    "id": "9-24",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "pwstore"
+    ],
+    "prompt": "HTTPS and password hashing each protect what?",
+    "options": [
+      {
+        "text": "HTTPS protects the password in transit; hashing protects it once stored",
+        "correct": true
+      },
+      {
+        "text": "HTTPS protects it in storage; hashing protects it in transit",
+        "why": "This swaps them: HTTPS covers transit and hashing covers storage."
+      },
+      {
+        "text": "Both of them only protect the password while it is being sent",
+        "why": "Hashing protects the stored record, not the password in transit."
+      },
+      {
+        "text": "Using HTTPS makes password hashing unnecessary on the server",
+        "why": "HTTPS doesn't protect the stored database if it's stolen."
+      }
+    ],
+    "explanation": "They address different moments in the password's life."
+  },
+  {
+    "id": "9-25",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "costhash"
+    ],
+    "prompt": "Argon2id is configured to use a large amount of working memory for each calculation. Does each stored password record take up that much space?",
+    "options": [
+      {
+        "text": "No: the memory is only used while the hash is being worked out",
+        "correct": true
+      },
+      {
+        "text": "Yes: each record stores the full working memory alongside it",
+        "why": "Records only store the algorithm, settings, salt and hash, which is a short string."
+      },
+      {
+        "text": "Only the salt is that large; the rest of the record is quite small",
+        "why": "Salts are short random values, not large blocks of memory."
+      },
+      {
+        "text": "Only administrator accounts use that much storage per record",
+        "why": "Every account's record is the same size whatever its role."
+      }
+    ],
+    "explanation": "The server pays the memory cost during every verification, which is why concurrent logins need benchmarking and limits on work in flight."
+  },
+  {
+    "id": "9-26",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "costhash"
+    ],
+    "prompt": "Why is a fast hash such as SHA-256 a poor choice for storing passwords?",
+    "options": [
+      {
+        "text": "It makes each guess fast and cheap for an attacker",
+        "correct": true
+      },
+      {
+        "text": "It can be decrypted by anyone who has the right key",
+        "why": "Hashes can't be decrypted; the problem is guessing is fast."
+      },
+      {
+        "text": "It gives different output each time for the same input",
+        "why": "A hash gives the same output for the same input; that's how verification works."
+      },
+      {
+        "text": "It can't handle long passwords or special characters",
+        "why": "SHA-256 handles long inputs fine; the problem is its speed."
+      }
+    ],
+    "explanation": "SHA-256 is designed to be fast, which suits integrity checks. Argon2id deliberately makes each guess cost time and memory."
+  },
+  {
+    "id": "9-27",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "costhash"
+    ],
+    "prompt": "What does Argon2id's memory cost do to an attacker with a stolen password database?",
+    "options": [
+      {
+        "text": "Each guess costs memory and time, so guessing at large scale becomes expensive",
+        "correct": true
+      },
+      {
+        "text": "It stops the attacker from being able to make any guesses at all",
+        "why": "Attackers can still make guesses; each one just costs more."
+      },
+      {
+        "text": "It encrypts the stolen database so the attacker can't read it",
+        "why": "Argon2id doesn't encrypt the database; it makes each guess expensive."
+      },
+      {
+        "text": "It only slows down the legitimate server, not the attacker",
+        "why": "The cost applies to every guess, including the attacker's."
+      }
+    ],
+    "explanation": "Slower guessing buys protection, but a predictable password can still be found. The server also pays this cost, so benchmark concurrent logins."
+  },
+  {
+    "id": "9-28",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "verify"
+    ],
+    "prompt": "Why must the stored password record include the algorithm, salt and cost settings?",
+    "options": [
+      {
+        "text": "Checking a password has to repeat exactly the same calculation",
+        "correct": true
+      },
+      {
+        "text": "So the original password can be recovered if it's forgotten",
+        "why": "Hash records can't be reversed; recovery needs a reset flow."
+      },
+      {
+        "text": "So users can view their own security settings in their profile",
+        "why": "The settings are for verification, not for users to view."
+      },
+      {
+        "text": "To make the record longer and harder for attackers to read",
+        "why": "Length doesn't protect anything; the settings let the check be repeated."
+      }
+    ],
+    "explanation": "The library reuses the recorded salt and settings, then compares the result with the stored hash."
+  },
+  {
+    "id": "9-29",
+    "chapter": 9,
+    "type": "true-false",
+    "concepts": [
+      "costhash"
+    ],
+    "prompt": "Argon2id makes each password guess slower and more costly, but weak passwords can still be guessed.",
+    "answer": true,
+    "explanation": "It makes each guess more expensive. Strong, unique passwords still matter."
+  },
+  {
+    "id": "9-30",
+    "chapter": 9,
+    "type": "short-answer",
+    "concepts": [
+      "salt"
+    ],
+    "prompt": "What is the random value generated for each password record so that identical passwords produce different stored hashes?",
+    "accept": [
+      "salt",
+      "a salt",
+      "password salt",
+      "the salt"
+    ],
+    "explanation": "The salt is stored with the hash. It prevents equality and precomputation shortcuts but does not strengthen a weak password."
+  }
+]

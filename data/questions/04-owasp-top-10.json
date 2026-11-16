@@ -1,0 +1,576 @@
+[
+  {
+    "id": "4-01",
+    "chapter": 4,
+    "type": "matching",
+    "concepts": [
+      "owasp"
+    ],
+    "prompt": "OWASP Top 10:2025: match each description to its category.",
+    "pairs": [
+      {
+        "item": "A user can read or change a resource without the required permission",
+        "match": "Broken Access Control",
+        "why": "Using a resource without permission is broken access control."
+      },
+      {
+        "item": "Settings expose data or features more widely than intended",
+        "match": "Security Misconfiguration",
+        "why": "Exposure caused by settings is misconfiguration."
+      },
+      {
+        "item": "Dependencies, suppliers, build systems or updates introduce risk",
+        "match": "Software Supply Chain Failures",
+        "why": "Risk from suppliers, dependencies and builds is supply chain."
+      },
+      {
+        "item": "Sensitive data lacks suitable protection in transit or storage",
+        "match": "Cryptographic Failures",
+        "why": "Weak protection of data in transit or storage is cryptographic."
+      },
+      {
+        "item": "Untrusted input changes the meaning of a query, command or page",
+        "match": "Injection",
+        "why": "Input changing a query, command or page is injection."
+      }
+    ],
+    "explanation": "Each category gives the team a useful question to ask about its own application."
+  },
+  {
+    "id": "4-02",
+    "chapter": 4,
+    "type": "matching",
+    "concepts": [
+      "owasp"
+    ],
+    "prompt": "OWASP Top 10:2025: match each description to its category.",
+    "pairs": [
+      {
+        "item": "A necessary security rule is missing from the workflow or architecture",
+        "match": "Insecure Design",
+        "why": "A missing rule in the workflow is insecure design."
+      },
+      {
+        "item": "Login or session handling does not reliably establish and maintain identity",
+        "match": "Authentication Failures",
+        "why": "Unreliable login or sessions are authentication failures."
+      },
+      {
+        "item": "Software or data is accepted without checking it is authentic and unchanged",
+        "match": "Software or Data Integrity Failures",
+        "why": "Using unverified software or data is an integrity failure."
+      },
+      {
+        "item": "Relevant events are not recorded, noticed or acted on",
+        "match": "Security Logging and Alerting Failures",
+        "why": "Events nobody notices or acts on are logging and alerting failures."
+      },
+      {
+        "item": "Errors, outages or unusual states cause unsafe behaviour",
+        "match": "Mishandling of Exceptional Conditions",
+        "why": "Unsafe behaviour on errors is mishandling exceptional conditions."
+      }
+    ],
+    "explanation": "The categories are an awareness and planning resource; they do not replace reviewing your own application's features, data and users."
+  },
+  {
+    "id": "4-03",
+    "chapter": 4,
+    "type": "matching",
+    "concepts": [
+      "owasp"
+    ],
+    "prompt": "Match each scenario to the OWASP category it illustrates.",
+    "pairs": [
+      {
+        "item": "Changing a sequential document number in a URL shows other customers' documents, with no login",
+        "match": "Broken Access Control",
+        "why": "No permission check on each document is broken access control."
+      },
+      {
+        "item": "Customer data in cloud storage is reachable from the internet because of its settings",
+        "match": "Security Misconfiguration",
+        "why": "Exposure through storage settings is misconfiguration."
+      },
+      {
+        "item": "Malicious code is inserted into a trusted vendor's software update",
+        "match": "Software Supply Chain Failures",
+        "why": "A compromised vendor update is a supply chain failure."
+      },
+      {
+        "item": "Stolen password hashes were made with a fast, unsalted hash and many are cracked",
+        "match": "Cryptographic Failures",
+        "why": "Fast, unsalted password hashes are a cryptographic failure."
+      },
+      {
+        "item": "Crafted input changes a database query and the attacker then installs a web shell",
+        "match": "Injection",
+        "why": "Crafted input changing a query is injection."
+      }
+    ],
+    "explanation": "Start with what went wrong: a missing permission check, unsafe settings, a compromised supplier, weak protection of secrets, or input changing a query."
+  },
+  {
+    "id": "4-04",
+    "chapter": 4,
+    "type": "matching",
+    "concepts": [
+      "owasp"
+    ],
+    "prompt": "Match each scenario to the OWASP category it illustrates.",
+    "pairs": [
+      {
+        "item": "The purchase workflow has no rule against bots and bulk accounts, so buyers get around a per-customer limit",
+        "match": "Insecure Design",
+        "why": "The workflow lacks a rule against automated bulk buying, so it's a design gap."
+      },
+      {
+        "item": "Attackers log in using passwords reused from other breached sites",
+        "match": "Authentication Failures",
+        "why": "Reused stolen passwords working is an authentication failure."
+      },
+      {
+        "item": "A downloaded build script was modified; its hash no longer matches the published value",
+        "match": "Software or Data Integrity Failures",
+        "why": "Running a modified script without verifying it is an integrity failure."
+      },
+      {
+        "item": "Traffic inspection quietly stops working and nobody is alerted, so data theft goes unnoticed for weeks",
+        "match": "Security Logging and Alerting Failures",
+        "why": "A signal nobody is alerted to is a logging and alerting failure."
+      },
+      {
+        "item": "When the MFA service goes down, the error-handling rule lets users in without the second factor",
+        "match": "Mishandling of Exceptional Conditions",
+        "why": "Letting users in when MFA errors is mishandling an exceptional condition."
+      }
+    ],
+    "explanation": "Start with what went wrong: a missing rule in the workflow, weak login protection, an unverified artifact, a signal nobody acted on, or unsafe behaviour when something failed."
+  },
+  {
+    "id": "4-05",
+    "chapter": 4,
+    "type": "matching",
+    "concepts": [
+      "owasp"
+    ],
+    "prompt": "Match each scenario to its OWASP category.",
+    "pairs": [
+      {
+        "item": "An API updates whichever account ID is in the request body without checking ownership",
+        "match": "Broken Access Control",
+        "why": "No ownership check is broken access control."
+      },
+      {
+        "item": "A production server keeps a sample admin console with its default password",
+        "match": "Security Misconfiguration",
+        "why": "A leftover default login is misconfiguration."
+      },
+      {
+        "item": "A web app ships an unsupported library with a known exploitable flaw",
+        "match": "Software Supply Chain Failures",
+        "why": "A known-vulnerable dependency is a supply chain failure."
+      },
+      {
+        "item": "The login page sends passwords over plain, unencrypted HTTP",
+        "match": "Cryptographic Failures",
+        "why": "Passwords sent unencrypted are a cryptographic failure."
+      },
+      {
+        "item": "A user's comment is inserted into a page without context-aware output encoding",
+        "match": "Injection",
+        "why": "Unencoded user input in a page is injection."
+      }
+    ],
+    "explanation": "No ownership check is access control. A leftover default login is misconfiguration. A known-vulnerable dependency is supply chain. Plain HTTP for passwords is a cryptographic failure. Unencoded user input in a page is injection."
+  },
+  {
+    "id": "4-06",
+    "chapter": 4,
+    "type": "matching",
+    "concepts": [
+      "owasp"
+    ],
+    "prompt": "Match each scenario to its OWASP category.",
+    "pairs": [
+      {
+        "item": "Account recovery was designed to rely only on a security question whose answer others can find out",
+        "match": "Insecure Design",
+        "why": "A weak recovery rule built into the workflow is insecure design."
+      },
+      {
+        "item": "A session token still works after the user logs out",
+        "match": "Authentication Failures",
+        "why": "A token that survives logout is an authentication failure."
+      },
+      {
+        "item": "A server deserialises a user-controlled object and trusts an unsigned role field inside it",
+        "match": "Software or Data Integrity Failures",
+        "why": "Trusting an unsigned field is an integrity failure."
+      },
+      {
+        "item": "An account exports thousands of records overnight; events are logged but nobody is alerted",
+        "match": "Security Logging and Alerting Failures",
+        "why": "Logged but unalerted activity is a logging and alerting failure."
+      },
+      {
+        "item": "A payment debits one account, fails before crediting the other, and is not rolled back",
+        "match": "Mishandling of Exceptional Conditions",
+        "why": "A half-finished payment with no rollback is mishandling an exceptional condition."
+      }
+    ],
+    "explanation": "A weak recovery rule built into the workflow is insecure design. A token that survives logout is an authentication failure. Trusting an unsigned field is an integrity failure. Logged but unalerted activity is a logging and alerting failure. A half-finished payment with no rollback is mishandling an exceptional condition."
+  },
+  {
+    "id": "4-07",
+    "chapter": 4,
+    "type": "multiple-choice",
+    "concepts": [
+      "supply"
+    ],
+    "prompt": "What distinguishes Software Supply Chain Failures from Software or Data Integrity Failures?",
+    "options": [
+      {
+        "text": "Supply chain covers suppliers and builds; integrity covers verifying one artifact",
+        "correct": true
+      },
+      {
+        "text": "Supply chain covers only outdated packages; integrity covers all other third-party code",
+        "why": "Supply chain risk covers suppliers, dependencies and builds, not just outdated packages."
+      },
+      {
+        "text": "Supply chain is about encrypting downloads; integrity is about logging who changed them",
+        "why": "Neither category is about encryption or logging; they concern trusted sources and verified artifacts."
+      },
+      {
+        "text": "They are the same category, renamed in the 2025 edition of the OWASP list",
+        "why": "They are separate categories that often overlap on the same event."
+      }
+    ],
+    "explanation": "Supply chain risk is broader than old packages: suppliers, dependencies, build systems and update routes. Integrity is about verifying a specific artifact or data object before use."
+  },
+  {
+    "id": "4-08",
+    "chapter": 4,
+    "type": "multiple-choice",
+    "concepts": [
+      "supply"
+    ],
+    "prompt": "An attacker modifies a supplier's update and customers install it. Which OWASP categories can this involve?",
+    "options": [
+      {
+        "text": "Software Supply Chain Failures and Software or Data Integrity Failures",
+        "correct": true
+      },
+      {
+        "text": "Broken Access Control and Authentication Failures",
+        "why": "Nobody's access was bypassed and no login failed; the trusted update itself was modified."
+      },
+      {
+        "text": "Injection only",
+        "why": "No untrusted input changed a query or command; the software artifact was altered."
+      },
+      {
+        "text": "Security Logging and Alerting Failures and Mishandling of Exceptional Conditions",
+        "why": "Logging and error handling may matter later, but the core failures are the supply chain and the unverified update."
+      }
+    ],
+    "explanation": "Categories overlap. The supply chain and the integrity of the downloaded artifact are different questions about the same event."
+  },
+  {
+    "id": "4-09",
+    "chapter": 4,
+    "type": "multiple-choice",
+    "concepts": [
+      "pwstore",
+      "costhash"
+    ],
+    "prompt": "An application stores user passwords as plain SHA-1 hashes with no salt. What should it do instead?",
+    "options": [
+      {
+        "text": "Hash them with a password hash such as Argon2id, with a random salt each",
+        "correct": true
+      },
+      {
+        "text": "Encrypt them with AES so they can be recovered if users forget",
+        "why": "Passwords should never be recoverable; encryption means anyone with the key can read them all."
+      },
+      {
+        "text": "Switch to SHA-256, which is a newer and stronger hash than SHA-1",
+        "why": "SHA-256 is still a fast hash, so guessing stays cheap; passwords need a slow, salted password hash."
+      },
+      {
+        "text": "Base64-encode them so they are no longer stored as readable text",
+        "why": "Base64 is reversible encoding, not protection."
+      }
+    ],
+    "explanation": "Hashing and encryption have different purposes. Passwords need a costly, salted password hash; encryption is for data that must be recovered later."
+  },
+  {
+    "id": "4-10",
+    "chapter": 4,
+    "type": "true-false",
+    "concepts": [
+      "owasp"
+    ],
+    "prompt": "If attackers log in using passwords reused from other breaches, the site's own password database must have been breached.",
+    "answer": false,
+    "explanation": "Credential stuffing uses credentials stolen elsewhere. Defend with MFA, throttling repeated attempts, and session expiry or invalidation."
+  },
+  {
+    "id": "4-11",
+    "chapter": 4,
+    "type": "multiple-choice",
+    "concepts": [
+      "supply",
+      "hashes"
+    ],
+    "prompt": "How can a team check that a downloaded build tool has not been tampered with before running it?",
+    "options": [
+      {
+        "text": "Compare its hash or signature with a trusted published value",
+        "correct": true
+      },
+      {
+        "text": "Check that the file extension matches what the vendor's website says",
+        "why": "An extension is just a name; a tampered file can keep the expected extension."
+      },
+      {
+        "text": "Run it once in a production environment and watch closely for errors",
+        "why": "Running untrusted code in production is exactly the risk you're trying to avoid."
+      },
+      {
+        "text": "Check that the download size matches what other users have reported",
+        "why": "A malicious version can easily have a similar size; only a trusted hash or signature verifies content."
+      }
+    ],
+    "explanation": "Software or Data Integrity Failures asks whether a particular artifact is authentic and unchanged before use."
+  },
+  {
+    "id": "4-12",
+    "chapter": 4,
+    "type": "multiple-choice",
+    "concepts": [
+      "logging"
+    ],
+    "prompt": "A team says, \"We log everything, so Security Logging and Alerting is covered.\" Why is that not enough?",
+    "options": [
+      {
+        "text": "Someone also has to notice the events, escalate them and act on them",
+        "correct": true
+      },
+      {
+        "text": "Logs only count if they are stored in a cloud service",
+        "why": "Where logs are stored doesn't matter if nobody is alerted and acts on them."
+      },
+      {
+        "text": "Only failed logins need logging, so the rest is wasted",
+        "why": "Many events beyond failed logins matter, such as permission changes and bulk exports."
+      },
+      {
+        "text": "Logging everything is itself a vulnerability to be fixed",
+        "why": "Logging isn't the vulnerability; the gap is that nobody notices or responds."
+      }
+    ],
+    "explanation": "Test the whole event-to-alert path, including whether staff can see and respond to the signal."
+  },
+  {
+    "id": "4-13",
+    "chapter": 4,
+    "type": "multiple-response",
+    "concepts": [
+      "injection"
+    ],
+    "prompt": "Which controls address injection? Select all that apply.",
+    "options": [
+      {
+        "text": "Bind SQL values as parameters",
+        "correct": true
+      },
+      {
+        "text": "Encode browser output for its context",
+        "correct": true
+      },
+      {
+        "text": "Use a password-specific hash",
+        "why": "Password hashing protects stored passwords; it doesn't stop input changing a query or page."
+      },
+      {
+        "text": "Enable multi-factor authentication",
+        "why": "MFA protects login; injection happens in how input is handled after login."
+      },
+      {
+        "text": "Rely on parameterised SQL to also stop XSS",
+        "why": "Parameterised SQL protects the database only; browser output still needs encoding to stop XSS."
+      }
+    ],
+    "explanation": "The two controls address different interpreters. One does not replace the other."
+  },
+  {
+    "id": "4-14",
+    "chapter": 4,
+    "type": "multiple-choice",
+    "concepts": [
+      "owasp"
+    ],
+    "prompt": "The design already includes a per-customer purchase limit, but the code for one endpoint forgets to apply it. Is this a missing design rule or an implementation defect?",
+    "options": [
+      {
+        "text": "An implementation defect: the rule exists, but the code doesn’t apply it",
+        "correct": true
+      },
+      {
+        "text": "Insecure design: the rule must be missing from the design",
+        "why": "The rule is in the design, so this isn't insecure design; the code failed to apply it."
+      },
+      {
+        "text": "Security misconfiguration: a server setting is switched off",
+        "why": "No server setting is involved; the endpoint's code skips a designed rule."
+      },
+      {
+        "text": "A logging failure: nobody was alerted when the limit was skipped",
+        "why": "Missing alerts might delay detection, but the cause is the code not applying the rule."
+      }
+    ],
+    "explanation": "Insecure Design means a necessary security rule is missing from the workflow or architecture. Here the rule exists in the design; the implementation failed to apply it."
+  },
+  {
+    "id": "4-17",
+    "chapter": 4,
+    "type": "multiple-choice",
+    "concepts": [
+      "objectauth"
+    ],
+    "prompt": "Which test best checks an application for broken access control?",
+    "options": [
+      {
+        "text": "Try reading and changing records with two different accounts",
+        "correct": true
+      },
+      {
+        "text": "Run a password-cracking tool against the stored password hashes",
+        "why": "Password cracking tests password storage, not whether users can reach others' records."
+      },
+      {
+        "text": "Check that error pages hide stack traces and version numbers",
+        "why": "Hiding stack traces is about error disclosure, not access control."
+      },
+      {
+        "text": "Check every dependency version against a vulnerability feed",
+        "why": "Dependency checks find vulnerable components, not missing permission checks."
+      }
+    ],
+    "explanation": "Does the server check the user, resource and action on each request?"
+  },
+  {
+    "id": "4-18",
+    "chapter": 4,
+    "type": "true-false",
+    "concepts": [
+      "authnz"
+    ],
+    "prompt": "A user can be correctly authenticated and still not be authorised to view another user's profile.",
+    "answer": true,
+    "explanation": "Authentication establishes identity; authorisation controls which resources that identity can use. Authentication Failures and Broken Access Control need separate checks."
+  },
+  {
+    "id": "4-20",
+    "chapter": 4,
+    "type": "multiple-response",
+    "concepts": [
+      "misconfig"
+    ],
+    "prompt": "Which of these are examples of security misconfiguration? Select all that apply.",
+    "options": [
+      {
+        "text": "Unnecessary services",
+        "correct": true
+      },
+      {
+        "text": "Default accounts",
+        "correct": true
+      },
+      {
+        "text": "Verbose error messages",
+        "correct": true
+      },
+      {
+        "text": "Cloud permissions wider than intended",
+        "correct": true
+      },
+      {
+        "text": "Unsalted password hashes",
+        "why": "Unsalted password hashes are a cryptographic failure in how passwords are stored, not a configuration setting."
+      }
+    ],
+    "explanation": "Unsalted password hashes are a cryptographic failure, not a misconfiguration."
+  },
+  {
+    "id": "4-21",
+    "chapter": 4,
+    "type": "multiple-choice",
+    "concepts": [
+      "misconfig",
+      "errors"
+    ],
+    "prompt": "Production error pages show full stack traces and framework versions. Which OWASP category fits best?",
+    "options": [
+      {
+        "text": "Security Misconfiguration",
+        "correct": true
+      },
+      {
+        "text": "Software Supply Chain Failures",
+        "why": "Supply chain concerns third-party components and updates, not what error pages reveal."
+      },
+      {
+        "text": "Cryptographic Failures",
+        "why": "Nothing here involves weak encryption; the server is showing too much detail."
+      },
+      {
+        "text": "Insecure Design",
+        "why": "Insecure design is a missing rule in the workflow; this is a deployment setting left on."
+      }
+    ],
+    "explanation": "Misconfiguration includes unnecessary services, default accounts and verbose error messages."
+  },
+  {
+    "id": "4-22",
+    "chapter": 4,
+    "type": "multiple-choice",
+    "concepts": [
+      "failclosed"
+    ],
+    "prompt": "When the authorisation service times out, the application's error-handling code lets the request through so users are not interrupted. Which OWASP category is this?",
+    "options": [
+      {
+        "text": "Mishandling of Exceptional Conditions",
+        "correct": true
+      },
+      {
+        "text": "Security Logging and Alerting Failures",
+        "why": "Logging may also be weak, but the failure here is letting requests through when an error happens."
+      },
+      {
+        "text": "Software Supply Chain Failures",
+        "why": "No third-party component or update is involved; the problem is the error-handling decision."
+      },
+      {
+        "text": "Injection",
+        "why": "No untrusted input changes a query or command; the app fails open on a timeout."
+      }
+    ],
+    "explanation": "This is failing open on an error. Decide deliberately what happens when a dependency fails: deny unsafe access, record the event and alert."
+  },
+  {
+    "id": "4-23",
+    "chapter": 4,
+    "type": "true-false",
+    "concepts": [
+      "owasp"
+    ],
+    "prompt": "Following the OWASP Top 10 removes the need to review your own application's features, data and users.",
+    "answer": false,
+    "explanation": "It is an awareness and planning resource. The categories prompt useful questions; they do not replace a review of the actual application."
+  }
+]

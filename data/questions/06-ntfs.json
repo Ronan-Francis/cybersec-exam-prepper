@@ -1,0 +1,377 @@
+[
+  {
+    "id": "6-08",
+    "chapter": 6,
+    "type": "ordering",
+    "concepts": [
+      "ntfs"
+    ],
+    "prompt": "Order these storage layers from outermost (the whole disk) to innermost (the file's content).",
+    "steps": [
+      "Disk image",
+      "Partition",
+      "File-system volume",
+      "MFT record",
+      "Attributes and data streams"
+    ],
+    "explanation": "Cluster numbers are relative to the volume. From a whole-disk image, add the volume's starting offset."
+  },
+  {
+    "id": "6-11",
+    "chapter": 6,
+    "type": "matching",
+    "concepts": [
+      "ntfs"
+    ],
+    "prompt": "Match each source to the main question it helps answer.",
+    "pairs": [
+      {
+        "item": "Master File Table (MFT)",
+        "match": "What file records, names and allocation state are present or retained?"
+      },
+      {
+        "item": "USN change journal",
+        "match": "What changes were recorded for files and directories?"
+      },
+      {
+        "item": "Application logs",
+        "match": "Which operation or process may explain a change?"
+      }
+    ],
+    "explanation": "The USN journal has limited retention and does not identify who made a change, so application and process logs add context."
+  },
+  {
+    "id": "6-12",
+    "chapter": 6,
+    "type": "true-false",
+    "concepts": [
+      "journal",
+      "attribution"
+    ],
+    "prompt": "The USN change journal identifies the process or person responsible for a change.",
+    "answer": false,
+    "explanation": "It records reasons and identifying context for changes, but not the responsible process or human, and it does not keep a permanent full history."
+  },
+  {
+    "id": "6-13",
+    "chapter": 6,
+    "type": "multiple-choice",
+    "concepts": [
+      "timestamps"
+    ],
+    "prompt": "Two different timestamp fields for the same NTFS file give creation dates several weeks apart. How should you treat this?",
+    "options": [
+      {
+        "text": "As an inconsistency to investigate before drawing a conclusion",
+        "correct": true
+      },
+      {
+        "text": "As proof that someone deliberately tampered with the timestamps",
+        "why": "Tampering is possible, but copying, restoring or application behaviour can also explain it."
+      },
+      {
+        "text": "As proof that the file was copied over from another volume",
+        "why": "Copying is one possible explanation, not a proven one."
+      },
+      {
+        "text": "As a parsing error in the tool, so the record can be ignored",
+        "why": "Different timestamp fields are expected to disagree sometimes; this is real data, not a parser fault."
+      }
+    ],
+    "explanation": "Copying, restoring, application behaviour or deliberate alteration could each explain it. Read timestamps as fields, not conclusions, and corroborate with other records."
+  },
+  {
+    "id": "6-15",
+    "chapter": 6,
+    "type": "matching",
+    "concepts": [
+      "ntfs"
+    ],
+    "prompt": "FAT32 or NTFS? Match each feature to the file system that has it.",
+    "pairs": [
+      {
+        "item": "Cluster chains linked through the File Allocation Table",
+        "match": "FAT32",
+        "why": "The File Allocation Table is what FAT32 is named after."
+      },
+      {
+        "item": "File records kept in a Master File Table",
+        "match": "NTFS",
+        "why": "NTFS stores file records in its Master File Table."
+      },
+      {
+        "item": "Named alternate data streams",
+        "match": "NTFS",
+        "why": "Named streams are an NTFS feature."
+      },
+      {
+        "item": "Windows access control lists (ACLs) on files",
+        "match": "NTFS",
+        "why": "Windows file permissions need NTFS."
+      }
+    ],
+    "explanation": "Feature support depends on the file system. NTFS support for a journal does not guarantee a particular volume's journal is available or retained."
+  },
+  {
+    "id": "6-17",
+    "chapter": 6,
+    "type": "multiple-response",
+    "concepts": [
+      "recovery"
+    ],
+    "prompt": "Which factors can reduce the chance of recovering a deleted NTFS file? Select all that apply.",
+    "options": [
+      {
+        "text": "MFT record reuse",
+        "correct": true
+      },
+      {
+        "text": "TRIM or discard on the storage",
+        "correct": true
+      },
+      {
+        "text": "Encryption",
+        "correct": true
+      },
+      {
+        "text": "Fragmentation removing the order needed to reassemble pieces",
+        "correct": true
+      },
+      {
+        "text": "Renaming the file before deletion",
+        "why": "Renaming changes only the name; the content clusters are unaffected."
+      }
+    ],
+    "explanation": "Deletion guarantees neither recovery nor erasure. Validate recovered content and report partial recovery as partial."
+  },
+  {
+    "id": "6-18",
+    "chapter": 6,
+    "type": "multiple-choice",
+    "concepts": [
+      "journal",
+      "attribution"
+    ],
+    "prompt": "The change journal shows budget.xlsx renamed to temp01.tmp, with the same file reference on both records. What do these records support?",
+    "options": [
+      {
+        "text": "It shows the same file was renamed, but not who or what renamed it",
+        "correct": true
+      },
+      {
+        "text": "The content of budget.xlsx was changed as well as its name",
+        "why": "A rename record says nothing about the file's content changing."
+      },
+      {
+        "text": "A person deliberately renamed the file to hide the budget",
+        "why": "The journal doesn't record who renamed the file or why."
+      },
+      {
+        "text": "Two different files were involved, one replacing the other",
+        "why": "The same file reference on both records shows it's one file."
+      }
+    ],
+    "explanation": "Renaming does not establish that content changed or that a person performed it. Application logs and process records add context."
+  },
+  {
+    "id": "6-22",
+    "chapter": 6,
+    "type": "true-false",
+    "concepts": [
+      "attribution"
+    ],
+    "prompt": "An export that ran under a service account does not, by itself, identify the person who requested it.",
+    "answer": true,
+    "explanation": "A service account is not automatically the human requester. Check job details, cleanup settings and process telemetry."
+  },
+  {
+    "id": "6-25",
+    "chapter": 6,
+    "type": "multiple-choice",
+    "concepts": [
+      "timestamps"
+    ],
+    "prompt": "What is true of the NTFS last-access timestamp?",
+    "options": [
+      {
+        "text": "Its updates may be delayed, or switched off completely",
+        "correct": true
+      },
+      {
+        "text": "It is updated instantly every time the file is read",
+        "why": "Windows may delay or switch off last-access updates for performance."
+      },
+      {
+        "text": "It records which user account last opened the file",
+        "why": "Timestamps don't record which user accessed the file."
+      },
+      {
+        "text": "It is the most reliable timestamp NTFS keeps for a file",
+        "why": "Last-access is one of the least reliable timestamps, because updates may be delayed or disabled."
+      }
+    ],
+    "explanation": "No timestamp on its own identifies a person or action."
+  },
+  {
+    "id": "6-26",
+    "chapter": 6,
+    "type": "true-false",
+    "concepts": [
+      "recovery"
+    ],
+    "prompt": "After a file is deleted, its MFT record and its content clusters may each survive, or be reused, separately.",
+    "answer": true,
+    "explanation": "You might recover a complete file, metadata only, fragments, or nothing useful."
+  },
+  {
+    "id": "6-27",
+    "chapter": 6,
+    "type": "multiple-choice",
+    "concepts": [
+      "clusters"
+    ],
+    "prompt": "Why does a file usually take up more space on disk than its logical size?",
+    "options": [
+      {
+        "text": "Space is allocated in whole clusters, so the last one is partly empty",
+        "correct": true
+      },
+      {
+        "text": "NTFS keeps a hidden backup copy of every file elsewhere on the same volume",
+        "why": "NTFS doesn't keep a hidden backup copy of each file."
+      },
+      {
+        "text": "The file's MFT record and all its metadata are added to the file size",
+        "why": "The MFT record is stored separately and isn't counted in the file's size."
+      },
+      {
+        "text": "Files are stored uncompressed, but their size is reported compressed",
+        "why": "Compression is optional, and reported size is the logical size, not a compressed one."
+      }
+    ],
+    "explanation": "The space after the logical end inside the final allocated cluster is called slack."
+  },
+  {
+    "id": "6-28",
+    "chapter": 6,
+    "type": "true-false",
+    "concepts": [
+      "clusters"
+    ],
+    "prompt": "Slack space is part of the file's current logical content.",
+    "answer": false,
+    "explanation": "Slack is allocated space after the file's logical end. It may be zeroed or may contain residual data from earlier use."
+  },
+  {
+    "id": "6-29",
+    "chapter": 6,
+    "type": "multiple-choice",
+    "concepts": [
+      "clusters"
+    ],
+    "prompt": "A file's clusters are scattered across the volume. How does NTFS know which order to read them in?",
+    "options": [
+      {
+        "text": "A run list maps each part of the file to clusters on the volume",
+        "correct": true
+      },
+      {
+        "text": "Clusters are always read in ascending order of their cluster number",
+        "why": "Fragmented files are often stored out of order, so cluster numbers don't give the order."
+      },
+      {
+        "text": "The order is stored as part of the file's name and extension",
+        "why": "Filenames don't encode storage locations."
+      },
+      {
+        "text": "The USN change journal records the order the clusters were written",
+        "why": "The change journal records file events, not cluster layout."
+      }
+    ],
+    "explanation": "Logical file order need not match physical order on the volume."
+  },
+  {
+    "id": "6-30",
+    "chapter": 6,
+    "type": "multiple-choice",
+    "concepts": [
+      "recovery"
+    ],
+    "prompt": "After a FAT32 file is deleted and its cluster chain is released, why can recovery be difficult?",
+    "options": [
+      {
+        "text": "The links saying which cluster comes next may be gone",
+        "correct": true
+      },
+      {
+        "text": "FAT32 encrypts deleted files so they cannot be read again",
+        "why": "FAT32 has no built-in encryption of deleted files."
+      },
+      {
+        "text": "FAT32 immediately overwrites every deleted cluster with zeros",
+        "why": "FAT32 doesn't zero deleted clusters immediately; data can remain until reused."
+      },
+      {
+        "text": "FAT32 doesn't keep any directory entries for its files",
+        "why": "FAT32 does use directory entries; the problem is the released cluster chain."
+      }
+    ],
+    "explanation": "Recovery depends on surviving content and a way to determine its order. Reallocation can remove the opportunity."
+  },
+  {
+    "id": "6-31",
+    "chapter": 6,
+    "type": "multiple-choice",
+    "concepts": [
+      "journal"
+    ],
+    "prompt": "Why correlate NTFS records by the full file reference (record number plus sequence number) rather than by filename?",
+    "options": [
+      {
+        "text": "Names can change on rename, and records can be reused for new files",
+        "correct": true
+      },
+      {
+        "text": "Filenames are encrypted in the MFT, so they can't be compared",
+        "why": "Filenames aren't encrypted in the MFT."
+      },
+      {
+        "text": "Record numbers are shorter, so they are much quicker to search",
+        "why": "Speed isn't the reason; names change and records get reused."
+      },
+      {
+        "text": "The MFT doesn't store filenames at all, only record numbers",
+        "why": "The MFT does store filenames; they're just unreliable for tracking identity over time."
+      }
+    ],
+    "explanation": "A rename keeps the reference but changes the name. Correlate by volume, record number and sequence number."
+  },
+  {
+    "id": "6-32",
+    "chapter": 6,
+    "type": "multiple-choice",
+    "concepts": [
+      "journal"
+    ],
+    "prompt": "A report file disappeared twenty minutes after the application exported it. What is a sensible first step?",
+    "options": [
+      {
+        "text": "Check file-system records and app logs for a rename, deletion or cleanup",
+        "correct": true
+      },
+      {
+        "text": "Assume an attacker deleted it and start full incident response straight away",
+        "why": "Jumping to an attack assumption skips checking expected behaviour like cleanup jobs."
+      },
+      {
+        "text": "Restore the file from last night's backup and close the ticket as resolved",
+        "why": "Restoring the file doesn't explain why it disappeared."
+      },
+      {
+        "text": "Reformat the volume to make sure no malware is hiding anywhere on it",
+        "why": "Reformatting destroys the evidence you need to explain what happened."
+      }
+    ],
+    "explanation": "Inspect, compare and explain: state what behaviour the records support and what remains uncertain."
+  }
+]

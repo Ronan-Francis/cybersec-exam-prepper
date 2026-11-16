@@ -1,0 +1,426 @@
+[
+  {
+    "id": "5-05",
+    "chapter": 5,
+    "type": "matching",
+    "concepts": [
+      "intake"
+    ],
+    "prompt": "File intake: match each signature result to the suitable handling.",
+    "pairs": [
+      {
+        "item": "Signature matches the claimed file family",
+        "match": "Continue with structural parsing and policy checks"
+      },
+      {
+        "item": "Signature conflicts with the claimed type",
+        "match": "Hold, reject or quarantine under documented policy and record the reason"
+      },
+      {
+        "item": "Signature is unavailable or unrecognised",
+        "match": "Keep the result unknown and route it for further inspection"
+      }
+    ],
+    "explanation": "A known signature match is not a full safety check; an unknown signature is uncertainty, not proof of malware."
+  },
+  {
+    "id": "5-06",
+    "chapter": 5,
+    "type": "true-false",
+    "concepts": [
+      "intake"
+    ],
+    "prompt": "An uploaded .docx whose first bytes match the ZIP signature has been confirmed as a valid document.",
+    "answer": false,
+    "explanation": "A DOCX is a ZIP container, so the ZIP signature alone does not show it is a sound document. A parser checks the structure."
+  },
+  {
+    "id": "5-07",
+    "chapter": 5,
+    "type": "matching",
+    "concepts": [
+      "intake"
+    ],
+    "prompt": "Secure file intake uses several checks. Match each check to what it tells you.",
+    "pairs": [
+      {
+        "item": "File extension",
+        "match": "What type the uploader claims the file is"
+      },
+      {
+        "item": "File signature",
+        "match": "Whether the first bytes match a known format"
+      },
+      {
+        "item": "Parser",
+        "match": "Whether the file's internal structure is valid"
+      },
+      {
+        "item": "Hash comparison",
+        "match": "Whether the bytes match a trusted baseline"
+      }
+    ],
+    "explanation": "No single check is a full safety test. Log the decision and reason so an analyst can reconstruct the intake result later."
+  },
+  {
+    "id": "5-08",
+    "chapter": 5,
+    "type": "multiple-choice",
+    "concepts": [
+      "hashes",
+      "attribution"
+    ],
+    "prompt": "What does a SHA-256 mismatch against a trusted baseline establish?",
+    "options": [
+      {
+        "text": "The file’s bytes differ from that baseline",
+        "correct": true
+      },
+      {
+        "text": "Which user account last changed the file",
+        "why": "A hash compares bytes only; it records nothing about who made a change."
+      },
+      {
+        "text": "The time at which the file was last changed",
+        "why": "A hash has no time information; it can't tell you when a change happened."
+      },
+      {
+        "text": "That the file has been infected with malware",
+        "why": "Legitimate edits also change the hash; a mismatch shows difference, not infection."
+      }
+    ],
+    "explanation": "The hash alone does not identify the person, time or reason. The baseline and its source must be trustworthy."
+  },
+  {
+    "id": "5-09",
+    "chapter": 5,
+    "type": "multiple-response",
+    "concepts": [
+      "eventlogs"
+    ],
+    "prompt": "You expected a process-creation event in the Security log, but none is present. Which of these could explain the missing event? Select all that apply.",
+    "options": [
+      {
+        "text": "Process-creation auditing was not enabled",
+        "correct": true
+      },
+      {
+        "text": "Older records were overwritten under retention settings",
+        "correct": true
+      },
+      {
+        "text": "You lack permission to read the Security log",
+        "correct": true
+      },
+      {
+        "text": "The process definitely never ran",
+        "why": "A missing event describes the log, not reality; the process may have run without being recorded."
+      },
+      {
+        "text": "Event Viewer always records every action",
+        "why": "Event Viewer only shows what auditing captured and retention kept."
+      }
+    ],
+    "explanation": "\"No event found\" describes this collection. It is not proof an action never happened."
+  },
+  {
+    "id": "5-10",
+    "chapter": 5,
+    "type": "matching",
+    "concepts": [
+      "registry"
+    ],
+    "prompt": "Match each Registry location to what it holds.",
+    "pairs": [
+      {
+        "item": "HKCU",
+        "match": "Settings for the current user",
+        "why": "HKCU holds per-user settings."
+      },
+      {
+        "item": "HKLM",
+        "match": "Settings for the computer",
+        "why": "HKLM holds machine-wide settings."
+      },
+      {
+        "item": "Run key",
+        "match": "Values that can start programs at sign-in",
+        "why": "Run keys make programs start at sign-in."
+      }
+    ],
+    "explanation": "Run keys are a common place for software, legitimate or not, to make itself start automatically."
+  },
+  {
+    "id": "5-11",
+    "chapter": 5,
+    "type": "multiple-choice",
+    "concepts": [
+      "reasoning",
+      "attribution"
+    ],
+    "prompt": "A Windows record shows a particular USB storage device was connected to a laptop. What can that record support on its own?",
+    "options": [
+      {
+        "text": "That a device with that identifier was connected",
+        "correct": true
+      },
+      {
+        "text": "That a specific file was copied onto the device",
+        "why": "Connecting a device doesn't show any particular file was copied."
+      },
+      {
+        "text": "That company data was taken off the laptop by someone",
+        "why": "A connection record alone doesn't show data left the laptop."
+      },
+      {
+        "text": "The exact time of every later connection of the device",
+        "why": "Device records don't list the exact time of every later connection."
+      }
+    ],
+    "explanation": "Device history shows a device was seen. Correlate it with file-access, process and transfer records before claiming anything was copied."
+  },
+  {
+    "id": "5-12",
+    "chapter": 5,
+    "type": "ordering",
+    "concepts": [
+      "reasoning"
+    ],
+    "prompt": "Put these steps for analysing a security signal in order.",
+    "steps": [
+      "Observe: cite the exact file, event, account, path, source and UTC time",
+      "Interpret: state a hypothesis and why the combination is unusual",
+      "Test: check an independent source such as process, file or network evidence"
+    ],
+    "explanation": "Scripts make the first pass repeatable; the analyst still owns the conclusion."
+  },
+  {
+    "id": "5-13",
+    "chapter": 5,
+    "type": "multiple-choice",
+    "concepts": [
+      "eventlogs",
+      "timeline",
+      "reasoning"
+    ],
+    "prompt": "10:14 to 10:16 three failed network logons; 10:18 the same account and source succeeds; 10:21 a new startup entry; 10:24 a new USB device. What is the most defensible conclusion?",
+    "options": [
+      {
+        "text": "It warrants investigation, but proves neither malware nor data loss",
+        "correct": true
+      },
+      {
+        "text": "Malware was installed and data was then copied to the USB device",
+        "why": "The sequence is suspicious, but nothing here shows malware ran or data was copied."
+      },
+      {
+        "text": "It was a brute-force attack, followed by exfiltration of data to USB",
+        "why": "Failed then successful logons and a USB device fit an attack, but also innocent explanations."
+      },
+      {
+        "text": "The events are unrelated and normal, so no follow-up is needed",
+        "why": "The combination is unusual enough to check; dismissing it risks missing a real incident."
+      }
+    ],
+    "explanation": "Record exact entries, consider benign explanations, and identify the next record that could distinguish them."
+  },
+  {
+    "id": "5-14",
+    "chapter": 5,
+    "type": "multiple-response",
+    "concepts": [
+      "logging"
+    ],
+    "prompt": "Which fields should an application audit log record? Select all that apply.",
+    "options": [
+      {
+        "text": "An unambiguous UTC time",
+        "correct": true
+      },
+      {
+        "text": "The action and outcome",
+        "correct": true
+      },
+      {
+        "text": "The resource affected",
+        "correct": true
+      },
+      {
+        "text": "A correlation or request ID",
+        "correct": true
+      },
+      {
+        "text": "The submitted password",
+        "why": "Logging passwords creates a new store of secrets that anyone with log access can read."
+      },
+      {
+        "text": "The user's session token",
+        "why": "A session token in a log lets anyone who reads the log act as that user."
+      }
+    ],
+    "explanation": "Logs should help reconstruct events while avoiding passwords, session tokens and unnecessary personal data."
+  },
+  {
+    "id": "5-15",
+    "chapter": 5,
+    "type": "true-false",
+    "concepts": [
+      "registry"
+    ],
+    "prompt": "An unfamiliar value under a Run key is a reason to investigate, not proof that malware is present.",
+    "answer": true,
+    "explanation": "Legitimate software also uses Run keys. Investigate the path, signature, hash, signer, process telemetry and approved baseline."
+  },
+  {
+    "id": "5-17",
+    "chapter": 5,
+    "type": "multiple-choice",
+    "concepts": [
+      "registry"
+    ],
+    "prompt": "A Run key value exists on the machine today. What do you need before calling it \"new\"?",
+    "options": [
+      {
+        "text": "An earlier trusted snapshot to compare it with",
+        "correct": true
+      },
+      {
+        "text": "Nothing, since the value itself records when it was added",
+        "why": "A Registry value doesn't record when it was first added."
+      },
+      {
+        "text": "A failed-logon event from around the same time",
+        "why": "A failed logon doesn't tell you whether a Run key value is new."
+      },
+      {
+        "text": "The file extension of the program the value launches",
+        "why": "The launched program's extension says nothing about when the value appeared."
+      }
+    ],
+    "explanation": "A current value does not say when it first appeared."
+  },
+  {
+    "id": "5-19",
+    "chapter": 5,
+    "type": "multiple-choice",
+    "concepts": [
+      "timeline"
+    ],
+    "prompt": "What should you do before sorting records from different systems into a timeline?",
+    "options": [
+      {
+        "text": "Convert all timestamps to UTC and note their source",
+        "correct": true
+      },
+      {
+        "text": "Use each computer's local display time exactly as shown",
+        "why": "Local display times use different time zones and settings, so they can't be sorted together."
+      },
+      {
+        "text": "Use the time the evidence was extracted as the event time",
+        "why": "When evidence was extracted is not when the original event happened."
+      },
+      {
+        "text": "Discard any records that don't include an event ID number",
+        "why": "Records without an event ID can still be important evidence."
+      }
+    ],
+    "explanation": "Extraction time, file display time or a local clock is not automatically the time of the event."
+  },
+  {
+    "id": "5-20",
+    "chapter": 5,
+    "type": "multiple-choice",
+    "concepts": [
+      "timeline"
+    ],
+    "prompt": "Why record a timestamp's original value and offset as well as the converted UTC time?",
+    "options": [
+      {
+        "text": "So anyone can check the conversion against the time as it was recorded",
+        "correct": true
+      },
+      {
+        "text": "Because UTC times are less precise than the original local times",
+        "why": "UTC is just as precise; the point is preserving the original evidence."
+      },
+      {
+        "text": "Because local times sort more reliably when building a timeline",
+        "why": "UTC is what you sort by; local times with different offsets sort badly."
+      },
+      {
+        "text": "It is only needed when the evidence is going to be used in court",
+        "why": "Keeping the original matters for any analysis, not only court cases."
+      }
+    ],
+    "explanation": "Normalise before sorting, but keep the time as recorded and note clock uncertainty and source."
+  },
+  {
+    "id": "5-21",
+    "chapter": 5,
+    "type": "multiple-choice",
+    "concepts": [
+      "intake"
+    ],
+    "prompt": "A user uploads invoice.pdf, but its first bytes match the ZIP signature. What should the service do?",
+    "options": [
+      {
+        "text": "Hold or reject it under policy and record why",
+        "correct": true
+      },
+      {
+        "text": "Accept it, because the .pdf extension says it is a PDF",
+        "why": "The extension is a claim from the uploader; the bytes say otherwise."
+      },
+      {
+        "text": "Rename it to .zip so the type matches, then accept it",
+        "why": "Renaming to match hides the conflict instead of handling it under policy."
+      },
+      {
+        "text": "Label it as malware and report the user to security",
+        "why": "A type mismatch is a reason to hold the file, not proof it's malware or that the user is malicious."
+      }
+    ],
+    "explanation": "The extension is a user-supplied claim. A conflict between claimed type and signature is a reason to hold, not proof of malice."
+  },
+  {
+    "id": "5-22",
+    "chapter": 5,
+    "type": "true-false",
+    "concepts": [
+      "intake"
+    ],
+    "prompt": "If a file's signature is not recognised, the file should be treated as malware.",
+    "answer": false,
+    "explanation": "An unknown signature is uncertainty. Keep the result unknown and route it for further inspection rather than guessing."
+  },
+  {
+    "id": "5-23",
+    "chapter": 5,
+    "type": "multiple-choice",
+    "concepts": [
+      "eventlogs",
+      "reasoning"
+    ],
+    "prompt": "Several failed logons are followed by a successful logon for the same account. What does this show on its own?",
+    "options": [
+      {
+        "text": "Worth investigating, though it could just be someone mistyping a password",
+        "correct": true
+      },
+      {
+        "text": "A confirmed brute-force attack that has compromised the account",
+        "why": "A success after failures is consistent with an attack, but also with someone mistyping."
+      },
+      {
+        "text": "That malware is running on the machine and guessing passwords",
+        "why": "Failed logons don't show malware; people mistype passwords all the time."
+      },
+      {
+        "text": "Nothing worth recording, since failed logons are very common",
+        "why": "A run of failures followed by success is worth recording and checking."
+      }
+    ],
+    "explanation": "Observe, interpret, then test against an independent source such as process, endpoint or network evidence."
+  }
+]

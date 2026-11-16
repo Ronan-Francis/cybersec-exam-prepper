@@ -1,0 +1,448 @@
+[
+  {
+    "id": "3-01",
+    "chapter": 3,
+    "type": "multiple-choice",
+    "concepts": [
+      "stego"
+    ],
+    "prompt": "What does steganography mainly aim to protect?",
+    "options": [
+      {
+        "text": "The presence of the communication",
+        "correct": true
+      },
+      {
+        "text": "The contents of the message, using a key",
+        "why": "Protecting contents with a key is what cryptography does."
+      },
+      {
+        "text": "The integrity of the carrier file",
+        "why": "Steganography changes the carrier, so protecting the carrier's integrity is not its aim."
+      },
+      {
+        "text": "The identity of the sender",
+        "why": "Hiding the sender's identity is anonymity, not steganography."
+      }
+    ],
+    "explanation": "Cryptography asks \"What does this message say?\" and protects contents. Steganography asks \"Is there a message here?\" and conceals that communication exists."
+  },
+  {
+    "id": "3-02",
+    "chapter": 3,
+    "type": "true-false",
+    "concepts": [
+      "stego"
+    ],
+    "prompt": "Steganography on its own hides that a message exists, but does not protect what the message says.",
+    "answer": true,
+    "explanation": "It conceals presence, not meaning. To protect both, encrypt the message and then embed the ciphertext. Neither method guarantees the carrier will avoid detection."
+  },
+  {
+    "id": "3-03",
+    "chapter": 3,
+    "type": "multiple-choice",
+    "concepts": [
+      "lsb"
+    ],
+    "prompt": "Why can least-significant-bit (LSB) substitution be hard to spot by eye?",
+    "options": [
+      {
+        "text": "Each pixel's colour changes only very slightly",
+        "correct": true
+      },
+      {
+        "text": "It encrypts the image so the hidden part looks like noise",
+        "why": "LSB embedding doesn't encrypt the image; it makes tiny value changes that are hard to see."
+      },
+      {
+        "text": "It only works on black-and-white images, which hide changes",
+        "why": "LSB embedding works on colour images too; the changes are small, not limited to black and white."
+      },
+      {
+        "text": "It removes the image's metadata, which is where tools look",
+        "why": "LSB embedding changes pixel values, not metadata, and analysis tools look at the pixels."
+      }
+    ],
+    "explanation": "A tiny change per pixel is hard to see, but accumulated changes or statistical patterns can still be detected. Hard to see does not mean undetectable."
+  },
+  {
+    "id": "3-04",
+    "chapter": 3,
+    "type": "true-false",
+    "concepts": [
+      "lsb"
+    ],
+    "prompt": "If an image looks identical to the original, it has not been altered.",
+    "answer": false,
+    "explanation": "Visual similarity does not prove an image is safe or unchanged. LSB changes are designed to be hard to see."
+  },
+  {
+    "id": "3-06",
+    "chapter": 3,
+    "type": "multiple-choice",
+    "concepts": [
+      "stego"
+    ],
+    "prompt": "A sender encrypts a message and then hides the ciphertext inside an image. What does each step contribute?",
+    "options": [
+      {
+        "text": "Encryption hides the meaning; steganography hides that a message exists",
+        "correct": true
+      },
+      {
+        "text": "Encryption hides that a message exists; steganography hides the meaning",
+        "why": "This swaps the two: encryption protects meaning and steganography hides existence."
+      },
+      {
+        "text": "Both hide the meaning, so using the two together adds nothing new",
+        "why": "They do different jobs: one hides meaning, the other hides that a message exists."
+      },
+      {
+        "text": "Together they guarantee no analysis tool can ever detect the image",
+        "why": "Neither method guarantees the carrier will pass every analysis tool unnoticed."
+      }
+    ],
+    "explanation": "The methods can be combined, but neither guarantees the carrier will look normal to every analysis tool."
+  },
+  {
+    "id": "3-09",
+    "chapter": 3,
+    "type": "multiple-choice",
+    "concepts": [
+      "entropy"
+    ],
+    "prompt": "The bit sequence 010101... has equal counts of 0s and 1s. What does this illustrate?",
+    "options": [
+      {
+        "text": "Balanced counts don't mean unpredictable: the pattern is easy to guess",
+        "correct": true
+      },
+      {
+        "text": "Equal numbers of 0s and 1s show the sequence is cryptographically random",
+        "why": "Balanced counts don't show unpredictability; this sequence is completely predictable."
+      },
+      {
+        "text": "A repeating pattern like this one always means data is hidden inside",
+        "why": "A repeating pattern is just structure; it doesn't indicate hidden data."
+      },
+      {
+        "text": "Entropy can only be measured for text, so binary sequences don't count",
+        "why": "Entropy can be measured for any symbols, including bits."
+      }
+    ],
+    "explanation": "The result depends on which data and probability model are measured. A balanced but repeating pattern can still be predictable."
+  },
+  {
+    "id": "3-10",
+    "chapter": 3,
+    "type": "multiple-choice",
+    "concepts": [
+      "entropy"
+    ],
+    "prompt": "During file triage, part of a file has very high Shannon entropy. What is the most defensible conclusion?",
+    "options": [
+      {
+        "text": "It may be compressed, encrypted or packed, so investigate further",
+        "correct": true
+      },
+      {
+        "text": "It proves the file contains hidden steganographic data inside it",
+        "why": "High entropy is common in ordinary compressed or encrypted files; it doesn't prove hidden data."
+      },
+      {
+        "text": "It proves the file is malware, because normal files never look random",
+        "why": "Many legitimate files look random, such as zip archives and media."
+      },
+      {
+        "text": "It shows the data is safe, as it must come from a secure random generator",
+        "why": "A high entropy score says nothing about safety or where the data came from."
+      }
+    ],
+    "explanation": "Ordinary media and legitimate encrypted files can also have high entropy. A score does not identify the cause or prove a file is unsafe."
+  },
+  {
+    "id": "3-11",
+    "chapter": 3,
+    "type": "multiple-choice",
+    "concepts": [
+      "entropy"
+    ],
+    "prompt": "You need to generate password-reset tokens. What should you use?",
+    "options": [
+      {
+        "text": "The platform's cryptographically secure random generator",
+        "correct": true
+      },
+      {
+        "text": "A custom generator that scores highly on entropy tests",
+        "why": "A good score on entropy tests doesn't make a homemade generator unpredictable to attackers."
+      },
+      {
+        "text": "The current time, hashed with SHA-256 to look random",
+        "why": "Time values are guessable, and hashing a guessable input stays guessable."
+      },
+      {
+        "text": "`Math.random()`, seeded with the user's ID for uniqueness",
+        "why": "`Math.random()` isn't cryptographically secure, and a user ID is a guessable seed."
+      }
+    ],
+    "explanation": "A high measured entropy score does not establish cryptographic unpredictability. Do not build a security-sensitive generator yourself."
+  },
+  {
+    "id": "3-13",
+    "chapter": 3,
+    "type": "ordering",
+    "concepts": [
+      "stego",
+      "lsb"
+    ],
+    "prompt": "Put these steps of a steganographic exchange in order.",
+    "steps": [
+      "The sender chooses a message and a carrier file",
+      "The sender embeds the message into the carrier",
+      "The resulting stego object is sent or stored",
+      "The recipient extracts the hidden message"
+    ],
+    "explanation": "A payload may be compressed or encrypted before embedding, and some methods use a key. These are choices, not requirements of every method."
+  },
+  {
+    "id": "3-14",
+    "chapter": 3,
+    "type": "true-false",
+    "concepts": [
+      "lsb"
+    ],
+    "prompt": "Re-saving, resizing or converting an image may damage or remove an LSB payload.",
+    "answer": true,
+    "explanation": "The carrier's transformation history affects what survives and what an inspection can reveal."
+  },
+  {
+    "id": "3-15",
+    "chapter": 3,
+    "type": "multiple-response",
+    "concepts": [
+      "steganalysis"
+    ],
+    "prompt": "Which of these are useful steganalysis checks? Select all that apply.",
+    "options": [
+      {
+        "text": "Unexpected size, format or metadata changes",
+        "correct": true
+      },
+      {
+        "text": "Statistical patterns in pixel or signal distributions",
+        "correct": true
+      },
+      {
+        "text": "Visual or audio artefacts",
+        "correct": true
+      },
+      {
+        "text": "Unexpected upload, transfer or process access context",
+        "correct": true
+      },
+      {
+        "text": "A matching file extension proves the file is clean",
+        "why": "An extension is a user-supplied label; it can't prove a file is free of hidden data."
+      }
+    ],
+    "explanation": "Simple checks can miss sophisticated embedding. Comparing with a known original helps, but an original is often unavailable."
+  },
+  {
+    "id": "3-16",
+    "chapter": 3,
+    "type": "true-false",
+    "concepts": [
+      "steganalysis"
+    ],
+    "prompt": "A carrier file showing signs of hidden data is a lead to investigate rather than proof of malicious intent.",
+    "answer": true,
+    "explanation": "Steganography has legitimate uses such as watermarking and protecting people at risk. A suspicious carrier is an investigation lead."
+  },
+  {
+    "id": "3-17",
+    "chapter": 3,
+    "type": "multiple-choice",
+    "concepts": [
+      "ads"
+    ],
+    "prompt": "In the path `invoice.pdf:Zone.Identifier`, what does the colon introduce?",
+    "options": [
+      {
+        "text": "A named stream attached to the same file, not a separate file",
+        "correct": true
+      },
+      {
+        "text": "A second, separate file stored in the same folder",
+        "why": "The stream belongs to invoice.pdf itself; no separate file is created."
+      },
+      {
+        "text": "A drive letter, as at the start of a Windows path",
+        "why": "Drive letters come at the start of a path, before the folder names, not after a filename."
+      },
+      {
+        "text": "A permission flag that controls who can open it",
+        "why": "NTFS permissions are stored separately; the colon names a stream."
+      }
+    ],
+    "explanation": "The colon introduces a stream name. It does not create a second, ordinary file."
+  },
+  {
+    "id": "3-18",
+    "chapter": 3,
+    "type": "multiple-choice",
+    "concepts": [
+      "ads"
+    ],
+    "prompt": "What does Windows typically use the `Zone.Identifier` stream for?",
+    "options": [
+      {
+        "text": "Recording download-origin information",
+        "correct": true
+      },
+      {
+        "text": "Storing the file's encryption key",
+        "why": "Encryption keys aren't stored in Zone.Identifier; it records where a file came from."
+      },
+      {
+        "text": "Holding a backup of the file",
+        "why": "It doesn't hold a backup; it's a small note about origin."
+      },
+      {
+        "text": "Logging every program that opened the file",
+        "why": "It doesn't log program access; it marks download origin."
+      }
+    ],
+    "explanation": "It can record that a file came from an Internet zone. Its presence alone is not suspicious."
+  },
+  {
+    "id": "3-19",
+    "chapter": 3,
+    "type": "true-false",
+    "concepts": [
+      "ads"
+    ],
+    "prompt": "An alternate data stream runs its contents automatically when the file is opened.",
+    "answer": false,
+    "explanation": "A named stream does not execute itself. Another program or action must read or execute its content."
+  },
+  {
+    "id": "3-20",
+    "chapter": 3,
+    "type": "multiple-response",
+    "concepts": [
+      "ads"
+    ],
+    "prompt": "Which statements about NTFS alternate data streams are correct? Select all that apply.",
+    "options": [
+      {
+        "text": "A normal hash of a file covers only its default-stream bytes",
+        "correct": true
+      },
+      {
+        "text": "Copying a file to another file system may not preserve its named streams",
+        "correct": true
+      },
+      {
+        "text": "Tools can list a file's streams so each one can be inspected",
+        "correct": true
+      },
+      {
+        "text": "A named stream's presence alone shows the file is malicious",
+        "why": "Windows itself creates named streams, for example to mark downloaded files, so presence alone proves nothing."
+      },
+      {
+        "text": "FAT32 and exFAT also support named streams",
+        "why": "Named streams are an NTFS feature; FAT32 and exFAT don't support them."
+      }
+    ],
+    "explanation": "Only NTFS supports named streams among the three. Enumerate streams explicitly when you need the complete file object."
+  },
+  {
+    "id": "3-22",
+    "chapter": 3,
+    "type": "matching",
+    "concepts": [
+      "steganalysis",
+      "ads"
+    ],
+    "prompt": "Steganography or alternate data stream? Match each statement.",
+    "pairs": [
+      {
+        "item": "Embeds data within a carrier's content or representation",
+        "match": "Steganography",
+        "why": "Steganography hides data inside the carrier itself."
+      },
+      {
+        "item": "Attaches another named stream to an NTFS file object",
+        "match": "Alternate data stream",
+        "why": "Named streams are an NTFS feature attached to a file."
+      },
+      {
+        "item": "Found by listing all the streams attached to a file",
+        "match": "Alternate data stream",
+        "why": "Streams show up when you list them; steganography doesn't."
+      },
+      {
+        "item": "Looked for through statistical patterns and visual or audio artefacts",
+        "match": "Steganography",
+        "why": "Steganalysis looks for statistical and visual traces."
+      },
+      {
+        "item": "Legitimate use: copyright watermarking",
+        "match": "Steganography",
+        "why": "Watermarking hides marks inside the content."
+      },
+      {
+        "item": "Legitimate use: recording that a file came from an Internet zone",
+        "match": "Alternate data stream",
+        "why": "Windows records download origin in a named stream."
+      }
+    ],
+    "explanation": "Steganography changes a carrier's representation; ADS adds a named stream to a file. The defensive questions differ accordingly."
+  },
+  {
+    "id": "3-23",
+    "chapter": 3,
+    "type": "short-answer",
+    "concepts": [
+      "steganalysis"
+    ],
+    "prompt": "What is the term for analysis that looks for evidence a carrier file contains hidden data?",
+    "accept": [
+      "steganalysis",
+      "stego analysis",
+      "stego-analysis"
+    ],
+    "explanation": "Steganalysis combines file properties, statistical patterns, artefacts and context. One signal is rarely enough to prove intent."
+  },
+  {
+    "id": "3-24",
+    "chapter": 3,
+    "type": "multiple-choice",
+    "concepts": [
+      "ads"
+    ],
+    "prompt": "An upload scanner reads only the default stream of files on an NTFS volume. What risk does this create?",
+    "options": [
+      {
+        "text": "Content hidden in other named streams could be missed",
+        "correct": true
+      },
+      {
+        "text": "The scanner will run too slowly on large NTFS volumes",
+        "why": "The risk isn't speed; content in other named streams is never inspected."
+      },
+      {
+        "text": "The scanner will flag every NTFS file as malicious by mistake",
+        "why": "Reading only the default stream would miss things, not flag every file."
+      },
+      {
+        "text": "None, because an NTFS file only ever has one stream",
+        "why": "NTFS files can have several named streams alongside the default one."
+      }
+    ],
+    "explanation": "Know which file content your application, scanner and storage tools actually inspect, and apply checks to the whole file object."
+  }
+]

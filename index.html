@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-IE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSSP Exam Prep</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/question.css">
+  <link rel="stylesheet" href="css/quiz.css">
+  <link rel="stylesheet" href="css/infinite.css">
+  <link rel="stylesheet" href="css/study.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body data-mode="quiz">
+
+<header class="masthead">
+  <div class="mast-inner">
+    <div>
+      <p class="kicker">ATU · COMP09031 · Cybersecurity and Secure Programming</p>
+      <h1>CSSP Exam Prep</h1>
+    </div>
+    <dl class="stats">
+      <div><dt>Questions</dt><dd id="statQuestions">0</dd></div>
+      <div><dt>Chapters</dt><dd id="statChapters">0</dd></div>
+      <div><dt>Question types</dt><dd id="statTypes">0</dd></div>
+    </dl>
+  </div>
+  <nav class="modetabs" aria-label="Mode">
+    <button type="button" data-mode="quiz" aria-pressed="true"><b>Quiz</b><small>Practice or exam attempts</small></button>
+    <button type="button" data-mode="infinite" aria-pressed="false"><b>Infinite</b><small>Follows what you get wrong</small></button>
+    <button type="button" data-mode="study" aria-pressed="false"><b>Study</b><small>Concept map and answers</small></button>
+  </nav>
+</header>
+
+<div class="workspace">
+  <aside class="side" aria-label="Side panel">
+
+    <!-- Infinite mode fills this panel (js/modes/infinite/infinite-side-panel.js). -->
+    <section class="card inf-card" id="infiniteSide" hidden aria-label="Infinite session"></section>
+
+    <!-- Quiz mode: navigation grid (js/modes/quiz/quiz-nav.js) and setup form (js/modes/quiz/quiz-setup.js). -->
+    <div class="side-group" id="quizSide" hidden>
+      <section class="card nav-card" aria-labelledby="navh">
+        <div class="nav-head"><h2 id="navh">Quiz navigation</h2><span class="timer" id="timer" aria-label="Time elapsed">00:00</span></div>
+        <div class="navmeta"><span class="mode-tag" id="modeTag">Practice mode</span><span id="navmeta"></span></div>
+        <div class="navgrid" id="navgrid"></div>
+        <ul class="legend" aria-label="Legend">
+          <li><i class="answered"></i>Answered</li>
+          <li><i class="good"></i>Correct</li>
+          <li><i class="part"></i>Partial</li>
+          <li><i class="bad"></i>Incorrect</li>
+        </ul>
+        <button type="button" class="btn primary block" id="finishBtn">Finish attempt…</button>
+      </section>
+
+      <details class="card setup" id="setup" open>
+        <summary>New quiz</summary>
+        <form id="setupForm" novalidate>
+          <fieldset>
+            <legend>Mode</legend>
+            <div class="seg">
+              <label><input type="radio" name="style" value="practice" checked><b>Practice</b><small>Check each answer as you go</small></label>
+              <label><input type="radio" name="style" value="exam"><b>Exam</b><small>Marked when you finish</small></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Chapters <button type="button" class="tiny" data-all="ch">All</button><button type="button" class="tiny" data-none="ch">None</button></legend>
+            <div class="chips" id="chapterChips"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Question types <button type="button" class="tiny" data-all="ty">All</button><button type="button" class="tiny" data-none="ty">None</button></legend>
+            <div class="chips" id="typeChips"></div>
+          </fieldset>
+          <div class="field">
+            <label for="count">Number of questions</label>
+            <select id="count">
+              <option value="10">10</option>
+              <option value="20" selected>20</option>
+              <option value="30">30</option>
+              <option value="50">50</option>
+              <option value="all">All that match</option>
+            </select>
+          </div>
+          <label class="checkline"><input type="checkbox" id="missed"><span>Only questions I got wrong before <span class="muted" id="missedCount"></span></span></label>
+          <p class="poolinfo" id="poolInfo" aria-live="polite"></p>
+          <button type="submit" class="btn primary block">Start quiz</button>
+        </form>
+        <div class="presets">
+          <button type="button" class="btn ghost block" data-preset="mock">Mock exam: 30 questions, marked at the end</button>
+          <button type="button" class="btn ghost block" data-preset="quick">Quick 10, practice mode</button>
+        </div>
+      </details>
+    </div>
+  </aside>
+
+  <!-- The active mode draws its page here. -->
+  <main class="stage" id="stage">
+    <article class="qcard">
+      <p class="muted">Loading questions… If this message stays, open the site through a web server (run <code>npm start</code>), not straight from a file.</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

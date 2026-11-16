@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Cybersecurity foundations",
+    "short": "Foundations",
+    "file": "questions/01-foundations.json"
+  },
+  {
+    "id": 2,
+    "name": "Threat modelling",
+    "short": "Threat modelling",
+    "file": "questions/02-threat-modelling.json"
+  },
+  {
+    "id": 3,
+    "name": "Data hiding",
+    "short": "Data hiding",
+    "file": "questions/03-data-hiding.json"
+  },
+  {
+    "id": 4,
+    "name": "OWASP Top 10:2025",
+    "short": "OWASP Top 10",
+    "file": "questions/04-owasp-top-10.json"
+  },
+  {
+    "id": 5,
+    "name": "Cybersecurity signals",
+    "short": "Signals",
+    "file": "questions/05-signals.json"
+  },
+  {
+    "id": 6,
+    "name": "NTFS security analysis",
+    "short": "NTFS",
+    "file": "questions/06-ntfs.json"
+  },
+  {
+    "id": 7,
+    "name": "Information disclosure and safe failure",
+    "short": "Disclosure",
+    "file": "questions/07-disclosure.json"
+  },
+  {
+    "id": 8,
+    "name": "Malware and ransomware",
+    "short": "Malware",
+    "file": "questions/08-malware.json"
+  },
+  {
+    "id": 9,
+    "name": "Authentication and sessions",
+    "short": "Authentication",
+    "file": "questions/09-authentication.json"
+  },
+  {
+    "id": 10,
+    "name": "Cookies, sessions and access control",
+    "short": "Cookies & access",
+    "file": "questions/10-cookies-and-access.json"
+  }
+]

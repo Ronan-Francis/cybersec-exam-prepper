@@ -1,0 +1,489 @@
+[
+  {
+    "id": "10-01",
+    "chapter": 10,
+    "type": "ordering",
+    "concepts": [
+      "sessions"
+    ],
+    "prompt": "Order the steps from password to session.",
+    "steps": [
+      "The customer submits credentials over HTTPS",
+      "The server verifies them and creates a session record",
+      "A Set-Cookie header gives the browser an opaque session ID",
+      "A later request carries the ID in its Cookie header",
+      "The server resolves and validates the session, then checks permission"
+    ],
+    "explanation": "Later requests use the session ID rather than resending the password. The ID does not let the browser choose its own role."
+  },
+  {
+    "id": "10-02",
+    "chapter": 10,
+    "type": "matching",
+    "concepts": [
+      "cookies"
+    ],
+    "prompt": "Match each cookie setting to its purpose.",
+    "pairs": [
+      {
+        "item": "Secure",
+        "match": "Send the cookie only over HTTPS"
+      },
+      {
+        "item": "HttpOnly",
+        "match": "Stop ordinary page JavaScript reading the cookie"
+      },
+      {
+        "item": "SameSite=Lax",
+        "match": "Limit when the cookie is sent with requests started by other sites"
+      }
+    ],
+    "explanation": "Cookie settings reduce exposure of the session ID. They do not replace the server's access checks."
+  },
+  {
+    "id": "10-04",
+    "chapter": 10,
+    "type": "multiple-choice",
+    "concepts": [
+      "objectauth"
+    ],
+    "prompt": "Each account has an `id` and a `role`. Each purchase has an `ownerId`. Which function body correctly implements \"the owner, or any support staff member, may view a purchase\"?",
+    "options": [
+      {
+        "text": "`if (!account || !purchase) return false; return account.id === purchase.ownerId || account.role === \"support\";`",
+        "correct": true
+      },
+      {
+        "text": "`if (!account || !purchase) return false; return account.id === purchase.id || account.role === \"support\";`",
+        "why": "`purchase.id` is the order's own ID, not the owner's, so this compares the wrong values."
+      },
+      {
+        "text": "`if (!account || !purchase) return false; return account.id === purchase.ownerId && account.role === \"support\";`",
+        "why": "`&&` requires the person to be both the owner and support, so owners are refused."
+      },
+      {
+        "text": "`return Boolean(account && purchase);`",
+        "why": "This only checks that both records exist; anyone signed in could view any purchase."
+      }
+    ],
+    "explanation": "`purchase.id` is the order's own ID, not the owner's, so comparing it with `account.id` is wrong. Using `&&` would require the requester to be both the owner and support. `Boolean(account && purchase)` only checks that both records exist."
+  },
+  {
+    "id": "10-05",
+    "chapter": 10,
+    "type": "multiple-choice",
+    "concepts": [
+      "objectauth"
+    ],
+    "prompt": "This function decides whether an account may view a purchase. What happens if the `||` on the last line is replaced with `&&`?",
+    "code": "function canViewPurchase(account, purchase) {\n  if (!account || !purchase) return false;\n  return account.id === purchase.ownerId || account.role === \"support\";\n}",
+    "options": [
+      {
+        "text": "Only someone who is both the owner and a support staff member gets access",
+        "correct": true
+      },
+      {
+        "text": "Nothing changes, because both operators check the same things",
+        "why": "`&&` and `||` differ: `||` needs either condition, `&&` needs both."
+      },
+      {
+        "text": "Everyone is allowed, because && is less strict than || here",
+        "why": "`&&` is stricter, not looser: both conditions must be true."
+      },
+      {
+        "text": "Owners are allowed, but support staff are always denied",
+        "why": "Owners are the ones refused: an owner who isn't also support staff fails, because `&&` needs both conditions."
+      }
+    ],
+    "explanation": "`||` allows either condition: the owner, or support staff. `&&` would require both at once, so ordinary owners and support staff viewing other people's purchases would all be denied."
+  },
+  {
+    "id": "10-06",
+    "chapter": 10,
+    "type": "matching",
+    "concepts": [
+      "objectauth"
+    ],
+    "prompt": "Horizontal or vertical access failure?",
+    "pairs": [
+      {
+        "item": "One customer reads another customer's order",
+        "match": "Horizontal",
+        "why": "Same privilege level, someone else's data."
+      },
+      {
+        "item": "A customer issues a refund, which only support staff may do",
+        "match": "Vertical",
+        "why": "Gaining a function reserved for a higher role."
+      },
+      {
+        "item": "One customer edits another customer's delivery address",
+        "match": "Horizontal",
+        "why": "Same privilege level, someone else's data."
+      },
+      {
+        "item": "A customer opens an admin-only export page",
+        "match": "Vertical",
+        "why": "Gaining a function reserved for a higher role."
+      }
+    ],
+    "explanation": "Horizontal: same privilege level, someone else's data. Vertical: gaining a higher-privilege function."
+  },
+  {
+    "id": "10-07",
+    "chapter": 10,
+    "type": "matching",
+    "concepts": [
+      "objectauth"
+    ],
+    "prompt": "An online shop's policy: a customer may read only their own orders. Support staff may read any order and may issue refunds. Customers may not issue refunds, even on their own orders. Requests without a valid session are refused. Sam owns order 101 and Priya owns order 102. Should each request be allowed or denied?",
+    "pairs": [
+      {
+        "item": "Sam (customer) reads Priya's order 102",
+        "match": "Deny",
+        "why": "Customers may read only their own orders."
+      },
+      {
+        "item": "Priya (customer) reads her own order 102",
+        "match": "Allow",
+        "why": "Owners may read their own orders."
+      },
+      {
+        "item": "Priya (customer) issues a refund on her own order 102",
+        "match": "Deny",
+        "why": "Refunds are support-only, even for the owner."
+      },
+      {
+        "item": "A support staff member reads Sam's order 101",
+        "match": "Allow",
+        "why": "Support staff may read any order."
+      },
+      {
+        "item": "A support staff member issues a refund on Sam's order 101",
+        "match": "Allow",
+        "why": "Support staff may issue refunds."
+      },
+      {
+        "item": "A request with no valid session reads order 101",
+        "match": "Deny",
+        "why": "No valid session means no identity to check, so refuse."
+      }
+    ],
+    "explanation": "Reading depends on ownership or the support role. Issuing a refund is a separate, support-only action, so owning the order is not enough. With no valid session there is no identity to check, so the request is refused."
+  },
+  {
+    "id": "10-08",
+    "chapter": 10,
+    "type": "true-false",
+    "concepts": [
+      "objectauth"
+    ],
+    "prompt": "Hiding the refund button from customers prevents them issuing refunds.",
+    "answer": false,
+    "explanation": "A direct request to the refund endpoint still works unless the server checks the requester's role before changing anything."
+  },
+  {
+    "id": "10-09",
+    "chapter": 10,
+    "type": "true-false",
+    "concepts": [
+      "objectauth"
+    ],
+    "prompt": "Replacing sequential document IDs with random values would, on its own, fix a missing access check.",
+    "answer": false,
+    "explanation": "Less predictable IDs reduce guessing, but known IDs still need a permission check for each requested document."
+  },
+  {
+    "id": "10-10",
+    "chapter": 10,
+    "type": "missing-words",
+    "concepts": [
+      "samesite"
+    ],
+    "prompt": "A user is signed in to the shop. For each cross-site case, does the browser send the shop session cookie? (Assume the SameSite value is set explicitly.)",
+    "text": "A link on another site takes the user to the shop with a normal top-level GET. With SameSite=Strict the cookie is [[not sent|sent]]. With SameSite=Lax it is [[sent|not sent]]. Another site submits a form POST to the shop. With SameSite=Lax the cookie is [[not sent|sent]]. Another site shows the shop inside an iframe. With SameSite=Lax the cookie is [[not sent|sent]].",
+    "explanation": "With None; Secure, cross-site POST and iframe requests are eligible, subject to browser third-party-cookie restrictions."
+  },
+  {
+    "id": "10-11",
+    "chapter": 10,
+    "type": "matching",
+    "concepts": [
+      "samesite"
+    ],
+    "prompt": "Compare each URL with https://shop.example.com. Origin = scheme + host + port. Site = scheme + registrable domain (example.com). Match each URL to its relationship.",
+    "pairs": [
+      {
+        "item": "https://shop.example.com/orders/101",
+        "match": "Same origin",
+        "why": "Only the path differs, so scheme, host and port all match."
+      },
+      {
+        "item": "https://help.example.com",
+        "match": "Same site, different origin",
+        "why": "A different subdomain changes the origin but keeps the registrable domain."
+      },
+      {
+        "item": "https://shop.example.com:8443",
+        "match": "Same site, different origin",
+        "why": "A different port changes the origin but not the site."
+      },
+      {
+        "item": "http://shop.example.com",
+        "match": "Different site (the scheme changed)",
+        "why": "Changing HTTPS to HTTP changes the scheme, so it's a different site."
+      }
+    ],
+    "explanation": "A different path keeps the origin. A different subdomain or port changes the origin but keeps the site. Changing HTTPS to HTTP changes the schemeful site."
+  },
+  {
+    "id": "10-12",
+    "chapter": 10,
+    "type": "true-false",
+    "concepts": [
+      "cookies"
+    ],
+    "prompt": "HttpOnly stops page scripts reading the cookie, but it does not prevent cross-site scripting.",
+    "answer": true,
+    "explanation": "HttpOnly stops ordinary page JavaScript reading the cookie, but injected script can still make the browser send authenticated requests."
+  },
+  {
+    "id": "10-13",
+    "chapter": 10,
+    "type": "multiple-choice",
+    "concepts": [
+      "samesite"
+    ],
+    "prompt": "What is cross-site request forgery (CSRF)?",
+    "options": [
+      {
+        "text": "Another site makes the browser send an unwanted request using the user's cookie",
+        "correct": true
+      },
+      {
+        "text": "An attacker steals the user's session cookie using script injected into the page",
+        "why": "Stealing a cookie with injected script is XSS, not CSRF."
+      },
+      {
+        "text": "A signed-in user changes an ID in the URL to read someone else's record",
+        "why": "Changing an ID to read another record is broken access control."
+      },
+      {
+        "text": "A server sends back more fields in its response than the page actually needs",
+        "why": "Returning extra fields is excessive data exposure."
+      }
+    ],
+    "explanation": "Use framework CSRF tokens and origin checks, keep state changes off GET, and treat SameSite as one layer. Sibling domains can be same-site, and CORS is not a universal CSRF defence."
+  },
+  {
+    "id": "10-16",
+    "chapter": 10,
+    "type": "matching",
+    "concepts": [
+      "minimise",
+      "objectauth"
+    ],
+    "prompt": "Match each OWASP API authorisation failure to the question it fails to answer.",
+    "pairs": [
+      {
+        "item": "Broken Object Level Authorization (BOLA / IDOR)",
+        "match": "May this user access this particular record?"
+      },
+      {
+        "item": "Broken Object Property Level Authorization (BOPLA)",
+        "match": "Which fields of the record may this user read or change?"
+      },
+      {
+        "item": "Broken Function Level Authorization",
+        "match": "May this user perform this action, such as issuing a refund?"
+      }
+    ],
+    "explanation": "Check the record, the fields and the action separately, on the server."
+  },
+  {
+    "id": "10-17",
+    "chapter": 10,
+    "type": "multiple-choice",
+    "concepts": [
+      "authnz",
+      "objectauth"
+    ],
+    "prompt": "A customer who owns order 101 changes the request /api/orders/101 to /api/orders/102. Input validation confirms 102 is a correctly formed order number. What does that establish?",
+    "options": [
+      {
+        "text": "Only that the ID is well formed, not that access is allowed",
+        "correct": true
+      },
+      {
+        "text": "That the customer is allowed to read order 102 as well",
+        "why": "A well-formed ID doesn't mean the customer owns or may read that order."
+      },
+      {
+        "text": "That the request is a cross-site request forgery attack",
+        "why": "Changing an ID yourself isn't a cross-site request; it's an access control test."
+      },
+      {
+        "text": "That order 102 must belong to the same customer as 101",
+        "why": "Order numbers don't imply ownership; 102 belongs to whoever placed it."
+      }
+    ],
+    "explanation": "An identifier tells the server which object is targeted, not who may access it."
+  },
+  {
+    "id": "10-19",
+    "chapter": 10,
+    "type": "multiple-choice",
+    "concepts": [
+      "cookies"
+    ],
+    "prompt": "Which cookie settings are a sensible starting point for an ordinary shop's session cookie?",
+    "options": [
+      {
+        "text": "Secure; HttpOnly; SameSite=Lax",
+        "correct": true
+      },
+      {
+        "text": "SameSite=None without Secure",
+        "why": "SameSite=None requires Secure, and without it the browser rejects the cookie."
+      },
+      {
+        "text": "HttpOnly only",
+        "why": "Without Secure the cookie can travel over HTTP, and without SameSite it is sent cross-site more freely."
+      },
+      {
+        "text": "Secure; SameSite=None; Domain=.example",
+        "why": "None with a broad Domain widens exposure; an ordinary shop doesn't need cross-site sending."
+      }
+    ],
+    "explanation": "Lax lets a normal incoming link keep the session. Consider Strict for tighter isolation, and None; Secure only for a genuine cross-site need."
+  },
+  {
+    "id": "10-20",
+    "chapter": 10,
+    "type": "multiple-choice",
+    "concepts": [
+      "objectauth"
+    ],
+    "prompt": "A refund endpoint only checks that the requester is signed in. What is the consequence?",
+    "options": [
+      {
+        "text": "Every authenticated customer could issue refunds",
+        "correct": true
+      },
+      {
+        "text": "Only support staff can issue refunds, as intended",
+        "why": "Nothing restricts refunds to support; any signed-in customer passes the check."
+      },
+      {
+        "text": "No one at all can issue refunds, including support",
+        "why": "Signed-in users can issue refunds, so it isn't nobody."
+      },
+      {
+        "text": "Refunds are limited to the customer who owns the order",
+        "why": "The check doesn't look at ownership or role at all."
+      }
+    ],
+    "explanation": "Check `account.role === \"support\"` from trusted records before recording a refund or changing the order."
+  },
+  {
+    "id": "10-21",
+    "chapter": 10,
+    "type": "multiple-choice",
+    "concepts": [
+      "objectauth"
+    ],
+    "prompt": "You want a test that proves the permission check, and not some other rule, is what stops a customer issuing a refund. Which order should the test use?",
+    "options": [
+      {
+        "text": "A paid order that is still eligible for a refund",
+        "correct": true
+      },
+      {
+        "text": "An order that has already been refunded in full",
+        "why": "Already-refunded orders are blocked by a different rule, so the test proves nothing about permissions."
+      },
+      {
+        "text": "An order that the customer has not paid for yet",
+        "why": "Unpaid orders can't be refunded anyway, so another rule causes the refusal."
+      },
+      {
+        "text": "An order that was cancelled before it was shipped",
+        "why": "Cancelled orders are blocked by a different rule, hiding whether the permission check works."
+      }
+    ],
+    "explanation": "With the other orders, a different rule (duplicate refund, nothing paid, cancelled) could cause the refusal, so the test would not show the permission check works. A denial must leave order and financial records unchanged."
+  },
+  {
+    "id": "10-24",
+    "chapter": 10,
+    "type": "multiple-response",
+    "concepts": [
+      "sessions"
+    ],
+    "prompt": "A valid session ID works like a password. Where should it NOT appear? Select all that apply.",
+    "options": [
+      {
+        "text": "In URLs",
+        "correct": true
+      },
+      {
+        "text": "In shared screenshots",
+        "correct": true
+      },
+      {
+        "text": "In application logs",
+        "correct": true
+      },
+      {
+        "text": "In the browser's Cookie request header",
+        "why": "The Cookie header is the intended way for the session ID to travel."
+      }
+    ],
+    "explanation": "The Cookie header is how the session ID is meant to travel. Keep it out of URLs, screenshots and logs, and renew it when authentication or privilege changes."
+  },
+  {
+    "id": "10-25",
+    "chapter": 10,
+    "type": "short-answer",
+    "concepts": [
+      "samesite"
+    ],
+    "prompt": "What is the attack called when another site tricks a signed-in user's browser into sending an unintended state-changing request?",
+    "accept": [
+      "csrf",
+      "cross-site request forgery",
+      "cross site request forgery",
+      "xsrf",
+      "request forgery"
+    ],
+    "explanation": "Use framework CSRF tokens, origin checks where appropriate, and keep state changes off GET. SameSite is a useful extra layer."
+  },
+  {
+    "id": "10-26",
+    "chapter": 10,
+    "type": "multiple-choice",
+    "concepts": [
+      "samesite"
+    ],
+    "prompt": "A shop's session cookie uses SameSite=Lax. Why should its refund endpoint still not accept GET requests?",
+    "options": [
+      {
+        "text": "Lax still sends the cookie when a user follows a normal link from another site",
+        "correct": true
+      },
+      {
+        "text": "Lax blocks every GET request, so the refund endpoint would never work",
+        "why": "Lax doesn't block GET; it sends the cookie on normal top-level links."
+      },
+      {
+        "text": "GET requests can't carry cookies, so the user wouldn't be signed in",
+        "why": "GET requests can carry cookies, which is exactly the risk."
+      },
+      {
+        "text": "Refund details are too large to fit into the URL of a GET request",
+        "why": "Size isn't the reason; the danger is a link triggering a refund."
+      }
+    ],
+    "explanation": "Keep changes off GET and keep CSRF protection for state-changing requests."
+  }
+]

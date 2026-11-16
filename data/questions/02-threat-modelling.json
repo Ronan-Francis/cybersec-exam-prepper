@@ -1,0 +1,525 @@
+[
+  {
+    "id": "2-01",
+    "chapter": 2,
+    "type": "ordering",
+    "concepts": [
+      "fourq"
+    ],
+    "prompt": "Put Shostack's Four Questions in order.",
+    "steps": [
+      "What are we working on?",
+      "What can go wrong?",
+      "What are we going to do about it?",
+      "Did we do a good enough job?"
+    ],
+    "explanation": "Scope, threats, responses, review. The questions form a cycle: a design change can create new threats, so review the model again."
+  },
+  {
+    "id": "2-02",
+    "chapter": 2,
+    "type": "matching",
+    "concepts": [
+      "stride"
+    ],
+    "prompt": "Match each STRIDE category to the security property it threatens.",
+    "pairs": [
+      {
+        "item": "Spoofing",
+        "match": "Authentication"
+      },
+      {
+        "item": "Tampering",
+        "match": "Integrity"
+      },
+      {
+        "item": "Repudiation",
+        "match": "Accountability"
+      },
+      {
+        "item": "Information disclosure",
+        "match": "Confidentiality"
+      },
+      {
+        "item": "Denial of service",
+        "match": "Availability"
+      },
+      {
+        "item": "Elevation of privilege",
+        "match": "Authorisation"
+      }
+    ],
+    "explanation": "Each STRIDE letter maps to the property it undermines. Repudiation is about missing reliable evidence of who did what."
+  },
+  {
+    "id": "2-03",
+    "chapter": 2,
+    "type": "matching",
+    "concepts": [
+      "stride"
+    ],
+    "prompt": "Classify each threat using STRIDE.",
+    "pairs": [
+      {
+        "item": "Someone reuses a stolen session token and is treated as the account holder",
+        "match": "Spoofing",
+        "why": "Using a stolen token is pretending to be someone else."
+      },
+      {
+        "item": "A user changes an account ID in a request and alters the data in another person’s record",
+        "match": "Tampering",
+        "why": "Changing another person's data is tampering."
+      },
+      {
+        "item": "An administrator deletes a record and no trustworthy audit event exists to show who did it",
+        "match": "Repudiation",
+        "why": "No trustworthy record lets someone deny the action."
+      },
+      {
+        "item": "Changing an object ID in a URL lets a user view another user’s private record",
+        "match": "Information disclosure",
+        "why": "Viewing another user's private record is disclosure."
+      },
+      {
+        "item": "Repeated large uploads fill storage and block legitimate submissions",
+        "match": "Denial of service",
+        "why": "Filling storage blocks legitimate users."
+      },
+      {
+        "item": "A user submits an \"admin\" role value and gains access to an administrator-only function",
+        "match": "Elevation of privilege",
+        "why": "Gaining an admin-only function is elevation of privilege."
+      }
+    ],
+    "explanation": "A STRIDE category is a prompt, not a threat statement, and several categories can apply to one component or flow."
+  },
+  {
+    "id": "2-04",
+    "chapter": 2,
+    "type": "true-false",
+    "concepts": [
+      "stride"
+    ],
+    "prompt": "STRIDE assigns likelihood and impact to each threat so you can prioritise them.",
+    "answer": false,
+    "explanation": "STRIDE helps identify threat types. Likelihood, impact and priority need a separate risk assessment after you write a concrete threat."
+  },
+  {
+    "id": "2-05",
+    "chapter": 2,
+    "type": "multiple-choice",
+    "concepts": [
+      "responses"
+    ],
+    "prompt": "Which is the best threat statement?",
+    "options": [
+      {
+        "text": "An authenticated user changes the record ID in a request and reads another user's profile.",
+        "correct": true
+      },
+      {
+        "text": "The profile API might have an access control problem that attackers could exploit somehow.",
+        "why": "This is vague: it doesn't name who acts, what they do, or what the consequence is."
+      },
+      {
+        "text": "Attackers are a serious risk to the profile endpoint and its users' data in general.",
+        "why": "This names a general risk but no specific actor, action or consequence, so you can't choose a response."
+      },
+      {
+        "text": "Broken access control is present in the profile endpoint of the web application.",
+        "why": "This names a weakness category, not the specific failure, so it's hard to test or fix."
+      }
+    ],
+    "explanation": "A useful statement names actor + action + target + consequence. \"Broken access control\" names a weakness category, not the specific failure, so it is harder to choose a response."
+  },
+  {
+    "id": "2-06",
+    "chapter": 2,
+    "type": "matching",
+    "concepts": [
+      "responses"
+    ],
+    "prompt": "Match each threat response to its description.",
+    "pairs": [
+      {
+        "item": "Eliminate",
+        "match": "Remove the feature, path or assumption that creates the threat"
+      },
+      {
+        "item": "Mitigate",
+        "match": "Reduce likelihood or impact with suitable controls"
+      },
+      {
+        "item": "Transfer",
+        "match": "Assign agreed parts of the risk to a provider or insurer"
+      },
+      {
+        "item": "Accept",
+        "match": "Retain the risk knowingly, with a reason and an owner"
+      }
+    ],
+    "explanation": "Record the decision, rationale, owner and any accepted residual risk, plus conditions that would trigger a review."
+  },
+  {
+    "id": "2-07",
+    "chapter": 2,
+    "type": "true-false",
+    "concepts": [
+      "responses"
+    ],
+    "prompt": "Once a risk is transferred to an insurer, the organisation no longer needs to oversee it.",
+    "answer": false,
+    "explanation": "Transfer assigns agreed parts of the risk to another party, but responsibility for oversight still matters."
+  },
+  {
+    "id": "2-08",
+    "chapter": 2,
+    "type": "multiple-response",
+    "concepts": [
+      "models"
+    ],
+    "prompt": "For each important data flow in a system model, what should you note? Select all that apply.",
+    "options": [
+      {
+        "text": "Its source",
+        "correct": true
+      },
+      {
+        "text": "Its destination",
+        "correct": true
+      },
+      {
+        "text": "The data it carries",
+        "correct": true
+      },
+      {
+        "text": "The identity involved",
+        "correct": true
+      },
+      {
+        "text": "Any change in privilege",
+        "correct": true
+      },
+      {
+        "text": "A likelihood score for each STRIDE category",
+        "why": "Likelihood is assessed later, once concrete threats are written, not recorded per data flow."
+      },
+      {
+        "text": "The name of the developer who wrote it",
+        "why": "Who wrote the code doesn't describe the flow's data, identity or trust."
+      }
+    ],
+    "explanation": "Note source, destination, data, identity and any privilege change, and include external services and dependencies. Likelihood is assessed separately, after threats are written."
+  },
+  {
+    "id": "2-09",
+    "chapter": 2,
+    "type": "multiple-choice",
+    "concepts": [
+      "models"
+    ],
+    "prompt": "Where should you mark a trust boundary in a system model?",
+    "options": [
+      {
+        "text": "Where data crosses between parts with different trust or control",
+        "correct": true
+      },
+      {
+        "text": "Only at the outer firewall between the organisation and the internet",
+        "why": "Trust changes inside the network too, for example between a web app and its database."
+      },
+      {
+        "text": "Around every database table that stores personal information",
+        "why": "Boundaries follow changes in trust or control, not every table that holds personal data."
+      },
+      {
+        "text": "Only at screens where a user types a password or other secret",
+        "why": "Password screens are one example; boundaries exist wherever trust or control changes."
+      }
+    ],
+    "explanation": "A browser sending a note to a web application crosses a boundary; the application's query to a database is another flow to examine."
+  },
+  {
+    "id": "2-10",
+    "chapter": 2,
+    "type": "multiple-response",
+    "concepts": [
+      "fourq",
+      "models"
+    ],
+    "prompt": "Which changes should make you reopen a threat model? Select all that apply.",
+    "options": [
+      {
+        "text": "A data flow changes",
+        "correct": true
+      },
+      {
+        "text": "A trust boundary moves",
+        "correct": true
+      },
+      {
+        "text": "A new dependency is added",
+        "correct": true
+      },
+      {
+        "text": "A role's privileges change",
+        "correct": true
+      },
+      {
+        "text": "Nothing in the design changed this sprint",
+        "why": "If nothing in the design changed, there's no new flow, boundary or privilege to model."
+      }
+    ],
+    "explanation": "Reopen the model when data flows, trust boundaries, dependencies or privileges change. The four questions form a cycle."
+  },
+  {
+    "id": "2-11",
+    "chapter": 2,
+    "type": "multiple-choice",
+    "concepts": [
+      "authnz",
+      "objectauth"
+    ],
+    "prompt": "A system authenticates a user correctly but still returns another user's record when the record ID is changed. What is missing?",
+    "options": [
+      {
+        "text": "An ownership check on each requested record",
+        "correct": true
+      },
+      {
+        "text": "Multi-factor authentication at login",
+        "why": "MFA strengthens login, but the user is already correctly identified; what's missing is a permission check."
+      },
+      {
+        "text": "Stricter validation of the ID format",
+        "why": "A well-formed ID can still belong to someone else; format checks don't establish permission."
+      },
+      {
+        "text": "Encryption of the connection with TLS",
+        "why": "TLS protects data in transit; it doesn't decide who may read which record."
+      }
+    ],
+    "explanation": "Authentication establishes who is asking. Authorisation decides whether that identity may perform this action on this resource. A well-formed ID says nothing about permission."
+  },
+  {
+    "id": "2-12",
+    "chapter": 2,
+    "type": "matching",
+    "concepts": [
+      "lifecycle"
+    ],
+    "prompt": "Match each lifecycle phase to its security activity.",
+    "pairs": [
+      {
+        "item": "Requirements",
+        "match": "Define security objectives and constraints"
+      },
+      {
+        "item": "Design",
+        "match": "Analyse threats and select controls"
+      },
+      {
+        "item": "Implementation",
+        "match": "Apply and test the selected controls"
+      },
+      {
+        "item": "Operation",
+        "match": "Monitor changes and reassess risk"
+      }
+    ],
+    "explanation": "Security belongs across the lifecycle, not only after something goes wrong."
+  },
+  {
+    "id": "2-14",
+    "chapter": 2,
+    "type": "multiple-choice",
+    "concepts": [
+      "responses"
+    ],
+    "prompt": "A team responds to a design flaw by adding a request limit. What is the best assessment of that response?",
+    "options": [
+      {
+        "text": "It may reduce some attacks, but the design flaw itself still needs fixing",
+        "correct": true
+      },
+      {
+        "text": "It fully resolves the flaw, since attackers can no longer send requests",
+        "why": "Attackers can still send requests within the limit, and the underlying design flaw remains."
+      },
+      {
+        "text": "It counts as eliminating the threat, so the model can mark it closed",
+        "why": "Eliminating means removing the cause; a request limit only reduces some attacks."
+      },
+      {
+        "text": "It transfers the risk to the network team, who now own the problem",
+        "why": "Adding a control is mitigation, not transfer; the team still owns the risk."
+      }
+    ],
+    "explanation": "Connect the response to the threat. A firewall or request limit may help, but it cannot repair every design flaw."
+  },
+  {
+    "id": "2-15",
+    "chapter": 2,
+    "type": "multiple-response",
+    "concepts": [
+      "fourq",
+      "lifecycle"
+    ],
+    "prompt": "Which of these describe good threat modelling? Select all that apply.",
+    "options": [
+      {
+        "text": "Structured and repeatable",
+        "correct": true
+      },
+      {
+        "text": "Multidisciplinary",
+        "correct": true
+      },
+      {
+        "text": "Decision focused",
+        "correct": true
+      },
+      {
+        "text": "Maintained when the system changes",
+        "correct": true
+      },
+      {
+        "text": "A one-off activity done after deployment",
+        "why": "Threat modelling is most useful during design and is revisited as the system changes."
+      },
+      {
+        "text": "A guarantee that every threat has been found",
+        "why": "A model is a structured way to ask questions; it can't guarantee every threat was found."
+      }
+    ],
+    "explanation": "A model is a map for asking questions, not a guarantee. It is most useful during design and is revisited when the system or its context changes."
+  },
+  {
+    "id": "2-16",
+    "chapter": 2,
+    "type": "matching",
+    "concepts": [
+      "fourq"
+    ],
+    "prompt": "Match each Four Questions step to its main output.",
+    "pairs": [
+      {
+        "item": "What are we working on?",
+        "match": "Defined scope: components, boundaries and assumptions"
+      },
+      {
+        "item": "What can go wrong?",
+        "match": "Specific threats, structured with prompts such as STRIDE"
+      },
+      {
+        "item": "What are we going to do about it?",
+        "match": "A chosen response with owner and rationale"
+      },
+      {
+        "item": "Did we do a good enough job?",
+        "match": "Review of coverage, evidence that controls exist, and changes"
+      }
+    ],
+    "explanation": "Scope, threats, responses, review."
+  },
+  {
+    "id": "2-17",
+    "chapter": 2,
+    "type": "multiple-choice",
+    "concepts": [
+      "stride"
+    ],
+    "prompt": "A student submits coursework late but edits the timestamp field in the request so it looks on time. Which STRIDE category fits best?",
+    "options": [
+      {
+        "text": "Tampering",
+        "correct": true
+      },
+      {
+        "text": "Spoofing",
+        "why": "Spoofing means pretending to be someone else; here the student changes data in the request."
+      },
+      {
+        "text": "Repudiation",
+        "why": "Repudiation is about denying an action; here the problem is that data was altered."
+      },
+      {
+        "text": "Denial of service",
+        "why": "Denial of service blocks availability; nothing is blocked here, the timestamp is altered."
+      }
+    ],
+    "explanation": "Data in the request is changed without permission, which threatens integrity."
+  },
+  {
+    "id": "2-18",
+    "chapter": 2,
+    "type": "multiple-choice",
+    "concepts": [
+      "stride"
+    ],
+    "prompt": "A portal keeps no trustworthy record of who changed a grade, so a lecturer can deny making the change. Which STRIDE category is this?",
+    "options": [
+      {
+        "text": "Repudiation",
+        "correct": true
+      },
+      {
+        "text": "Tampering",
+        "why": "Tampering is changing data without permission; the issue here is the missing evidence of who acted."
+      },
+      {
+        "text": "Elevation of privilege",
+        "why": "Elevation of privilege means gaining extra rights; the lecturer already had permission to change grades."
+      },
+      {
+        "text": "Information disclosure",
+        "why": "Information disclosure is exposing data; here the problem is being able to deny an action."
+      }
+    ],
+    "explanation": "Repudiation threatens accountability: important events need to be logged, protected and linked to an identity."
+  },
+  {
+    "id": "2-19",
+    "chapter": 2,
+    "type": "short-answer",
+    "concepts": [
+      "stride"
+    ],
+    "prompt": "In STRIDE, what does the E stand for?",
+    "accept": [
+      "elevation of privilege",
+      "elevation of privileges",
+      "privilege elevation",
+      "privilege escalation"
+    ],
+    "explanation": "Elevation of privilege: could an identity gain permissions beyond its role? It threatens authorisation."
+  },
+  {
+    "id": "2-20",
+    "chapter": 2,
+    "type": "multiple-choice",
+    "concepts": [
+      "responses"
+    ],
+    "prompt": "A team removes a rarely used \"export all users\" feature because it creates a disclosure risk. Which response is this?",
+    "options": [
+      {
+        "text": "Eliminate",
+        "correct": true
+      },
+      {
+        "text": "Mitigate",
+        "why": "Mitigating would keep the feature and add controls; here the feature is removed entirely."
+      },
+      {
+        "text": "Transfer",
+        "why": "Transferring hands parts of the risk to another party, such as an insurer."
+      },
+      {
+        "text": "Accept",
+        "why": "Accepting keeps the risk knowingly; here the team removes its cause."
+      }
+    ],
+    "explanation": "Eliminating removes the feature, path or assumption that creates the threat. Mitigating would keep the feature and add controls."
+  }
+]
