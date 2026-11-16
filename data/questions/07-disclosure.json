@@ -116,7 +116,7 @@
     "pairs": [
       {
         "item": "Stack trace",
-        "match": "File paths, framework structure and implementation details"
+        "match": "File paths and the chain of function calls that led to the error"
       },
       {
         "item": "Database exception",
@@ -128,7 +128,7 @@
       },
       {
         "item": "Debug page",
-        "match": "Configuration, local variables or environment details"
+        "match": "Configuration values, environment details and local variables"
       }
     ],
     "explanation": "A useful public error can be concise while internal diagnostics stay restricted."
@@ -267,11 +267,11 @@
     "pairs": [
       {
         "item": "Revocation",
-        "match": "Disables a credential value"
+        "match": "Stops a credential working, without replacing it"
       },
       {
         "item": "Rotation",
-        "match": "Replaces the credential and retires the previous value"
+        "match": "Issues a new credential and retires the old one"
       },
       {
         "item": "History cleanup",

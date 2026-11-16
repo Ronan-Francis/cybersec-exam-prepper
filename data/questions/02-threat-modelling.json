@@ -8,12 +8,12 @@
     ],
     "prompt": "Put Shostack's Four Questions in order.",
     "steps": [
-      "What are we working on?",
-      "What can go wrong?",
-      "What are we going to do about it?",
-      "Did we do a good enough job?"
+      "Scope: what are we working on?",
+      "Threats: what can go wrong?",
+      "Responses: what are we going to do about it?",
+      "Review: did we do a good enough job?"
     ],
-    "explanation": "Scope, threats, responses, review. The questions form a cycle: a design change can create new threats, so review the model again."
+    "explanation": "The same four steps are also worded as: what is being examined, what can go wrong, how will identified threats be addressed, and was the analysis effective. They form a cycle: a design change can create new threats, so review the model again."
   },
   {
     "id": "2-02",
@@ -58,7 +58,7 @@
     "concepts": [
       "stride"
     ],
-    "prompt": "Classify each threat using STRIDE.",
+    "prompt": "Classify each threat using STRIDE. Look at the outcome: what is faked, changed, denied, read, blocked or gained.",
     "pairs": [
       {
         "item": "Someone reuses a stolen session token and is treated as the account holder",
@@ -66,7 +66,7 @@
         "why": "Using a stolen token is pretending to be someone else."
       },
       {
-        "item": "A user changes an account ID in a request and alters the data in another person’s record",
+        "item": "A user alters an account ID in a request, and another person's stored data is changed as a result",
         "match": "Tampering",
         "why": "Changing another person's data is tampering."
       },
@@ -420,7 +420,7 @@
         "match": "A review: was everything covered, do the controls exist, has anything changed?"
       }
     ],
-    "explanation": "Scope, threats, responses, review."
+    "explanation": "Scope, threats, responses, review. The same four steps are also worded as: what is being examined, what can go wrong, how will identified threats be addressed, and was the analysis effective."
   },
   {
     "id": "2-17",

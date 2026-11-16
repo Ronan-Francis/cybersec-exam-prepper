@@ -140,7 +140,7 @@
         "why": "A signal nobody is alerted to is a logging and alerting failure."
       },
       {
-        "item": "When the MFA service goes down, the error-handling rule lets users in without the second factor",
+        "item": "A service the login depends on goes down, and the error-handling code lets users in without the second factor",
         "match": "Mishandling of Exceptional Conditions",
         "why": "Letting users in when MFA errors is mishandling an exceptional condition."
       }
@@ -194,7 +194,7 @@
     "prompt": "Match each scenario to its OWASP category.",
     "pairs": [
       {
-        "item": "Account recovery was designed to rely only on a security question whose answer others can find out",
+        "item": "By design, the account-recovery workflow accepts the answer to a security question that other people can find out",
         "match": "Insecure Design",
         "why": "A weak recovery rule built into the workflow is insecure design."
       },
