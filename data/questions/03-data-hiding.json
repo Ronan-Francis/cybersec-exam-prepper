@@ -207,17 +207,6 @@
     "explanation": "A payload may be compressed or encrypted before embedding, and some methods use a key. These are choices, not requirements of every method."
   },
   {
-    "id": "3-14",
-    "chapter": 3,
-    "type": "true-false",
-    "concepts": [
-      "lsb"
-    ],
-    "prompt": "Re-saving, resizing or converting an image may damage or remove an LSB payload.",
-    "answer": true,
-    "explanation": "The carrier's transformation history affects what survives and what an inspection can reveal."
-  },
-  {
     "id": "3-15",
     "chapter": 3,
     "type": "multiple-response",
@@ -336,14 +325,6 @@
     ],
     "prompt": "Which statements about NTFS alternate data streams are correct? Select all that apply.",
     "options": [
-      {
-        "text": "An ordinary hash of the file covers only its main (default) stream",
-        "correct": true
-      },
-      {
-        "text": "Copying a file to another file system may not preserve its named streams",
-        "correct": true
-      },
       {
         "text": "Tools can list a file's streams so each one can be inspected",
         "correct": true

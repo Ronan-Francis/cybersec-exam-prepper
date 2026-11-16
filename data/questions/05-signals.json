@@ -24,17 +24,6 @@
     "explanation": "A known signature match is not a full safety check; an unknown signature is uncertainty, not proof of malware."
   },
   {
-    "id": "5-06",
-    "chapter": 5,
-    "type": "true-false",
-    "concepts": [
-      "intake"
-    ],
-    "prompt": "An uploaded .docx whose first bytes match the ZIP signature has been confirmed as a valid document.",
-    "answer": false,
-    "explanation": "A DOCX is a ZIP container, so the ZIP signature alone does not show it is a sound document. A parser checks the structure."
-  },
-  {
     "id": "5-07",
     "chapter": 5,
     "type": "matching",
@@ -122,33 +111,6 @@
       }
     ],
     "explanation": "\"No event found\" describes this collection. It is not proof that the program never ran."
-  },
-  {
-    "id": "5-10",
-    "chapter": 5,
-    "type": "matching",
-    "concepts": [
-      "registry"
-    ],
-    "prompt": "Match each Registry location to what it holds.",
-    "pairs": [
-      {
-        "item": "HKCU",
-        "match": "Settings for the current user",
-        "why": "HKCU holds per-user settings."
-      },
-      {
-        "item": "HKLM",
-        "match": "Settings for the computer",
-        "why": "HKLM holds machine-wide settings."
-      },
-      {
-        "item": "Run key",
-        "match": "Values that can start programs at sign-in",
-        "why": "Run keys make programs start at sign-in."
-      }
-    ],
-    "explanation": "Run keys are a common place for software, legitimate or not, to make itself start automatically."
   },
   {
     "id": "5-11",

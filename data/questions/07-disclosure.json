@@ -319,34 +319,6 @@
     "explanation": "This is failing closed: an unavailable checker has not granted permission. Make the decision before releasing the records."
   },
   {
-    "id": "7-15",
-    "chapter": 7,
-    "type": "multiple-choice",
-    "concepts": [
-      "minimise"
-    ],
-    "prompt": "A response contains sensitive account data. What should its caching policy do?",
-    "options": [
-      {
-        "text": "Stop it being stored anywhere, for example with `Cache-Control: no-store`",
-        "correct": true
-      },
-      {
-        "text": "Cache it for as long as possible to reduce load on the server",
-        "why": "Caching sensitive data means copies can be served to the wrong person later."
-      },
-      {
-        "text": "Nothing, because caching a response can't cause a disclosure",
-        "why": "Shared or browser caches can hand a stored copy to someone else."
-      },
-      {
-        "text": "Nothing, because HTTPS already stops caches keeping a copy",
-        "why": "HTTPS encrypts transit; it doesn't stop browsers or proxies keeping a copy."
-      }
-    ],
-    "explanation": "Cached representations can stay available beyond their intended use. Cache policy complements, but does not replace, access control."
-  },
-  {
     "id": "7-16",
     "chapter": 7,
     "type": "multiple-choice",

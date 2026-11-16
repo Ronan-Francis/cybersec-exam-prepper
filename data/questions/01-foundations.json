@@ -1,34 +1,5 @@
 [
   {
-    "id": "1-01",
-    "chapter": 1,
-    "type": "multiple-choice",
-    "concepts": [
-      "defence",
-      "incident"
-    ],
-    "prompt": "An antivirus product detects suspicious activity, but it is set to monitor only and nobody reviews its alerts overnight. What principle does this illustrate?",
-    "options": [
-      {
-        "text": "Detection only helps if someone reviews the alert and responds to it in time",
-        "correct": true
-      },
-      {
-        "text": "Monitoring mode is safer than blocking because it avoids disrupting users",
-        "why": "Monitoring without anyone acting on alerts lets the attack carry on unchecked."
-      },
-      {
-        "text": "Antivirus alerts matter less when the organisation keeps good backups",
-        "why": "Backups help recovery, but an unreviewed alert still lets the attacker keep going and take data."
-      },
-      {
-        "text": "Overnight alerts can wait, since attacks are rarely active outside working hours",
-        "why": "Attackers often work outside office hours precisely because fewer people are watching."
-      }
-    ],
-    "explanation": "Prevention, detection, response and recovery need to work as connected controls. Ask who receives an alert, how quickly it is reviewed, what authority they have to contain activity, and what happens outside staffed hours."
-  },
-  {
     "id": "1-04",
     "chapter": 1,
     "type": "ordering",

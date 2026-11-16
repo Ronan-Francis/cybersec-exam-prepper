@@ -1,6 +1,6 @@
 # CSSP Exam Prep
 
-Moodle-style revision for ATU COMP09031 Cybersecurity and Secure Programming: 204 questions across 10 chapters, 56 concepts and 7 question types.
+Moodle-style revision for ATU COMP09031 Cybersecurity and Secure Programming: 187 questions across 10 chapters, 56 concepts and 7 question types.
 
 It has three modes, each with its own address (`#quiz`, `#infinite`, `#study`) so you can bookmark one:
 
@@ -168,7 +168,7 @@ Code goes in an optional `code` field. After editing, run `npm run graph` to reb
 - plus up to 0.2 for shared wording (TF-IDF cosine similarity)
 - clamped to between 0.01 and 1, so every pair is linked
 
-The question links are stored as a flat upper triangle in `data/graph.json`, 20,706 of them for 204 questions. The same file holds the concept-to-concept links that Study mode draws: the average of the three strongest question links between two concepts, plus 0.1 if a question is tagged with both. The rules live in `js/core/similarity.js`, and the Study overview has a button that copies the whole graph as JSON.
+The question links are stored as a flat upper triangle in `data/graph.json`, 17,391 of them for 187 questions. The same file holds the concept-to-concept links that Study mode draws: the average of the three strongest question links between two concepts, plus 0.1 if a question is tagged with both. The rules live in `js/core/similarity.js`, and the Study overview has a button that copies the whole graph as JSON.
 
 ## Conventions
 

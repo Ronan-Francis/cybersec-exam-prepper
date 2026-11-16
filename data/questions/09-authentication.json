@@ -170,34 +170,6 @@
     "explanation": "Base64 represents binary data as text. It is encoding, not encryption."
   },
   {
-    "id": "9-18",
-    "chapter": 9,
-    "type": "multiple-choice",
-    "concepts": [
-      "sessions"
-    ],
-    "prompt": "Why is an IP address not reliable evidence of who is making a request?",
-    "options": [
-      {
-        "text": "Addresses are shared and can change over time",
-        "correct": true
-      },
-      {
-        "text": "HTTPS encrypts IP addresses so servers can't read them",
-        "why": "Servers do see IP addresses; HTTPS doesn't hide them."
-      },
-      {
-        "text": "Browsers hide the user's IP address from every server",
-        "why": "Browsers don't hide the client's IP address from servers."
-      },
-      {
-        "text": "IP addresses are only used for email, not web requests",
-        "why": "IP addresses are used for all internet traffic, including web requests."
-      }
-    ],
-    "explanation": "Cookies and sessions provide the context for later requests."
-  },
-  {
     "id": "9-19",
     "chapter": 9,
     "type": "missing-words",

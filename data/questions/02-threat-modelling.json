@@ -133,113 +133,6 @@
     "explanation": "A useful statement names actor + action + target + consequence. \"Broken access control\" names a weakness category, not the specific failure, so it is harder to choose a response."
   },
   {
-    "id": "2-06",
-    "chapter": 2,
-    "type": "matching",
-    "concepts": [
-      "responses"
-    ],
-    "prompt": "Match each threat response to its description.",
-    "pairs": [
-      {
-        "item": "Eliminate",
-        "match": "Remove the feature, path or assumption that creates the threat"
-      },
-      {
-        "item": "Mitigate",
-        "match": "Reduce likelihood or impact with suitable controls"
-      },
-      {
-        "item": "Transfer",
-        "match": "Assign agreed parts of the risk to a provider or insurer"
-      },
-      {
-        "item": "Accept",
-        "match": "Retain the risk knowingly, with a reason and an owner"
-      }
-    ],
-    "explanation": "Record the decision, rationale, owner and any accepted residual risk, plus conditions that would trigger a review."
-  },
-  {
-    "id": "2-07",
-    "chapter": 2,
-    "type": "true-false",
-    "concepts": [
-      "responses"
-    ],
-    "prompt": "Once a risk is transferred to an insurer, the organisation no longer needs to oversee it.",
-    "answer": false,
-    "explanation": "Transfer assigns agreed parts of the risk to another party, but responsibility for oversight still matters."
-  },
-  {
-    "id": "2-08",
-    "chapter": 2,
-    "type": "multiple-response",
-    "concepts": [
-      "models"
-    ],
-    "prompt": "For each important data flow in a system model, what should you note? Select all that apply.",
-    "options": [
-      {
-        "text": "Its source",
-        "correct": true
-      },
-      {
-        "text": "Its destination",
-        "correct": true
-      },
-      {
-        "text": "The data it carries",
-        "correct": true
-      },
-      {
-        "text": "The identity involved",
-        "correct": true
-      },
-      {
-        "text": "Any change in privilege",
-        "correct": true
-      },
-      {
-        "text": "A likelihood score for each STRIDE category",
-        "why": "Likelihood is assessed later, once concrete threats are written, not recorded per data flow."
-      },
-      {
-        "text": "The name of the developer who wrote it",
-        "why": "Who wrote the code doesn't describe the flow's data, identity or trust."
-      }
-    ],
-    "explanation": "Note source, destination, data, identity and any privilege change, and include external services and dependencies. Likelihood is assessed separately, after threats are written."
-  },
-  {
-    "id": "2-09",
-    "chapter": 2,
-    "type": "multiple-choice",
-    "concepts": [
-      "models"
-    ],
-    "prompt": "Where should you mark a trust boundary in a system model?",
-    "options": [
-      {
-        "text": "Where data crosses between parts with different trust or control",
-        "correct": true
-      },
-      {
-        "text": "Only at the outer firewall between the organisation and the internet",
-        "why": "Trust changes inside the network too, for example between a web app and its database."
-      },
-      {
-        "text": "Around every database table that stores personal information",
-        "why": "Boundaries follow changes in trust or control, not every table that holds personal data."
-      },
-      {
-        "text": "Only at screens where a user types a password or other secret",
-        "why": "Password screens are one example; boundaries exist wherever trust or control changes."
-      }
-    ],
-    "explanation": "A browser sending a note to a web application crosses a boundary; the application's query to a database is another flow to examine."
-  },
-  {
     "id": "2-10",
     "chapter": 2,
     "type": "multiple-response",
@@ -328,34 +221,6 @@
       }
     ],
     "explanation": "Security belongs across the lifecycle, not only after something goes wrong."
-  },
-  {
-    "id": "2-14",
-    "chapter": 2,
-    "type": "multiple-choice",
-    "concepts": [
-      "responses"
-    ],
-    "prompt": "A team responds to a design flaw by adding a request limit. What is the best assessment of that response?",
-    "options": [
-      {
-        "text": "It may reduce some attacks, but the design flaw itself still needs fixing",
-        "correct": true
-      },
-      {
-        "text": "It fully resolves the flaw, since attackers can no longer send requests",
-        "why": "Attackers can still send requests within the limit, and the underlying design flaw remains."
-      },
-      {
-        "text": "It counts as eliminating the threat, so the model can mark it closed",
-        "why": "Eliminating means removing the cause; a request limit only reduces some attacks."
-      },
-      {
-        "text": "It transfers the risk to the network team, who now own the problem",
-        "why": "Adding a control is mitigation, not transfer; the team still owns the risk."
-      }
-    ],
-    "explanation": "Connect the response to the threat. A firewall or request limit may help, but it cannot repair every design flaw."
   },
   {
     "id": "2-15",
@@ -493,33 +358,5 @@
       "privilege escalation"
     ],
     "explanation": "Elevation of privilege: could an identity gain permissions beyond its role? It threatens authorisation."
-  },
-  {
-    "id": "2-20",
-    "chapter": 2,
-    "type": "multiple-choice",
-    "concepts": [
-      "responses"
-    ],
-    "prompt": "A team removes a rarely used \"export all users\" feature because it creates a disclosure risk. Which response is this?",
-    "options": [
-      {
-        "text": "Eliminate",
-        "correct": true
-      },
-      {
-        "text": "Mitigate",
-        "why": "Mitigating would keep the feature and add controls; here the feature is removed entirely."
-      },
-      {
-        "text": "Transfer",
-        "why": "Transferring hands parts of the risk to another party, such as an insurer."
-      },
-      {
-        "text": "Accept",
-        "why": "Accepting keeps the risk knowingly; here the team removes its cause."
-      }
-    ],
-    "explanation": "Eliminating removes the feature, path or assumption that creates the threat. Mitigating would keep the feature and add controls."
   }
 ]
