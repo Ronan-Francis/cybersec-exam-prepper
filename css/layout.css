@@ -6,8 +6,9 @@
 h1 { font-size: 18px; font-weight: 400; padding: 14px 0; }
 .modetabs { display: flex; gap: 4px; align-self: stretch; }
 .modetabs button { border: 0; border-bottom: 3px solid transparent; background: none; padding: 3px 12px 0; cursor: pointer; color: var(--ink); }
-.modetabs button:hover { background: var(--surface-2); }
-.modetabs button[aria-pressed="true"] { border-bottom-color: var(--accent); }
+.modetabs button:hover:not(:disabled) { background: var(--surface-2); }
+/* The mode showing: underlined and not clickable (the router disables it). */
+.modetabs button[aria-current="page"] { border-bottom-color: var(--accent); cursor: default; }
 
 /* Main column and side blocks */
 .workspace { max-width: 1160px; margin: 0 auto; padding: 24px 20px 48px; display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 24px; align-items: start; }

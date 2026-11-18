@@ -8,7 +8,7 @@ import { $ } from "../../ui/dom.js";
 export function renderQuizNav(state) {
   const finished = state.page === "results";
   $("#navgrid").innerHTML = state.attempts.map((attempt, i) => navButton(attempt, i, state, finished)).join("");
-  $("#finishBtn").hidden = finished;
+  $("#finishBtn").hidden = finished || !state.attempts.length;
 }
 
 function navButton(attempt, index, state, finished) {

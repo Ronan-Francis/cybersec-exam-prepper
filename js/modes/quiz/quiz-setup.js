@@ -58,13 +58,15 @@ export function createQuizSetup(app, { onStart }) {
       : "Nothing matches. Pick at least one chapter and one question type.";
   }
 
+  /** Starts a quiz with the current settings. Returns false if no questions match them. */
   function start({ scroll = true } = {}) {
     const settings = readSettings();
     const pool = shuffle(matchingQuestions(settings));
-    if (!pool.length) { refresh(); return; }
+    if (!pool.length) { refresh(); return false; }
     const length = settings.length === "all" ? pool.length : Math.min(pool.length, Number(settings.length));
     onStart(pool.slice(0, length), settings.style, { scroll });
     if (isNarrowScreen()) panel.open = false;
+    return true;
   }
 
   function applyPreset(name) {

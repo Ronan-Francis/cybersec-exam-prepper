@@ -5,7 +5,7 @@
  * Pages: "question" -> "summary" -> "results".
  */
 
-import { createAttempt, checkAttempt, isFullMarks } from "../../core/attempt.js";
+import { createAttempt, checkAttempt, isFullMarks, isAnswered } from "../../core/attempt.js";
 import { shuffle } from "../../core/text.js";
 import { $, revealIfScrolledPast, scrollIntoViewGently, scrollBehaviour } from "../../ui/dom.js";
 import { updateInfo } from "../../ui/question-card.js";
@@ -94,6 +94,19 @@ export function createQuizMode(app) {
     updateTimer();
   }
 
+  /** Shown when the settings match no questions, so the previous mode's page isn't left on screen. */
+  function showNothingToStart() {
+    Object.assign(state, { attempts: [], index: 0, page: "question", startedAt: Date.now(), endedAt: 0 });
+    renderQuizNav(state);
+    $("#timer").textContent = formatStopwatch(0);
+    stage.innerHTML = `
+      <div class="page">
+        <h2>No questions match your settings</h2>
+        <p>Pick at least one chapter and one question type in the "New quiz" panel, then start the quiz.</p>
+        <div><button type="button" class="btn primary" data-act="settings">Change settings</button></div>
+      </div>`;
+  }
+
   function updateTimer() {
     const end = state.page === "results" ? state.endedAt : Date.now();
     $("#timer").textContent = formatStopwatch(end - state.startedAt);
@@ -150,13 +163,18 @@ export function createQuizMode(app) {
 
   return {
     name: "quiz",
+    /** Every visit starts a new attempt with the settings in the "New quiz" panel. */
     enter() {
       quizSide.hidden = false;
       listeners = new AbortController();
       bindEvents(listeners.signal);
-      if (!state.attempts.length) setup.start({ scroll: false });
-      else render();
-      timer = setInterval(() => { if (state.page !== "results") updateTimer(); }, 1000);
+      if (!setup.start({ scroll: false })) showNothingToStart();
+      timer = setInterval(() => { if (state.page !== "results" && state.attempts.length) updateTimer(); }, 1000);
+    },
+    /** Asks before throwing away an unfinished attempt that has answers or flags in it. */
+    confirmLeave() {
+      const inProgress = state.page !== "results" && state.attempts.some(a => a.checked || a.flagged || isAnswered(a));
+      return !inProgress || window.confirm("Leave this quiz? Your current attempt will be lost, and a new quiz starts next time you open Quiz.");
     },
     leave() {
       quizSide.hidden = true;

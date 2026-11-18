@@ -1,7 +1,7 @@
 /**
  * Infinite mode: an endless session that follows what you get wrong.
- * A session starts fresh each time (page load, "Start a new session", or practising a concept from Study mode)
- * and draws from every chapter. Switching tabs keeps the current session.
+ * A session starts fresh every time the mode is opened (the Infinite tab, Back or Forward, "Start a new session",
+ * or practising a concept) and draws from every chapter unless it is focused on a concept.
  */
 
 import { createAttempt, checkAttempt } from "../../core/attempt.js";
@@ -106,13 +106,12 @@ export function createInfiniteMode(app) {
 
   return {
     name: "infinite",
-    /** params.focus: a concept id to focus on, which always starts a new session. */
+    /** Every visit starts a new session. params.focus: a concept id to focus it on. */
     enter(params = {}) {
       infiniteSide.hidden = false;
       listeners = new AbortController();
       bindEvents(listeners.signal);
-      if ("focus" in params || !session || session.endedAt) newSession(params.focus || null);
-      else render();
+      newSession(params.focus || null);
       timer = setInterval(updateTimer, 1000);
     },
     leave() {
