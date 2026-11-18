@@ -18,10 +18,10 @@
       },
       {
         "item": "The signature is missing or not recognised",
-        "match": "Record it as unknown and send it for closer inspection"
+        "match": "Don't accept it yet: record it as unknown and send it for closer inspection"
       }
     ],
-    "explanation": "A known signature match is not a full safety check; an unknown signature is uncertainty, not proof of malware."
+    "explanation": "A known signature match is not a full safety check. An unknown signature is not accepted, but it is uncertainty, not proof of malware."
   },
   {
     "id": "5-07",
@@ -384,5 +384,37 @@
       }
     ],
     "explanation": "Observe, interpret, then test against an independent source such as process, endpoint or network evidence."
+  },
+  {
+    "id": "5-24",
+    "chapter": 5,
+    "type": "matching",
+    "concepts": [
+      "eventlogs"
+    ],
+    "prompt": "Match each Windows Security log entry to what it records.",
+    "pairs": [
+      {
+        "item": "Event 4624",
+        "match": "A successful logon"
+      },
+      {
+        "item": "Event 4625",
+        "match": "A failed logon"
+      },
+      {
+        "item": "Event 4688",
+        "match": "A new process was created"
+      },
+      {
+        "item": "Logon type 2",
+        "match": "Someone signed in at the computer itself"
+      },
+      {
+        "item": "Logon type 3",
+        "match": "Access over the network, such as to a file share"
+      }
+    ],
+    "explanation": "For each logon event ask which account, on which computer, from what source and with which logon type. Event 4688 only appears when process-creation auditing is enabled."
   }
 ]

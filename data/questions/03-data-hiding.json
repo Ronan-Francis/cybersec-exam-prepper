@@ -207,6 +207,17 @@
     "explanation": "A payload may be compressed or encrypted before embedding, and some methods use a key. These are choices, not requirements of every method."
   },
   {
+    "id": "3-14",
+    "chapter": 3,
+    "type": "true-false",
+    "concepts": [
+      "lsb"
+    ],
+    "prompt": "Re-saving, resizing or converting an image may damage or remove an LSB payload.",
+    "answer": true,
+    "explanation": "LSB substitution is fragile: lossy re-saving, cropping or resizing changes pixel values and can destroy the hidden bits. Transform-domain methods survive compression better."
+  },
+  {
     "id": "3-15",
     "chapter": 3,
     "type": "multiple-response",
@@ -425,5 +436,64 @@
       }
     ],
     "explanation": "Know which file content your application, scanner and storage tools actually inspect, and apply checks to the whole file object."
+  },
+  {
+    "id": "3-26",
+    "chapter": 3,
+    "type": "matching",
+    "concepts": [
+      "entropy"
+    ],
+    "prompt": "Match each byte pattern to its Shannon entropy.",
+    "pairs": [
+      {
+        "item": "Every byte has the same value",
+        "match": "0 bits",
+        "why": "The next value is always known, so there is no uncertainty."
+      },
+      {
+        "item": "Two values, each equally likely",
+        "match": "1 bit",
+        "why": "A fair binary outcome carries one bit of uncertainty."
+      },
+      {
+        "item": "All 256 byte values equally likely",
+        "match": "8 bits per byte",
+        "why": "This is the maximum for one byte."
+      }
+    ],
+    "explanation": "Shannon entropy is the average information, in bits, per outcome. For bytes it runs from 0 to 8, but a frequency count alone can miss order: a balanced, repeating pattern is still predictable."
+  },
+  {
+    "id": "3-28",
+    "chapter": 3,
+    "type": "matching",
+    "concepts": [
+      "stego"
+    ],
+    "prompt": "Is each use of steganography legitimate or abuse?",
+    "pairs": [
+      {
+        "item": "Copyright watermarking",
+        "match": "Legitimate"
+      },
+      {
+        "item": "Covert communication for people at risk",
+        "match": "Legitimate"
+      },
+      {
+        "item": "Data exfiltration",
+        "match": "Abuse"
+      },
+      {
+        "item": "Command-and-control messages",
+        "match": "Abuse"
+      },
+      {
+        "item": "Evading security monitoring",
+        "match": "Abuse"
+      }
+    ],
+    "explanation": "The same technique serves protective and harmful purposes, so a suspicious carrier is a lead to investigate, not proof of malicious intent."
   }
 ]

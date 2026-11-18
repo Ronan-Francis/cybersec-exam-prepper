@@ -98,6 +98,38 @@
     "explanation": "`||` allows either condition: the owner, or support staff. `&&` would require both at once, so ordinary owners and support staff viewing other people's purchases would all be denied."
   },
   {
+    "id": "10-06",
+    "chapter": 10,
+    "type": "matching",
+    "concepts": [
+      "objectauth"
+    ],
+    "prompt": "Horizontal or vertical access failure?",
+    "pairs": [
+      {
+        "item": "One customer reads another customer's order",
+        "match": "Horizontal",
+        "why": "Same privilege level, someone else's data."
+      },
+      {
+        "item": "A customer issues a refund, which only support staff may do",
+        "match": "Vertical",
+        "why": "Gaining a function reserved for a higher role."
+      },
+      {
+        "item": "One customer edits another customer's delivery address",
+        "match": "Horizontal",
+        "why": "Same privilege level, someone else's data."
+      },
+      {
+        "item": "A customer opens an admin-only export page",
+        "match": "Vertical",
+        "why": "Gaining a function reserved for a higher role."
+      }
+    ],
+    "explanation": "Horizontal: same privilege level, someone else's data. Vertical: gaining a higher-privilege function."
+  },
+  {
     "id": "10-07",
     "chapter": 10,
     "type": "matching",
@@ -216,6 +248,34 @@
     "explanation": "HttpOnly stops ordinary page JavaScript reading the cookie, but injected script can still make the browser send authenticated requests."
   },
   {
+    "id": "10-13",
+    "chapter": 10,
+    "type": "multiple-choice",
+    "concepts": [
+      "samesite"
+    ],
+    "prompt": "What is cross-site request forgery (CSRF)?",
+    "options": [
+      {
+        "text": "Another site makes the browser send an unwanted request using the user's cookie",
+        "correct": true
+      },
+      {
+        "text": "An attacker steals the user's session cookie using script injected into the page",
+        "why": "Stealing a cookie with injected script is XSS, not CSRF."
+      },
+      {
+        "text": "A signed-in user changes an ID in the URL to read someone else's record",
+        "why": "Changing an ID to read another record is broken access control."
+      },
+      {
+        "text": "A server sends back more fields in its response than the page actually needs",
+        "why": "Returning extra fields is excessive data exposure."
+      }
+    ],
+    "explanation": "Use framework CSRF tokens and origin checks, keep state changes off GET, and treat SameSite as one layer. Sibling domains can be same-site, and CORS is not a universal CSRF defence."
+  },
+  {
     "id": "10-16",
     "chapter": 10,
     "type": "matching",
@@ -326,6 +386,51 @@
     "explanation": "Check `account.role === \"support\"` from trusted records before recording a refund or changing the order."
   },
   {
+    "id": "10-24",
+    "chapter": 10,
+    "type": "multiple-response",
+    "concepts": [
+      "sessions"
+    ],
+    "prompt": "A valid session ID works like a password. Which of these places would expose it? Select all that apply.",
+    "options": [
+      {
+        "text": "A URL",
+        "correct": true
+      },
+      {
+        "text": "A screenshot shared with other people",
+        "correct": true
+      },
+      {
+        "text": "An application log",
+        "correct": true
+      },
+      {
+        "text": "The Cookie header of a request sent over HTTPS",
+        "why": "The Cookie header is the intended way for the session ID to travel, and HTTPS protects it on the way."
+      }
+    ],
+    "explanation": "The Cookie header is how the session ID is meant to travel. Keep it out of URLs, screenshots and logs, and renew it when authentication or privilege changes."
+  },
+  {
+    "id": "10-25",
+    "chapter": 10,
+    "type": "short-answer",
+    "concepts": [
+      "samesite"
+    ],
+    "prompt": "What is the attack called when another site tricks a signed-in user's browser into sending an unintended state-changing request?",
+    "accept": [
+      "csrf",
+      "cross-site request forgery",
+      "cross site request forgery",
+      "xsrf",
+      "request forgery"
+    ],
+    "explanation": "Use framework CSRF tokens, origin checks where appropriate, and keep state changes off GET. SameSite is a useful extra layer."
+  },
+  {
     "id": "10-26",
     "chapter": 10,
     "type": "multiple-choice",
@@ -352,5 +457,33 @@
       }
     ],
     "explanation": "Keep changes off GET and keep CSRF protection for state-changing requests."
+  },
+  {
+    "id": "10-27",
+    "chapter": 10,
+    "type": "multiple-choice",
+    "concepts": [
+      "sessions"
+    ],
+    "prompt": "When a user clicks Log out, what must the server do so that a previously captured session ID stops working?",
+    "options": [
+      {
+        "text": "Delete or invalidate the session record on the server",
+        "correct": true
+      },
+      {
+        "text": "Tell the browser to delete the cookie, and nothing else",
+        "why": "A copy of the ID captured earlier would still match a live session on the server."
+      },
+      {
+        "text": "Redirect the user straight back to the login page",
+        "why": "A redirect changes the page shown; it doesn't end the server-side session."
+      },
+      {
+        "text": "Change the cookie's SameSite setting to Strict",
+        "why": "SameSite controls cross-site sending; it doesn't end the session."
+      }
+    ],
+    "explanation": "A session ID works like a password for the life of the session. Invalidate it on the server, then also clear the browser's copy."
   }
 ]

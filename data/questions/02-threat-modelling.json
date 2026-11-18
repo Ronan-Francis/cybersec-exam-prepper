@@ -133,6 +133,58 @@
     "explanation": "A useful statement names actor + action + target + consequence. \"Broken access control\" names a weakness category, not the specific failure, so it is harder to choose a response."
   },
   {
+    "id": "2-06",
+    "chapter": 2,
+    "type": "matching",
+    "concepts": [
+      "responses"
+    ],
+    "prompt": "Match each response to a threat with what the team does.",
+    "pairs": [
+      {
+        "item": "Change the design (eliminate)",
+        "match": "Remove the feature, path or assumption that creates the threat"
+      },
+      {
+        "item": "Add a control (mitigate)",
+        "match": "Keep the feature and add a check that prevents, detects or limits the harm"
+      },
+      {
+        "item": "Accept and record",
+        "match": "Keep the risk knowingly, writing down the owner, the reason and the risk that is left"
+      }
+    ],
+    "explanation": "Every response is recorded with its owner and rationale. Some sources also list transfer, which hands agreed parts of a risk to a provider or insurer."
+  },
+  {
+    "id": "2-09",
+    "chapter": 2,
+    "type": "multiple-choice",
+    "concepts": [
+      "models"
+    ],
+    "prompt": "Where should you mark a trust boundary in a system model?",
+    "options": [
+      {
+        "text": "Where data crosses between parts with different trust or control",
+        "correct": true
+      },
+      {
+        "text": "Only at the outer firewall between the organisation and the internet",
+        "why": "Trust changes inside the network too, for example between a web app and its database."
+      },
+      {
+        "text": "Around every database table that stores personal information",
+        "why": "Boundaries follow changes in trust or control, not every table that holds personal data."
+      },
+      {
+        "text": "Only at screens where a user types a password or other secret",
+        "why": "Password screens are one example; boundaries exist wherever trust or control changes."
+      }
+    ],
+    "explanation": "A browser sending a note to a web application crosses a boundary; the application's query to a database is another flow to examine."
+  },
+  {
     "id": "2-10",
     "chapter": 2,
     "type": "multiple-response",
@@ -221,6 +273,34 @@
       }
     ],
     "explanation": "Security belongs across the lifecycle, not only after something goes wrong."
+  },
+  {
+    "id": "2-14",
+    "chapter": 2,
+    "type": "multiple-choice",
+    "concepts": [
+      "responses"
+    ],
+    "prompt": "A team keeps an endpoint but adds a request limit to it. Which response is this?",
+    "options": [
+      {
+        "text": "Add a control (mitigate)",
+        "correct": true
+      },
+      {
+        "text": "Change the design (eliminate)",
+        "why": "Eliminating removes the feature or path; here the endpoint stays."
+      },
+      {
+        "text": "Accept and record",
+        "why": "Accepting leaves the risk as it is; here a new check is added."
+      },
+      {
+        "text": "Transfer to the network team",
+        "why": "Handing the problem to another team doesn't change the risk; the request limit is a control."
+      }
+    ],
+    "explanation": "A control prevents, detects or limits the unwanted outcome without removing the feature. The design flaw it guards may still be there."
   },
   {
     "id": "2-15",
@@ -358,5 +438,65 @@
       "privilege escalation"
     ],
     "explanation": "Elevation of privilege: could an identity gain permissions beyond its role? It threatens authorisation."
+  },
+  {
+    "id": "2-20",
+    "chapter": 2,
+    "type": "multiple-choice",
+    "concepts": [
+      "responses"
+    ],
+    "prompt": "A team removes a rarely used \"export all users\" feature because it creates a disclosure risk. Which response is this?",
+    "options": [
+      {
+        "text": "Change the design (eliminate)",
+        "correct": true
+      },
+      {
+        "text": "Add a control (mitigate)",
+        "why": "A control would keep the feature and add a check; here the feature is removed entirely."
+      },
+      {
+        "text": "Accept and record",
+        "why": "Accepting keeps the risk knowingly; here the team removes its cause."
+      },
+      {
+        "text": "Do nothing yet",
+        "why": "Removing the feature is a deliberate response, not inaction."
+      }
+    ],
+    "explanation": "Changing the design removes the feature, path or assumption that creates the threat. A control would keep the feature and reduce the risk."
+  },
+  {
+    "id": "2-21",
+    "chapter": 2,
+    "type": "multiple-response",
+    "concepts": [
+      "responses"
+    ],
+    "prompt": "A team decides to accept a risk. What should the threat model record? Select all that apply.",
+    "options": [
+      {
+        "text": "Who owns the decision",
+        "correct": true
+      },
+      {
+        "text": "Why the risk was accepted",
+        "correct": true
+      },
+      {
+        "text": "The residual risk that remains",
+        "correct": true
+      },
+      {
+        "text": "The name of the attacker most likely to exploit it",
+        "why": "The record is about the team's decision and its owner, not a guess at a named attacker."
+      },
+      {
+        "text": "Nothing, because accepted risks need no record",
+        "why": "An accepted risk still needs an owner and a reason so it can be reviewed when the system changes."
+      }
+    ],
+    "explanation": "Record the decision, its owner, the rationale and any accepted residual risk, so it can be revisited when the system changes."
   }
 ]

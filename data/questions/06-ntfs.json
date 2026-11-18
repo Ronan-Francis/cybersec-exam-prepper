@@ -373,5 +373,33 @@
       }
     ],
     "explanation": "Inspect, compare and explain: state what behaviour the records support and what remains uncertain."
+  },
+  {
+    "id": "6-33",
+    "chapter": 6,
+    "type": "multiple-choice",
+    "concepts": [
+      "clusters"
+    ],
+    "prompt": "A very small file's content is stored inside its own MFT record rather than in separate clusters. What is this called?",
+    "options": [
+      {
+        "text": "Resident data",
+        "correct": true
+      },
+      {
+        "text": "Nonresident data",
+        "why": "Nonresident content lives in clusters elsewhere on the volume, reached through a run list."
+      },
+      {
+        "text": "Slack space",
+        "why": "Slack is unused space after a file's logical end in its last cluster."
+      },
+      {
+        "text": "A FAT cluster chain",
+        "why": "Cluster chains are how FAT32 links clusters; they don't store content inside a file record."
+      }
+    ],
+    "explanation": "Resident describes where an attribute's value is stored. Larger content is nonresident: the record holds a run list pointing to clusters elsewhere. The size threshold depends on how much space the record's other attributes use."
   }
 ]

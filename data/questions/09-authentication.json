@@ -170,6 +170,34 @@
     "explanation": "Base64 represents binary data as text. It is encoding, not encryption."
   },
   {
+    "id": "9-18",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "sessions"
+    ],
+    "prompt": "Why is an IP address not reliable evidence of who is making a request?",
+    "options": [
+      {
+        "text": "Addresses are shared and can change over time",
+        "correct": true
+      },
+      {
+        "text": "HTTPS encrypts IP addresses so servers can't read them",
+        "why": "Servers do see IP addresses; HTTPS doesn't hide them."
+      },
+      {
+        "text": "Browsers hide the user's IP address from every server",
+        "why": "Browsers don't hide the client's IP address from servers."
+      },
+      {
+        "text": "IP addresses are only used for email, not web requests",
+        "why": "IP addresses are used for all internet traffic, including web requests."
+      }
+    ],
+    "explanation": "Many users behind one NAT gateway or proxy share an address, and a phone moving from Wi-Fi to mobile data changes address mid-visit. Cookies and sessions provide the context for later requests."
+  },
+  {
     "id": "9-19",
     "chapter": 9,
     "type": "missing-words",
@@ -463,5 +491,34 @@
       "the salt"
     ],
     "explanation": "The salt is stored with the hash. It prevents equality and precomputation shortcuts but does not strengthen a weak password."
+  },
+  {
+    "id": "9-31",
+    "chapter": 9,
+    "type": "multiple-choice",
+    "concepts": [
+      "verify",
+      "costhash"
+    ],
+    "prompt": "A site raises its Argon2id memory cost for new hashes. What happens to existing users' stored records?",
+    "options": [
+      {
+        "text": "Each is re-hashed with the new settings at that user's next successful login",
+        "correct": true
+      },
+      {
+        "text": "Every existing user must reset their password before they can log in again",
+        "why": "Each record stores its own settings, so old records still verify."
+      },
+      {
+        "text": "The server decrypts every stored record overnight and hashes it again",
+        "why": "Hash records can't be decrypted; the password is only available when the user logs in."
+      },
+      {
+        "text": "Old records stop verifying, because the configured settings have changed",
+        "why": "Verification uses the settings saved in each record, not the current configuration."
+      }
+    ],
+    "explanation": "Because every record stores its own settings, old records still verify. After a successful login the server holds the correct password, so it can hash it again with the new settings and save the upgraded record."
   }
 ]

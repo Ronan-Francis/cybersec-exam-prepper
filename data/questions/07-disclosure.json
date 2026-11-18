@@ -319,6 +319,34 @@
     "explanation": "This is failing closed: an unavailable checker has not granted permission. Make the decision before releasing the records."
   },
   {
+    "id": "7-15",
+    "chapter": 7,
+    "type": "multiple-choice",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "A response contains sensitive account data. What should its caching policy do?",
+    "options": [
+      {
+        "text": "Stop it being stored anywhere, for example with `Cache-Control: no-store`",
+        "correct": true
+      },
+      {
+        "text": "Cache it for as long as possible to reduce load on the server",
+        "why": "Caching sensitive data means copies can be served to the wrong person later."
+      },
+      {
+        "text": "Nothing, because caching a response can't cause a disclosure",
+        "why": "Shared or browser caches can hand a stored copy to someone else."
+      },
+      {
+        "text": "Nothing, because HTTPS already stops caches keeping a copy",
+        "why": "HTTPS encrypts transit; it doesn't stop browsers or proxies keeping a copy."
+      }
+    ],
+    "explanation": "Cached representations can stay available beyond their intended use. Cache policy complements, but does not replace, access control."
+  },
+  {
     "id": "7-16",
     "chapter": 7,
     "type": "multiple-choice",
@@ -498,5 +526,53 @@
       "email enumeration"
     ],
     "explanation": "Return comparable responses, and do comparable work, for comparable failures."
+  },
+  {
+    "id": "7-25",
+    "chapter": 7,
+    "type": "ordering",
+    "concepts": [
+      "secrets"
+    ],
+    "prompt": "An API key was pushed to a shared repository. Put the response steps in order.",
+    "steps": [
+      "Contain access to the exposed files",
+      "Revoke or rotate the key so the old value stops working",
+      "Investigate whether the key was used, and keep the evidence",
+      "Clean the repository history and other copies"
+    ],
+    "explanation": "A credential may still work after its line has been deleted, so revoking it comes before tidying history. Cleaning history cannot retrieve copies already downloaded."
+  },
+  {
+    "id": "7-26",
+    "chapter": 7,
+    "type": "multiple-response",
+    "concepts": [
+      "minimise"
+    ],
+    "prompt": "Besides the JSON fields, where else can a response disclose information? Select all that apply.",
+    "options": [
+      {
+        "text": "Response headers, such as detailed server version strings",
+        "correct": true
+      },
+      {
+        "text": "Metadata inside downloads or exported documents",
+        "correct": true
+      },
+      {
+        "text": "Copies kept by a browser or intermediary cache",
+        "correct": true
+      },
+      {
+        "text": "The HTTP status code being 200",
+        "why": "A success code on its own reveals nothing sensitive."
+      },
+      {
+        "text": "The font used to display the page",
+        "why": "Presentation choices don't carry account or system data."
+      }
+    ],
+    "explanation": "Disclosure is not limited to JSON fields. Sensitivity depends on context: version information or identifiers are not automatically confidential in every system."
   }
 ]

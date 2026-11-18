@@ -513,7 +513,7 @@
       "misconfig",
       "errors"
     ],
-    "prompt": "Production error pages show full stack traces and framework versions. Which OWASP category fits best?",
+    "prompt": "Debug mode was left switched on in production, so error pages show full stack traces and framework versions. Which OWASP category fits best?",
     "options": [
       {
         "text": "Security Misconfiguration",
@@ -529,10 +529,10 @@
       },
       {
         "text": "Insecure Design",
-        "why": "Insecure design is a missing rule in the workflow; this is a deployment setting left on."
+        "why": "Insecure design is a missing rule in the workflow; this is a development setting left on in production."
       }
     ],
-    "explanation": "Misconfiguration includes unnecessary services, default accounts and verbose error messages."
+    "explanation": "Leaving development settings switched on in production is misconfiguration, alongside unnecessary services and default accounts. If code chose to send stack traces when an exception occurred, that would also touch Mishandling of Exceptional Conditions."
   },
   {
     "id": "4-22",

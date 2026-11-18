@@ -102,14 +102,14 @@
       },
       {
         "text": "Integrity",
-        "why": "Integrity matters for accuracy, but the stated risk is not being able to reach the record in time."
+        "why": "Integrity matters too, because wrong allergy or dosage data can be fatal. But the harm described here comes from delay, which is an availability problem."
       },
       {
         "text": "Non-repudiation",
         "why": "Non-repudiation is about proving who did something, not about reaching a record quickly."
       }
     ],
-    "explanation": "Emergency records must be available immediately, though access still needs accountability. Psychotherapy notes are the contrasting case, where confidentiality weighs more."
+    "explanation": "Emergency records must be available immediately and must also be accurate, though access still needs accountability. Psychotherapy notes are the contrasting case, where confidentiality weighs more."
   },
   {
     "id": "1-08",

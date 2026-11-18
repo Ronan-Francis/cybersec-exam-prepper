@@ -315,7 +315,7 @@
     "id": "sessions",
     "chapter": 10,
     "name": "Sessions and session IDs",
-    "summary": "After login, the server creates a session and gives the browser an opaque session ID in a cookie. Later requests carry the ID instead of the password, and the server checks the session is valid before applying its access policy."
+    "summary": "After login, the server creates a session and gives the browser an opaque session ID in a cookie. Later requests carry the ID instead of the password, and the server checks the session is valid before applying its access policy. The ID works like a password, so keep it out of URLs and logs and invalidate it on the server at logout; an IP address is no substitute."
   },
   {
     "id": "cookies",
@@ -327,12 +327,12 @@
     "id": "samesite",
     "chapter": 10,
     "name": "Sites, SameSite and CSRF",
-    "summary": "SameSite controls whether a cookie is sent on requests that start from another site. Lax still sends it on normal links, so keep state changes off GET and keep CSRF protection. Origin and site are different boundaries."
+    "summary": "Cross-site request forgery tricks a signed-in browser into sending an unwanted request with its cookie. SameSite controls whether a cookie is sent on requests that start from another site. Lax still sends it on normal links, so keep state changes off GET and keep CSRF protection. Origin and site are different boundaries."
   },
   {
     "id": "objectauth",
     "chapter": 10,
     "name": "Object and function access checks",
-    "summary": "For every request, the server checks whether this user may access this record and perform this action. Hidden buttons, random IDs and valid ID formats are not permission checks."
+    "summary": "For every request, the server checks whether this user may access this record (a horizontal failure reaches a peer's data) and perform this action (a vertical failure reaches a higher role's function). Hidden buttons, random IDs and valid ID formats are not permission checks."
   }
 ]
